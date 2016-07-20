@@ -15,8 +15,11 @@
         <!-- Angular CSS files -->
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <meta name="viewport" content="initial-scale=1" />
 
+        <!-- Bootstrap -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script src="app/app.module.js"></script>
         <script src="app/app.config.js"></script>
@@ -40,16 +43,30 @@
 
         <div layout="row" flex>
             <!-- Player 1: Marcellino -->
-            <div layout="column" flex id="content">
+            <div layout="column" flex id="column1">
                 <md-content layout="column" flex class="md-padding" id="player_profile">
-                    <h1>Player 1 : Marcellino</h1>
+                    <h1 class="fighterName" id="tomName">Tom Marcellino</h1>
+                    <img ng-src="{{tom.pic}}" id="tomPic" />
+                    <div class="progress" id="tomEnergy">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
+                             aria-valuemin="5" aria-valuemax="100" style="width:30%">
+                            40% left
+                        </div>
+                    </div>
                 </md-content>
             </div>
 
             <!-- Player 2: Powell -->
-            <div layout="column" flex id="content">
+            <div layout="column" flex id="column2">
                 <md-content layout="column" flex class="md-padding" id="player_profile">
-                    <h1>Player 2 : Powell</h1>
+                    <h1 class="fighterName" id="devinName"> Devin Powell</h1>
+                    <img ng-src="{{devin.pic}}" id="devinPic" />
+                    <div class="progress" id="devinEnergy">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
+                             aria-valuemin="5" aria-valuemax="100" style="width:30%">
+                            40% left
+                        </div>
+                    </div>
                 </md-content>
             </div>
         </div>
