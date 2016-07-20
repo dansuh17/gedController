@@ -35,6 +35,8 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
     pic: "assets/images/profile1.png"
   };
 
+  $scope.timerRunning = true;
+
   $scope.tom = {
     name: "Tom Marcellino",
     pic: "assets/images/profile1.png",
@@ -52,6 +54,23 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
   $scope.tomEnergyMinusFive = function() {
     $scope.tom.energy -= 5;
 
+  };
+
+  $scope.devinEnergyMinusFive = function() {
+    $scope.devin.energy -= 5;
+
+    if ($scope.devin.energy >= 80) {
+      $scope.devin.energyStatus = "progress-bar-success";
+    } else if ($scope.devin.energy >= 40) {
+      $scope.devin.energyStatus = "progress-bar-warning";
+    } else {
+      $scope.devin.energyStatus = "progress-bar-danger";
+    }
+  };
+
+  $scope.tomEnergyPlusTen = function() {
+    $scope.tom.energy += 10;
+
     if ($scope.tom.energy >= 80) {
       $scope.tom.energyStatus = "progress-bar-success";
     } else if ($scope.tom.energy >= 40) {
@@ -59,10 +78,10 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
     } else {
       $scope.tom.energyStatus = "progress-bar-danger";
     }
-  }
+  };
 
-  $scope.devinEnergyMinusFive = function() {
-    $scope.devin.energy -= 5;
+  $scope.devinEnergyPlusTen = function() {
+    $scope.devin.energy += 10;
 
     if ($scope.devin.energy >= 80) {
       $scope.devin.energyStatus = "progress-bar-success";
