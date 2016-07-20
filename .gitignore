@@ -3,6 +3,7 @@
 ### Node
 *.log
 .npm
+/node_modules
 
 ### Vim
 # swap files
