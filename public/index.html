@@ -36,9 +36,34 @@
     <body layout="column" ng-app="gedApp" ng-controller="MainCtrl">
         <md-toolbar layout="row" name="scoreboard">
             <!-- Round Number, Time, Player Name -->
+
+            <div flex="45">
+            </div>
+
+            <!--
+            <div flex="2">
             <h1 class="md-toolbar-tools" layout-align-gt-sm="center">
-                <timer countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                <span style="font-size: 40px;"><b>{{roundNo}}</b></span>
             </h1>
+            </div>
+            -->
+            <div flex="10">
+                <h1 class="md-toolbar-tools" layout-align-gt-sm="center">
+                    <timer countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                </h1>
+            </div>
+
+            <div flex="37">
+
+            </div>
+
+                <button ng-click="setRoundNo(1)">1</button>
+                <button ng-click="setRoundNo(2)">2</button>
+                <button ng-click="setRoundNo(3)">3</button>
+                <button ng-click="resetTimer()"></button>
+                <button ng-click="startTimer()" ng-disabled="timerRunning">></button>
+                <button ng-click="stopTimer()" ng-disabled="!timerRunning">x</button>
+
         </md-toolbar>
 
         <div layout="row" flex>

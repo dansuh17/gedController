@@ -1,9 +1,34 @@
 app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
-        $scope.toggleSidenav = function(menuId) {
-                $mdSidenav(menuId).toggle();
-        };
 
-        $scope.timerRunning = true;
+  $scope.roundNo = 1;
+
+  $scope.setRoundNo = function(no) {
+    $scope.roundNo = no;
+  }
+
+
+  $scope.toggleSidenav = function(menuId) {
+    $mdSidenav(menuId).toggle();
+  };
+
+  $scope.timerRunning = false;
+
+  $scope.startTimer = function (){
+    $scope.$broadcast('timer-start');
+    $scope.timerRunning = true;
+  };
+
+  $scope.stopTimer = function (){
+    $scope.$broadcast('timer-stop');
+    $scope.timerRunning = false;
+  };
+
+  $scope.resetTimer = function() {
+    $scope.$broadcast('timer-reset');
+    $scope.timerRunning = false;
+  }
+
+
 
   $scope.devin = {
     name: "Devin Powell",
@@ -47,4 +72,5 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
       $scope.devin.energyStatus = "progress-bar-danger";
     }
   }
+
 }]);
