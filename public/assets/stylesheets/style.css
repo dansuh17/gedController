@@ -1,7 +1,15 @@
+
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /*background-image: url('http://a.espncdn.com/photo/2012/1208/mma_ufcfox5_14.jpg');*/
+    background-image: url('../images/mma_arena.jpg');
+    background-size: cover;
 }
+
+#player_profile {
+    background-color: transparent;
+}
+
 
 a {
   color: #00B7FF;
