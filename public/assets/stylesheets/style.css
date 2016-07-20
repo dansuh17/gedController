@@ -1,7 +1,6 @@
 
 
 body {
-    /*background-image: url('http://a.espncdn.com/photo/2012/1208/mma_ufcfox5_14.jpg');*/
     background-image: url('../images/mma_arena_bright2.jpeg');
     background-size: cover;
 }
@@ -10,7 +9,47 @@ body {
     background-color: transparent;
 }
 
-
 a {
   color: #00B7FF;
+}
+
+.fighterName {
+  color: white;
+}
+
+.fighterName#tomName {
+  position: absolute;
+  right: 0;
+}
+
+img {
+  height: 200px;
+  width: 350px;
+  top: 100px;
+}
+
+img#tomPic {
+  position: absolute;
+  right: 0;
+  top: 100px;
+}
+
+img#devinPic {
+  position: absolute;
+  left: 0;
+  top: 100px;
+}
+
+#devinEnergy{
+  position: absolute;
+  left: 30px;
+  top: 300px;
+  width: 70%;
+}
+
+#tomEnergy{
+  position: absolute;
+  right: 30px;
+  top: 300px;
+  width: 70%;
 }
