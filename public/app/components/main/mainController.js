@@ -4,8 +4,7 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
 
   $scope.setRoundNo = function(no) {
     $scope.roundNo = no;
-  }
-
+  };
 
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
@@ -26,9 +25,7 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
   $scope.resetTimer = function() {
     $scope.$broadcast('timer-reset');
     $scope.timerRunning = false;
-  }
-
-
+  };
 
   $scope.devin = {
     name: "Devin Powell",
@@ -54,6 +51,13 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
   $scope.tomEnergyMinusFive = function() {
     $scope.tom.energy -= 5;
 
+    if ($scope.tom.energy >= 80) {
+      $scope.tom.energyStatus = "progress-bar-success";
+    } else if ($scope.tom.energy >= 40) {
+      $scope.tom.energyStatus = "progress-bar-warning";
+    } else {
+      $scope.tom.energyStatus = "progress-bar-danger";
+    }
   };
 
   $scope.devinEnergyMinusFive = function() {
