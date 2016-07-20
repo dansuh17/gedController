@@ -45,6 +45,7 @@ img#devinPic {
   left: 30px;
   top: 300px;
   width: 70%;
+  height: 50px;
 }
 
 #tomEnergy{
@@ -52,4 +53,5 @@ img#devinPic {
   right: 30px;
   top: 300px;
   width: 70%;
+  height: 50px;
 }
