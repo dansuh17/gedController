@@ -3,6 +3,8 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
     $mdSidenav(menuId).toggle();
   };
 
+  $scope.timerRunning = true;
+
   $scope.tom = {
     name: "Tom Marcellino",
     pic: "assets/images/profile1.png",

@@ -1,2 +1,21 @@
-node_modules/
+.gitignore
+
+### Node
+*.log
+.npm
+/node_modules
+
+### Vim
+# swap files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+
+# session
+Session.vim
+
+### OSX
+*.DS_Store
+._*
+
+### JetBrains
 .idea/
