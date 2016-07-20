@@ -48,12 +48,13 @@
                     <h1 class="fighterName" id="tomName">Tom Marcellino</h1>
                     <img ng-src="{{tom.pic}}" id="tomPic" />
                     <div class="progress" id="tomEnergy">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
-                             aria-valuemin="5" aria-valuemax="100" style="width:30%">
-                            40% left
+                        <div class="progress-bar {{tom.energyStatus}} progress-bar-striped active" role="progressbar"
+                             aria-valuenow="{{tom.energy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{tom.energy}}%">
                         </div>
                     </div>
                 </md-content>
+                <button ng-click="tomEnergyMinusFive()"></button>
             </div>
 
             <!-- Player 2: Powell -->
@@ -62,12 +63,13 @@
                     <h1 class="fighterName" id="devinName"> Devin Powell</h1>
                     <img ng-src="{{devin.pic}}" id="devinPic" />
                     <div class="progress" id="devinEnergy">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40"
-                             aria-valuemin="5" aria-valuemax="100" style="width:30%">
-                            40% left
+                        <div class="progress-bar {{devin.energyStatus}} progress-bar-striped active" role="progressbar"
+                             aria-valuenow="{{devin.energy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{devin.energy}}%">
                         </div>
                     </div>
                 </md-content>
+                <button ng-click="devinEnergyMinusFive()"></button>
             </div>
         </div>
     </body>
