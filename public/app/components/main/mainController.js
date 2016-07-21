@@ -27,26 +27,29 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
     $scope.timerRunning = false;
   };
 
-  $scope.devin = {
-    name: "Devin Powell",
-    pic: "assets/images/profile1.png"
-  };
-
   $scope.timerRunning = true;
 
   $scope.tom = {
     name: "Tom Marcellino",
     pic: "assets/images/profile1.png",
-    energy: 80,
-    energyStatus: "progress-bar-success"
+    headenergy: 80,
+    bodyenergy: 70,
+    headEnergyStatus: "progress-bar-success",
+    bodyEnergyStatus: "progress-bar-success",
+    bodypic: "assets/images/body1.svg"
   };
 
   $scope.devin = {
     name: "Devin Powell",
     pic: "assets/images/profile2.png",
-    energy: 100,
-    energyStatus: "progress-bar-success"
+    headenergy: 100,
+    bodyenergy: 20,
+    headEnergyStatus: "progress-bar-success",
+    bodyEnergyStatus: "progress-bar-success",
+    bodypic: "assets/images/body2.svg"
   };
+
+  $scope.
 
   $scope.tomEnergyMinusFive = function() {
     $scope.tom.energy -= 5;
@@ -94,6 +97,5 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav)
     } else {
       $scope.devin.energyStatus = "progress-bar-danger";
     }
-  }
-
+  };
 }]);
