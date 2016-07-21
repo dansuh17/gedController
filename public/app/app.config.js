@@ -1,4 +1,7 @@
 app.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default').primaryPalette('grey').dark();
+
+  /*
     var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
         'contrastDefaultColor': 'light',
         'contrastDarkColors': ['50'],
@@ -8,9 +11,10 @@ app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
     .primaryPalette('customBlue', {
         'default': '500',
-        'hue-1': '50',
+        'hue-1': '50'
     })
     .accentPalette('pink');
     $mdThemingProvider.theme('input', 'default')
         .primaryPalette('grey')
+        */
 });

@@ -1,5 +1,5 @@
 body {
-  background-image: url('../images/mma_arena.jpg');
+  background-image: url('../images/mma_arena.jpeg');
   background-size: cover;
 }
 
@@ -72,23 +72,27 @@ img#devinPic {
 
 .progress {
   width: 60%;
-  position: relative;
-  top: 300px;
 }
 
 #devinEnergy {
   position: relative;
+  top: 200px;
   left: 40%;
 }
 
 #devinBodyEnergy {
   position: relative;
-  top: 100px;
   left: 40%;
+  top: 250px;
+}
+
+#tomEnergy {
+  position: relative;
+  top: 200px;
 }
 
 #tomBodyEnergy {
   position: relative;
-  top: 100px;
+  top: 250px;
 }
 

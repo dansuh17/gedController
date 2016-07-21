@@ -43,7 +43,7 @@
         <md-toolbar layout="row" name="scoreboard">
             <!-- Round Number, Time, Player Name -->
             <h1 class="md-toolbar-tools" layout-align-gt-sm="center">
-                <span style="font-size: 70px;"><b>{{roundNo}}</b></span>
+                <span style="font-size: 70px;"><b>ROUND {{roundNo}}</b></span>
                 <timer countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
             </h1>
         </md-toolbar>
@@ -72,8 +72,10 @@
                         </div>
                     </div>
                 </md-content>
+                <!--
                 <button ng-click="tomEnergyMinusFive()"></button>
                 <button ng-click="tomEnergyPlusTen()"></button>
+                -->
             </div>
 
             <!-- Player 2: Powell -->
@@ -92,14 +94,14 @@
                         </div>
                     </div>
                     <div class="progress" id="devinBodyEnergy">
-                        <div class="progress-bar {{devin.headEnergyStatus}}" role="progressbar"
+                        <div class="progress-bar {{devin.bodyEnergyStatus}}" role="progressbar"
                              aria-valuenow="{{devin.bodyenergy}}" aria-valuemin="5" aria-valuemax="100"
                              style="width:{{devin.bodyenergy}}%">
                         </div>
                     </div>
                 </md-content>
                 <!--
-                <button ng-click="devinEnergyMinusFive()"></button>
+                <button ng-click="energyChange('devin', 'head', -20)"></button>
                 <button ng-click="devinEnergyPlusTen()"></button>
                 -->
             </div>
@@ -107,7 +109,7 @@
         <a class="twitter-timeline"  href="https://twitter.com/hashtag/WSOF32"
            data-widget-id="756196597852168192"
             data-chrome="nofooter noborders noscrollbar noheader transparent"
-        height="100px" width="100%">#WSOF32 Tweets</a>
+        height="100px" width="120%">#WSOF32 Tweets</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 </html>
