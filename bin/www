@@ -19,10 +19,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
-var io = require('socket.io')(server);
-
 
 /*
  * socket.io
@@ -35,18 +32,6 @@ io.attach(server);
  * Listen on provided port, on all network interfaces.
  * bind to socket with socket.io
  */
-
-io.on('connection', function(socket) {
-  socket.on('tomEnergyDec', function (data) {
-    socket.broadcast.emit('tomEnergyDec', {
-      username: socket.username,
-      message: data
-    });
-  });
-
-  socket.on('disconnect', function () {});
-});
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

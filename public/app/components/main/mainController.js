@@ -72,8 +72,6 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
     bodypic: "assets/images/body2.svg"
   };
 
-  $scope.
-
   $scope.tomEnergyMinusFive = function() {
     $scope.tom.energy -= 5;
 
