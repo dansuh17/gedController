@@ -5,22 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-
 // Socket.io
 var socketio = require('socket.io');
-
 var app = express();
-
-
-// Socket.io
 var io = socketio();
 app.io = io;
 
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public'));
@@ -67,6 +59,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

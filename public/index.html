@@ -6,7 +6,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-
         <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
 
         <!-- Angular Material Icons -->
@@ -31,6 +30,7 @@
         <script src="assets/lib/bower_components/moment/min/locales.min.js"></script>
         <script src="assets/lib/bower_components/humanize-duration/humanize-duration.js"></script>
         <script src="assets/lib/bower_components/angular-timer/dist/angular-timer.js"></script>
+        <script src="assets/lib/bower_components/Snap.svg/dist/snap.svg-min.js"></script>
 
         <script src="app/app.module.js"></script>
         <script src="app/app.config.js"></script>
@@ -38,29 +38,37 @@
         <script src="app/components/main/mainController.js"></script>
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
-
     </head>
     <body layout="column" ng-app="gedApp" ng-controller="MainCtrl">
         <md-toolbar layout="row" name="scoreboard">
             <!-- Round Number, Time, Player Name -->
-
             <h1 class="md-toolbar-tools" layout-align-gt-sm="center">
                 <span style="font-size: 70px;"><b>{{roundNo}}</b></span>
                 <timer countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
             </h1>
-
         </md-toolbar>
 
+        <!-- Player views -->
         <div layout="row" flex>
             <!-- Player 1: Marcellino -->
             <div layout="column" flex id="column1">
-                <md-content layout="column" flex class="md-padding" id="player_profile">
+                <md-content layout="column" flex class="md-padding" id="tomProfile">
                     <h1 class="fighterName" id="tomName">Tom Marcellino</h1>
                     <img ng-src="{{tom.pic}}" id="tomPic" />
+                    <!-- svg element -->
+                    <div layout="row" class="svg">
+                        <img class="bodypic" id="tombody" ng-src="{{tom.bodypic}}" />
+                    </div>
                     <div class="progress" id="tomEnergy">
-                        <div class="progress-bar {{tom.energyStatus}} progress-bar-striped active" role="progressbar"
-                             aria-valuenow="{{tom.energy}}" aria-valuemin="5" aria-valuemax="100"
-                             style="width:{{tom.energy}}%">
+                        <div class="progress-bar {{tom.headEnergyStatus}}" role="progressbar"
+                             aria-valuenow="{{tom.headenergy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{tom.headenergy}}%">
+                        </div>
+                    </div>
+                    <div class="progress" id="tomBodyEnergy">
+                        <div class="progress-bar {{tom.bodyEnergyStatus}}" role="progressbar"
+                             aria-valuenow="{{tom.bodyenergy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{tom.bodyenergy}}%">
                         </div>
                     </div>
                 </md-content>
@@ -70,19 +78,36 @@
 
             <!-- Player 2: Powell -->
             <div layout="column" flex id="column2">
-                <md-content layout="column" flex class="md-padding" id="player_profile">
+                <md-content layout="column" flex class="md-padding" id="devinProfile">
                     <h1 class="fighterName" id="devinName"> Devin Powell</h1>
                     <img ng-src="{{devin.pic}}" id="devinPic" />
+                    <div layout="row" class="svg">
+                        <img class="bodypic" id="devinbody" ng-src="{{devin.bodypic}}" />
+                    </div>
+                    <!-- energy bars -->
                     <div class="progress" id="devinEnergy">
-                        <div class="progress-bar {{devin.energyStatus}} progress-bar-striped active" role="progressbar"
-                             aria-valuenow="{{devin.energy}}" aria-valuemin="5" aria-valuemax="100"
-                             style="width:{{devin.energy}}%">
+                        <div class="progress-bar {{devin.headEnergyStatus}}" role="progressbar"
+                             aria-valuenow="{{devin.headenergy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{devin.headenergy}}%">
+                        </div>
+                    </div>
+                    <div class="progress" id="devinBodyEnergy">
+                        <div class="progress-bar {{devin.headEnergyStatus}}" role="progressbar"
+                             aria-valuenow="{{devin.bodyenergy}}" aria-valuemin="5" aria-valuemax="100"
+                             style="width:{{devin.bodyenergy}}%">
                         </div>
                     </div>
                 </md-content>
+                <!--
                 <button ng-click="devinEnergyMinusFive()"></button>
                 <button ng-click="devinEnergyPlusTen()"></button>
+                -->
             </div>
         </div>
+        <a class="twitter-timeline"  href="https://twitter.com/hashtag/WSOF32"
+           data-widget-id="756196597852168192"
+            data-chrome="nofooter noborders noscrollbar noheader transparent"
+        height="100px" width="100%">#WSOF32 Tweets</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 </html>

@@ -1,57 +1,94 @@
-
-
 body {
-    background-image: url('../images/mma_arena.jpg');
-    background-size: cover;
+  background-image: url('../images/mma_arena.jpg');
+  background-size: cover;
 }
 
-#player_profile {
-    background-color: transparent;
+#tomProfile {
+  background-color: transparent;
+}
+
+#devinProfile {
+  background-color: transparent;
 }
 
 a {
   color: #00B7FF;
 }
 
+.time {
+  font-size: 200%;
+}
+
 .fighterName {
   color: white;
-  font-size: 500%;
+  font-size: 300%;
   text-align: center;
   text-shadow: 0 0 4px black;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
 
+#tomName {
+  text-align: right;
+}
+
+#devinName {
+  text-align: left;
+}
+
+.bodypic {
+  height: 70%;
+  width: 70%;
+}
+
+#tombody {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}
+
+#devinbody {
+  position: absolute;
+  top: 20%;
+  right: 50%;
+}
+
 img {
-  height: 280px;
-  width: 500px;
-  top: 100px;
+  height: 200px;
+  width: 380px;
 }
 
 img#tomPic {
   position: absolute;
-  right: 15%;
-  top: 100px;
+  top: 30px;
+  right: 250px;
 }
 
 img#devinPic {
   position: absolute;
-  left: 15%;
+  top: 30px;
+  left: 250px;
+}
+
+.progress {
+  width: 60%;
+  position: relative;
+  top: 300px;
+}
+
+#devinEnergy {
+  position: relative;
+  left: 40%;
+}
+
+#devinBodyEnergy {
+  position: relative;
+  top: 100px;
+  left: 40%;
+}
+
+#tomBodyEnergy {
+  position: relative;
   top: 100px;
 }
 
-#devinEnergy{
-  position: absolute;
-  left: 15%;
-  top: 400px;
-  width: 70%;
-  height: 50px;
-}
-
-#tomEnergy{
-  position: absolute;
-  right: 15%;
-  top: 400px;
-  width: 70%;
-  height: 50px;
-}
