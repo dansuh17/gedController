@@ -40,40 +40,50 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
       $scope.$apply(function() {
           $scope.stopTimer();
       });
-    };
+    }
 
     if (data.timerCmd == "start") {
       $scope.$apply(function() {
           $scope.startTimer();
       });
-    };
+    }
   });
-
-
-  $scope.devin = {
-    name: "Devin Powell",
-    pic: "assets/images/profile1.png"
-  };
 
   $scope.timerRunning = true;
 
+  // players
   $scope.tom = {
     name: "Tom Marcellino",
     pic: "assets/images/profile1.png",
-    energy: 80,
-    energyStatus: "progress-bar-success"
+    headenergy: 80,
+    bodyenergy: 70,
+    headEnergyStatus: "progress-bar-success",
+    bodyEnergyStatus: "progress-bar-success",
+    bodypic: "assets/images/body1.svg"
   };
 
   $scope.devin = {
     name: "Devin Powell",
     pic: "assets/images/profile2.png",
-    energy: 100,
-    energyStatus: "progress-bar-success"
+    headenergy: 100,
+    bodyenergy: 20,
+    headEnergyStatus: "progress-bar-success",
+    bodyEnergyStatus: "progress-bar-success",
+    bodypic: "assets/images/body2.svg"
   };
+
+  $scope.
 
   $scope.tomEnergyMinusFive = function() {
     $scope.tom.energy -= 5;
 
+    if ($scope.tom.energy >= 80) {
+      $scope.tom.energyStatus = "progress-bar-success";
+    } else if ($scope.tom.energy >= 40) {
+      $scope.tom.energyStatus = "progress-bar-warning";
+    } else {
+      $scope.tom.energyStatus = "progress-bar-danger";
+    }
   };
 
   $scope.devinEnergyMinusFive = function() {
@@ -110,6 +120,5 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
     } else {
       $scope.devin.energyStatus = "progress-bar-danger";
     }
-  }
-
+  };
 }]);
