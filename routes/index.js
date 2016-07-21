@@ -32,5 +32,18 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
+
+    router.post('/energyBarChange/:player/:change', function(req, res, next) {
+        console.log("energyBarChange command called via API");
+        var player = req.params.player;
+        var change = req.params.change;
+
+        io.emit('energyBarChange', {
+            player: player,
+            change: change
+        });
+        res.json({"sent": "done"});
+    });
+
     return router;
 }

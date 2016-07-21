@@ -47,6 +47,12 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
           $scope.startTimer();
       });
     }
+
+    if (data.timerCmd == "reset") {
+      $scope.$apply(function() {
+          $scope.resetTimer();
+      });
+    }
   });
 
   $scope.timerRunning = true;
@@ -119,4 +125,14 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
       $scope.devin.energyStatus = "progress-bar-danger";
     }
   };
+
+
+  socket.on('energyBarChange', function(data) {
+    console.log("energyBar received." + data.energyBar + " / " + data.change);
+    $scope.$apply(function () {
+        //apply energybar accordingly.
+    });
+  });
+
+
 }]);
