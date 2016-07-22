@@ -1,12 +1,9 @@
-/**
- * Created by deNsuh on 7/20/16.
- */
 app.factory('socket', function ($rootScope) {
   var socket = io.connect();
 
   return {
     on: function('tomEnergyDec', function (data) {
-    $scope.tomEnergyMinusFive();
+      $scope.setPowerBalance(data);
     });
   }
 });

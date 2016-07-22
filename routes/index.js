@@ -13,6 +13,14 @@ module.exports = function(io) {
         res.render('sample', {title: 'Express'});
     });
 
+    router.post('/setPowerBalance/:balance', function(req, res, next) {
+        console.log("power balance changed via API.");
+        var balance = req.params.balance;
+        io.emit('setPowerBalance', {
+            balance: balance
+        });
+        res.json({"sent": "done"});
+    });
 
     router.post('/setRoundNo/:roundNo', function(req, res, next) {
         console.log("roundNo changed via API.");
@@ -58,4 +66,4 @@ module.exports = function(io) {
     });
 
     return router;
-}
+};
