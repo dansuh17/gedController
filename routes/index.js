@@ -32,6 +32,16 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
+    router.post('/timerCmd/setCountdown/:countdown', function(req, res, next) {
+        var newCountdown = req.params.countdown;
+        console.log("countdown set to " + newCountdown);
+        io.emit('timerCmd', {
+            timerCmd: 'setCountdown',
+            countdown: newCountdown
+        });
+        res.json({"sent": "done"});
+    });
+
 
     router.post('/energyBarChange/:fighter/:part/:amount', function(req, res, next) {
         console.log("energyBarChange command called via API");

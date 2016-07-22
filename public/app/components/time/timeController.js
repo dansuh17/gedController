@@ -18,18 +18,12 @@ app.controller('timeCtrl', ['$scope', 'socket', function($scope, socket) {
   $scope.timerRunning = false;
 
   $scope.startTimer = function () {
-    $scope.$broadcast('timer-start');
-    $scope.timerRunning = true;
   };
 
   $scope.stopTimer = function () {
-    $scope.$broadcast('timer-stop');
-    $scope.timerRunning = false;
   };
 
   $scope.resetTimer = function () {
-    $scope.$broadcast('timer-reset');
-    $scope.timerRunning = false;
   };
 
   socket.on('timerCmd', function (data) {
@@ -37,20 +31,27 @@ app.controller('timeCtrl', ['$scope', 'socket', function($scope, socket) {
 
     if (data.timerCmd == "stop") {
       $scope.$apply(function () {
-        $scope.stopTimer();
+        $scope.$broadcast('timer-stop');
+        $scope.timerRunning = false;
       });
     }
 
     if (data.timerCmd == "start") {
       $scope.$apply(function () {
-        $scope.startTimer();
+        $scope.$broadcast('timer-start');
+        $scope.timerRunning = true;
       });
     }
 
     if (data.timerCmd == "reset") {
       $scope.$apply(function () {
-        $scope.resetTimer();
+        $scope.$broadcast('timer-reset');
+        $scope.timerRunning = false;
       });
+    }
+
+    if (data.timerCmd == "setCountdown") {
+      $scope.$broadcast('timer-set-countdown', data.countdown);
     }
   });
 
