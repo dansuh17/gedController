@@ -39,46 +39,44 @@
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
     </head>
-    <body layout="column" ng-app="gedApp" ng-controller="MainCtrl">
+    <body ng-app="gedApp" ng-controller="MainCtrl">
+        <div id="bodyContainer" ng-controller="timeCtrl">
+            <!-- this will contain everything -->
+            <div id="flexMainBody">
 
-        <!-- Angular material design toolbar -->
-        <md-toolbar layout="row" name="timeBar" ng-controller="timeCtrl">
-            <!-- Round Number, Time, Player Name -->
-            <h1 class="md-toolbar-tools" layout-align-gt-sm="center">
-                <span style="font-size: 70px;"><b>ROUND {{roundNo}}</b></span>
-                <timer countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
-            </h1>
-        </md-toolbar>
+                <div class="upperBar">
+                    <h1 class="fighterName" id="leftName">Tom Marcellino</h1>
+                    <!-- container for round number + timer -->
+                    <div class="gameInfo">
+                        <div class="roundNumber">
+                            <span id="round"> ROUND </span>
+                            <span id="number"> {{ roundNo }} </span>
+                        </div>
+                         <timer class="timer" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                    </div>
+                    <h1 class="fighterName" id="rightName">Devin Powell</h1>
+                </div>
 
-        <!-- Player views -->
-        <div layout="row" flex>
-            <!-- Player 1: Marcellino -->
-            <div layout="column" flex="45" id="column1">
-                <md-content layout="column" flex class="md-padding" id="tomProfile">
-                    <h1 class="fighterName" id="tomName">Tom Marcellino</h1>
-                </md-content>
+                <!-- Power balance bar -->
+                <div class="progress progress-stacked">
+                    <span style='width: {{powerBalance}}%' class="bg-left grad-left"></span>
+                    <span style="width: 1%" class="meter"></span>
+                    <span style='width: {{ 99 - powerBalance }}%' class="bg-right grad-right"></span>
+                </div>
+
+                <!-- Twitter embedded widget - 'twidget' -->
+                <div class="twitter-container">
+                    <a class="twitter-timeline"  href="https://twitter.com/hashtag/WSOF32"
+                        data-widget-id="756196597852168192"
+                        data-chrome="nofooter noborders noscrollbar noheader transparent"
+                        height="100px" width="100%">#WSOF32 Tweets</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+
             </div>
 
-            <!-- Player 2: Powell -->
-            <div layout="column" flex="45" id="column2">
-                <md-content layout="column" flex class="md-padding" id="devinProfile">
-                    <h1 class="fighterName" id="devinName"> Devin Powell</h1>
-                </md-content>
-            </div>
+            <!-- empty space for picture in pictures -->
+            <div id="flexPipSpace"></div>
         </div>
-
-        <!-- Progress bar -->
-        <div class="progress progress-stacked">
-            <span style="width: 24%" class="bg-left grad-left"></span>
-            <span style="width: 1%" class="meter"></span>
-            <span style="width: 75%" class="bg-right grad-right"></span>
-        </div>
-
-        <!-- Twitter embedded widget - 'twidget' -->
-        <a class="twitter-timeline"  href="https://twitter.com/hashtag/WSOF32"
-            data-widget-id="756196597852168192"
-            data-chrome="nofooter noborders noscrollbar noheader"
-            height="100px" width="90%">#WSOF32 Tweets</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 </html>
