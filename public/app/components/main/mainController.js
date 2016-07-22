@@ -1,62 +1,4 @@
 app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $mdSidenav, socket){
-
-  //roundNo
-  $scope.roundNo = 1;
-
-  $scope.setRoundNo = function(no) {
-    $scope.roundNo = no;
-  }
-
-  socket.on('roundNo', function(data) {
-    console.log("roundNo received." + data.roundNo);
-
-    $scope.$apply(function () {
-      $scope.setRoundNo(data.roundNo);
-    });
-  });
-
-  //timer
-  $scope.timerRunning = false;
-
-  $scope.startTimer = function (){
-    $scope.$broadcast('timer-start');
-    $scope.timerRunning = true;
-  };
-
-  $scope.stopTimer = function (){
-    $scope.$broadcast('timer-stop');
-    $scope.timerRunning = false;
-  };
-
-  $scope.resetTimer = function() {
-    $scope.$broadcast('timer-reset');
-    $scope.timerRunning = false;
-  };
-
-  socket.on('timerCmd', function(data) {
-    console.log("timer command received. " + data.timerCmd);
-
-    if (data.timerCmd == "stop") {
-      $scope.$apply(function() {
-          $scope.stopTimer();
-      });
-    }
-
-    if (data.timerCmd == "start") {
-      $scope.$apply(function() {
-          $scope.startTimer();
-      });
-    }
-
-    if (data.timerCmd == "reset") {
-      $scope.$apply(function() {
-          $scope.resetTimer();
-      });
-    }
-  });
-
-  $scope.timerRunning = true;
-
   // players
   $scope.tom = {
     name: "Tom Marcellino",
@@ -77,6 +19,41 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
     bodyEnergyStatus: "progress-bar-success",
     bodypic: "assets/images/body2.svg"
   };
+
+  /*
+   * To simplify energyChange function
+   */
+  /*
+  $scope.energyChangeNew = function(fighter, part, amount) {
+    if (['tom', 'devin'].indexOf(fighter) != -1) {
+      //$scope.fighterObj = $scope.$eval(fighter);
+      if (['body', 'head'].indexOf(part) != -1) {
+        $scope.targetEnergy = $scope.$eval(fighter + '.' + part + 'energy');
+        //add amount.
+        $scope.targetEnergy += amount;
+        console.log(part + "energy" + " : " + $scope.targetEnergy);
+        $scope.targetEnergyStatus = $scope.$eval(fighter + '.' + part + 'EnergyStatus');
+
+        if ($scope.targetEnergy >= 80) {
+          $scope.targetEnergyStatus = "progress-bar-success";
+        } else if ($scope.targetEnergy >= 40) {
+          $scope.targetEnergyStatus = "progress-bar-warning";
+        } else {
+          $scope.targetEnergyStatus = "progress-bar-danger";
+        }
+        console.log(part + "energyStatus" + " : " + $scope.targetEnergyStatus);
+      }
+      else {
+        console.log("wrong body-part name");
+        return;
+      }
+    }
+    else {
+      console.log("wrong fighter name!");
+      return;
+    }
+  };
+  */
 
   /**
    * Call the appropriate function according to input arguments
@@ -99,6 +76,14 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
       }
     }
   };
+
+  socket.on('energyBarChange', function(data) {
+    console.log("energyBar received.");
+    //apply energybar accordingly.
+    $scope.energyChange(data.fighter, data.part, parseInt(data.amount, 10));
+  });
+
+
 
   /**
    * change tom's body energy by amount
@@ -163,14 +148,6 @@ app.controller('MainCtrl', ['$scope', '$mdSidenav', 'socket', function($scope, $
       $scope.devin.headEnergyStatus = "progress-bar-danger";
     }
   };
-
-
-  socket.on('energyBarChange', function(data) {
-    console.log("energyBar received." + data.energyBar + " / " + data.change);
-    $scope.$apply(function () {
-        //apply energybar accordingly.
-    });
-  });
 
 
 }]);

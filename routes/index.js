@@ -33,14 +33,16 @@ module.exports = function(io) {
     });
 
 
-    router.post('/energyBarChange/:player/:change', function(req, res, next) {
+    router.post('/energyBarChange/:fighter/:part/:amount', function(req, res, next) {
         console.log("energyBarChange command called via API");
-        var player = req.params.player;
-        var change = req.params.change;
+        var fighter = req.params.fighter;
+        var part = req.params.part;
+        var amount = req.params.amount;
 
         io.emit('energyBarChange', {
-            player: player,
-            change: change
+            fighter: fighter,
+            part: part,
+            amount: amount
         });
         res.json({"sent": "done"});
     });
