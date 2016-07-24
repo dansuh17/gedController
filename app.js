@@ -11,6 +11,8 @@ var app = express();
 var io = socketio();
 app.io = io;
 
+var Twit = require('twit');
+
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');
 
@@ -58,6 +60,30 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+
+/*
+ * Twitter Socket Interface
+ */
+
+var keys = require('./keys');
+var T = new Twit({
+  consumer_key:         keys.consumer_key,
+  consumer_secret:      keys.consumer_secret,
+  access_token:         keys.access_token,
+  access_token_secret:  keys.access_token_secret,
+});
+
+var index = {
+    hash: "#WSOF31"
+};
+
+
+var stream = T.stream('statuses/filter', { track: index.hash});
+stream.on('tweet', function (tweet) {
+  console.log(tweet);
+  io.emit('stream', {text:tweet.text, name:tweet.user.name, username:tweet.user.screen_name, icon:tweet.user.profile_image_url, hash:index.hash});
 });
 
 module.exports = app;

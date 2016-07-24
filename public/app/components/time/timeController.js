@@ -4,7 +4,7 @@ app.controller('timeCtrl', ['$scope', 'socket', function($scope, socket) {
 
   $scope.setRoundNo = function (no) {
     $scope.roundNo = no;
-  }
+  };
 
   socket.on('roundNo', function (data) {
     console.log("roundNo received." + data.roundNo);
