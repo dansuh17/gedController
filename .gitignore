@@ -22,3 +22,6 @@ Session.vim
 
 ### bower
 public/assets/lib/
+
+### Twit keys
+keys.js
