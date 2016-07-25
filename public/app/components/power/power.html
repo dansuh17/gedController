@@ -1,6 +1,6 @@
 <!-- power balance bar html directive -->
 <div class="progress progress-stacked">
-  <span ng-style="{'width': '{{powerBalance}}%'}" class="bg-left grad-left"></span>
+  <span ng-style="{'width': '{{powerBalance}}%'}" class="bg-left {{leftColor}}"></span>
   <span ng-style="{'width': '1%'}" class="meter"></span>
-  <span ng-style="{'width': '{{99 - powerBalance}}%'}" class="bg-right grad-right"></span>
+  <span ng-style="{'width': '{{99 - powerBalance}}%'}" class="bg-right {{rightColor}}"></span>
 </div>

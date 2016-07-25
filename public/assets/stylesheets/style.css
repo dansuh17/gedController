@@ -136,7 +136,7 @@ a {
   overflow: hidden;
   position: relative;
   width: auto;
-  transition: width 1s ease;
+  transition: width 1s ease, background 1s ease;
   -webkit-border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   border-top-left-radius: 10px;
@@ -185,7 +185,7 @@ a {
 }
 
 /* Gradations in energy bars */
-.grad-left {
+.grad-danger {
   background: #f9423a; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left, #620e03, #f9423a); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(right, #620e03, #f9423a); /* For Opera 11.1 to 12.0 */
@@ -193,12 +193,20 @@ a {
   background: linear-gradient(to right, #620e03, #f9423a); /* Standard syntax (must be last) */
 }
 
-.grad-right {
+.grad-safe {
+  background: #114cb6; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(right, #114cb6, #3ab83a); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left, #114cb6, #3ab83a); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left, #114cb6, #3ab83a); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left, #114cb6, #3ab83a); /* Standard syntax (must be last) */
+}
+
+.grad-normal {
   background: #3ab83a; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(right, yellow, #3ab83a); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(left, yellow, #3ab83a); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(left, yellow, #3ab83a); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to left, yellow, #3ab83a); /* Standard syntax (must be last) */
+  background: -webkit-linear-gradient(right, #3ab83a, yellow); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left, #3ab83a, yellow); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left, #3ab83a, yellow); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left, #3ab83a, yellow); /* Standard syntax (must be last) */
 }
 
 .progress-striped.progress-animate > span:after, .progress-striped.progress-animate > span > span {
@@ -264,4 +272,3 @@ a {
 	left: 150px;
 	overflow: hidden;
 }
-

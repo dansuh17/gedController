@@ -8,7 +8,6 @@ module.exports = function(io) {
         res.render('index', { title: 'Express' });
     });
 
-
     router.get('/sample', function(req, res, next) {
         res.render('sample', {title: 'Express'});
     });
@@ -50,20 +49,18 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
+    router.post('/powerCommand/powerToLeft', function(req, res, next) {
+        console.log("power To Left by five");
 
-    router.post('/energyBarChange/:fighter/:part/:amount', function(req, res, next) {
-        console.log("energyBarChange command called via API");
-        var fighter = req.params.fighter;
-        var part = req.params.part;
-        var amount = req.params.amount;
-
-        io.emit('energyBarChange', {
-            fighter: fighter,
-            part: part,
-            amount: amount
-        });
+        io.emit('powerToLeft', {});
         res.json({"sent": "done"});
     });
 
+    router.post('/powerCommand/powerToRight', function(req, res, next) {
+        console.log("power To right by five");
+
+        io.emit('powerToRight', {});
+        res.json({"sent": "done"});
+    });
     return router;
 };
