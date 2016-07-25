@@ -57,10 +57,11 @@ module.exports = function(io) {
     });
 
     router.post('/powerCommand/powerToRight', function(req, res, next) {
-        console.log("power To right by five");
+        console.log("power To Right by five");
 
         io.emit('powerToRight', {});
         res.json({"sent": "done"});
     });
+
     return router;
 };

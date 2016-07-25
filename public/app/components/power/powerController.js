@@ -35,10 +35,10 @@
          * according the the balance status.
          */
         $scope.applyStatusColor = function() {
-          if (powerBalance >= 67) {
+          if ($scope.powerBalance >= 67) {
             $scope.leftColor = 'grad-safe';
             $scope.rightColor = 'grad-danger';
-          } else if (powerBalance >= 33) {
+          } else if ($scope.powerBalance >= 33) {
             $scope.leftColor = 'grad-normal';
             $scope.rightColor = 'grad-normal';
           } else {
@@ -49,21 +49,21 @@
 
         socket.on('powerToLeft', function() {
           console.log('powerToLeft received');
-          $scope.apply(function() {
+          $scope.$apply(function() {
             $scope.powerToLeft();
           });
         });
 
         socket.on('powerToRight', function() {
           console.log('powerToRight received');
-          $scope.apply(function() {
+          $scope.$apply(function() {
             $scope.powerToRight();
           });
         });
 
         socket.on('setPowerBalance', function (data) {
           console.log('setPowerBalance received.' + data.balance);
-          $scope.apply(function () {
+          $scope.$apply(function () {
             $scope.setPowerBalance(parseInt(data.balance, 10));
           });
         });
