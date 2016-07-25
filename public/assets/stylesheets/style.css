@@ -26,6 +26,7 @@ body {
 }
 
 .upperBar {
+  height: 400px;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;

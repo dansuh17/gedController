@@ -1,31 +1,33 @@
-app.controller('twitCtrl', ['$scope', 'socket', function($scope, socket) {
+app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', function($scope, $timeout, $interval, socket) {
     $scope.feedList = [];
     $scope.tweet = $scope.feedList[0];
     console.log($scope.feedList.length);
+    var intervalCall;
+
+    var updateFeed = function() {
+        if ($scope.feedList.length!=0) {
+            $scope.feedList.shift();
+            $scope.tweet = $scope.feedList[0];
+        }
+
+        if ($scope.feedList.length==0) {
+            $interval.cancel(intervalCall);
+        }
+    };
+
+
     socket.on("stream", function(tweet){
         console.log("twitter feed received.");
-        console.log(tweet);
-        //insert tweet into $scope.feedList.
         $scope.$apply(function() {
-            $scope.feedList.push(tweet);
-            $scope.tweet = $scope.feedList[0];
+            if ($scope.feedList.length<5) {
+                $scope.feedList.push(tweet);
+            }
+
+            if ($scope.feedList.length == 1) {
+                //intervalCall = $interval(updateFeed, 5000);
+                $scope.tweet = $scope.feedList[0];
+            }
         });
-        console.log("feedList has " + $scope.feedList.length + " elements.");
     });
-
-    // when the feedList is not empty, ng-show.
-    // At 5 seconds timeout, pop.
-    // At timeout, ng-hide and then give breakf or 0.5 second.
-    // possibly length-dependent timeout?
-    /*
-    tweet = {
-        text,
-        icon,
-        name,
-        username,
-        hash
-    };
-     */
-
 
 }]);

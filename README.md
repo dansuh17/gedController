@@ -32,3 +32,11 @@ For more information, refer to [Twit](https://github.com/ttezel/twit), which is 
 
 
 ## API
+
+
+## Implementation Details
+Twitter Feed appears in the following logic :
+- Each feed appears for 5 seconds and disappears.
+- If multiple feeds are received within 5 seconds, they are stacked in queue.
+- If the 5-element queue is full when another feed arrives, the feed is ignored.
+- Each feed that are pushed to the queue is guaranteed 5 seconds appearance.
