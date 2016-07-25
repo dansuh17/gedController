@@ -1,15 +1,5 @@
 app.factory('socket', function ($rootScope) {
   var socket = io.connect();
-
-  return {
-    on: function('tomEnergyDec', function (data) {
-      $scope.setPowerBalance(data);
-    });
-  }
-});
-
-app.factory('socket', function ($rootScope) {
-  var socket = io.connect();
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {
@@ -31,4 +21,3 @@ app.factory('socket', function ($rootScope) {
     }
   };
 });
-

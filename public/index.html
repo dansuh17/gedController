@@ -35,17 +35,19 @@
         <script src="app/components/main/mainController.js"></script>
         <script src="app/components/time/timeController.js"></script>
         <script src="app/components/twitter/twitterController.js"></script>
+        <script src="app/components/power/powerController.js"></script>
+        <script src="app/components/power/power.directive.js"></script>
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
     </head>
     <body ng-app="gedApp" ng-controller="MainCtrl">
-        <div id="bodyContainer" ng-controller="timeCtrl">
+        <div id="bodyContainer">
             <!-- this will contain everything -->
             <div id="flexMainBody">
 
-                <div class="upperBar">
+                <div class="upperBar" ng-controller="timeCtrl">
                     <h1 class="fighterName" id="leftName">Tom Marcellino</h1>
                     <!-- container for round number + timer -->
                     <div class="gameInfo">
@@ -59,12 +61,11 @@
                 </div>
 
                 <!-- Power balance bar -->
-                <div class="progress progress-stacked">
-                    <span style='width: {{powerBalance}}%' class="bg-left grad-left"></span>
-                    <span style="width: 1%" class="meter"></span>
-                    <span style='width: {{ 99 - powerBalance }}%' class="bg-right grad-right"></span>
+                <div ng-controller="powerCtrl">
+                  <power-balance></power-balance>
                 </div>
 
+                <!-- Twitter feed -->
                 <div class="content" ng-controller="twitCtrl">
                     <li ng-hide="feedList.length==0">
                         <img ng-src="{{tweet.icon}}" alt>

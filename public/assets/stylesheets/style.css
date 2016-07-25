@@ -60,7 +60,7 @@ body {
   -moz-border-radius-bottomright: 10px;
   border-bottom-right-radius: 10px;
   -webkit-align-items: center;
-  -align-items: center;
+  align-items: center;
   text-align: center;
   font-size: 20px;
   color: white;
@@ -107,8 +107,12 @@ a {
   padding: 15px;
   width: 90%;
   left: 5%;
-  //line-height: 1.182;
-  //box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+  -webkit-border-top-left-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  border-top-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .progress-small {
@@ -132,6 +136,13 @@ a {
   overflow: hidden;
   position: relative;
   width: auto;
+  transition: width 1s ease;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .progress.progress-stacked > span {
@@ -207,14 +218,12 @@ a {
 /*
  * Twitter Component
  */
-
 .content{
 	position: relative;
 	width: 90%;
 	height: 90%;
 	text-align: center;
 	margin: 5% 5% 5% 5%;
-
 }
 
 .content li{
@@ -234,12 +243,14 @@ a {
 	width: 90px;
 	border: 2px solid #cdcdcd;
 }
+
 .content .name{
     font-size: 24px;
 	top: 25px;
 	height: 40px;
 	font-weight: bold;
 }
+
 .content .message{
     font-size:24px;
 	top: 60px;
@@ -247,8 +258,10 @@ a {
 	height: 160px;
 	text-align: left;
 }
+
 .content .name, .content .message{
 	position: absolute;
 	left: 150px;
 	overflow: hidden;
 }
+

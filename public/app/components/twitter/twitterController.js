@@ -15,7 +15,6 @@ app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', functio
         }
     };
 
-
     socket.on("stream", function(tweet){
         console.log("twitter feed received.");
         $scope.$apply(function() {
@@ -29,5 +28,4 @@ app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', functio
             }
         });
     });
-
 }]);

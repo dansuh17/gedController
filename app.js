@@ -11,6 +11,7 @@ var app = express();
 var io = socketio();
 app.io = io;
 
+// twitter embed
 var Twit = require('twit');
 
 var routes = require('./routes/index')(io);
@@ -66,7 +67,6 @@ app.use(function(err, req, res, next) {
 /*
  * Twitter Socket Interface
  */
-
 var keys = require('./keys');
 var T = new Twit({
   consumer_key:         keys.consumer_key,
@@ -79,8 +79,7 @@ var index = {
     hash: "#WSOF31"
 };
 
-
-var stream = T.stream('statuses/filter', { track: index.hash});
+var stream = T.stream('statuses/filter', {track: index.hash});
 stream.on('tweet', function (tweet) {
   console.log(tweet);
   io.emit('stream', {text:tweet.text, name:tweet.user.name, username:tweet.user.screen_name, icon:tweet.user.profile_image_url, hash:index.hash});

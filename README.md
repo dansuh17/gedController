@@ -13,7 +13,7 @@ npm install
 ```
 
 ### Twitter app
-Use [dev.twitter.com](https://dev.twitter.com) to register and retrieve the app keys.
+Use [apps.twitter.com](https://apps.twitter.com) to register and retrieve the app keys.
 
 Create a file `keys.js` and insert the app keys as follows:
 
