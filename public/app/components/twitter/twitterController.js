@@ -24,7 +24,7 @@ app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', functio
             }
 
             if ($scope.feedList.length == 1) {
-                //intervalCall = $interval(updateFeed, 5000);
+                intervalCall = $interval(updateFeed, 5000);
                 $scope.tweet = $scope.feedList[0];
             }
         });

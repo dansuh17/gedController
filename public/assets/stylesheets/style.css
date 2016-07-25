@@ -219,9 +219,9 @@ a {
 
 .content li{
 	position: relative;
-	width: 400px;
-	height: 150px;
-	background: #567E3A;
+	width: 700px;
+	height: 250px;
+	background: #0c6f9d;
 	display: inline-block;
 	margin: 0 2% 2% 0;
 	border-radius: 2px;
@@ -235,14 +235,16 @@ a {
 	border: 2px solid #cdcdcd;
 }
 .content .name{
+    font-size: 24px;
 	top: 25px;
-	height: 25px;
+	height: 40px;
 	font-weight: bold;
 }
 .content .message{
-	top: 50px;
-	width: 210px;
-	height: 80px;
+    font-size:24px;
+	top: 60px;
+	width: 500px;
+	height: 160px;
 	text-align: left;
 }
 .content .name, .content .message{
