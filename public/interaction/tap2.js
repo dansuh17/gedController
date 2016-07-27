@@ -6,7 +6,7 @@
 ;(function() {
   $(document).ready(function () {
 
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://ged.uwcj.kr:3000');
     /**
      * welcome on connection
      */
