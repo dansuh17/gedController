@@ -17,7 +17,7 @@ var Twit = require('twit');
 // mongoose
 var mongoose = require('mongoose');
 require('./models/votes');
-mongoose.connect('/mongodb://localhost:27017/ged');
+mongoose.connect('mongodb://localhost:27017/ged');
 
 
 // routes
