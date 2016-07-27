@@ -69,7 +69,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-/*
+/**
  * Twitter Socket Interface
  */
 var keys = require('./keys');
@@ -81,13 +81,18 @@ var T = new Twit({
 });
 
 var index = {
-    hash: "#WSOF31"
+  hash: "#WSOF32"
 };
 
 var stream = T.stream('statuses/filter', {track: index.hash});
 stream.on('tweet', function (tweet) {
   console.log(tweet);
-  io.emit('stream', {text:tweet.text, name:tweet.user.name, username:tweet.user.screen_name, icon:tweet.user.profile_image_url, hash:index.hash});
+  io.emit('stream', {
+    text:tweet.text,
+    name:tweet.user.name,
+    username:tweet.user.screen_name,
+    icon:tweet.user.profile_image_url,
+    hash:index.hash});
 });
 
 module.exports = app;

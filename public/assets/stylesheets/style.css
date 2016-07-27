@@ -97,7 +97,7 @@ a {
   text-align: center;
 }
 
-/* Progress Bar CSS */
+/* Power Balance Bar */
 .progress {
   background-color: #777777;
   box-sizing: border-box;
@@ -162,6 +162,7 @@ a {
   background-color: white;
 }
 
+/* Striped animation effect */
 .progress-striped > span:after, .progress-striped > span > span {
   background-size: 50px 50px;
   bottom: 0;
