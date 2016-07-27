@@ -19,7 +19,6 @@ var mongoose = require('mongoose');
 require('./models/votes');
 mongoose.connect('mongodb://localhost:27017/ged');
 
-
 // routes
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');
@@ -69,7 +68,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 /*
  * Twitter Socket Interface

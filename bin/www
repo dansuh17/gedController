@@ -7,11 +7,9 @@ var app = require('../app');
 var debug = require('debug')('gedController:server');
 var http = require('http');
 
-
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -20,12 +18,20 @@ app.set('port', port);
  */
 var server = http.createServer(app);
 
-/*
- * socket.io
+/**
+ * Attach http server to socket.io
  */
 var io = app.io;
 io.attach(server);
 
+io.on('connection', function(socket) {
+  console.log('new connection');
+  socket.emit('welcome', {});
+
+  socket.on('powerToRight', function(){
+    io.emit('powerToRight', {});
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -38,7 +44,6 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 

@@ -1,5 +1,7 @@
+/*
 app.factory('socket', function ($rootScope) {
   var socket = io.connect();
+  console.log('service.js');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {
@@ -21,3 +23,4 @@ app.factory('socket', function ($rootScope) {
     }
   };
 });
+*/
