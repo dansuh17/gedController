@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var VoteSchema = new mongoose.Schema({
-    tomUp: Integer, 
-    devinUp: Integer,
+    tomUp: Number, 
+    devinUp: Number,
 },
 {
     timestamps: true
