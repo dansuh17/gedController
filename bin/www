@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
@@ -25,8 +24,14 @@ var io = app.io;
 io.attach(server);
 
 
+/**
+ * serverside socket.io listener.
+ * Here, the functions that the server reacts onto
+ * specific messages are defined.
+ */
 var mongoose = require('mongoose');
 var Vote = mongoose.model('Vote');
+
 io.on('connection', function(socket) {
   console.log('new connection');
   socket.emit('welcome', {});
@@ -76,7 +81,6 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -104,7 +108,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
