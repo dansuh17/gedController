@@ -23,7 +23,6 @@ var server = http.createServer(app);
 var io = app.io;
 io.attach(server);
 
-
 /**
  * serverside socket.io listener.
  * Here, the functions that the server reacts onto
@@ -39,13 +38,23 @@ io.on('connection', function(socket) {
   socket.on('powerToRight', function(){
     io.emit('powerToRight', {});
 
-
     Vote.findOneAndUpdate({}, {tomUp:1, devinUp:1}, function(err, vote){
       if (err) {
         console.log("DB ERROR");
         return next(err);
       }
       console.log("Vote DB gogo");
+    });
+  });
+
+  socket.on('addPowerBalance', function(data) {
+    io.emit('addPowerBalance', data);
+    Vote.findOneAndUpdate({}, {tomUp:2, devinUp:2}, function(err, vote) {
+      if (err) {
+        console.log("DB ERROR");
+        return next(err);
+      }
+      console.log("db store successful")
     });
 
   });
