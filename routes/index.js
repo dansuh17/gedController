@@ -71,6 +71,7 @@ module.exports = function(io) {
 
         Vote.findOne({}, function(err, votes){
             if(err){ return next(err); }
+            res.setHeader("Access-Control-Allow-Origin", "*");
             res.json(votes);
         });
     });
