@@ -14,6 +14,13 @@ app.io = io;
 // twitter embed
 var Twit = require('twit');
 
+// mongoose
+var mongoose = require('mongoose');
+require('./models/votes');
+mongoose.connect('/mongodb://localhost:27017/ged');
+
+
+// routes
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');
 
