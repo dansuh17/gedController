@@ -4,7 +4,10 @@ app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', functio
     console.log($scope.feedList.length);
     var intervalCall;
 
-    var updateFeed = function() {
+  /**
+   * Updates twitter feed and displays on screen.
+   */
+  var updateFeed = function() {
         if ($scope.feedList.length!=0) {
             $scope.feedList.shift();
             $scope.tweet = $scope.feedList[0];
