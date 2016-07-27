@@ -24,12 +24,25 @@ var server = http.createServer(app);
 var io = app.io;
 io.attach(server);
 
+
+var mongoose = require('mongoose');
+var Vote = mongoose.model('Vote');
 io.on('connection', function(socket) {
   console.log('new connection');
   socket.emit('welcome', {});
 
   socket.on('powerToRight', function(){
     io.emit('powerToRight', {});
+
+
+    Vote.findOneAndUpdate({}, {tomUp:1, devinUp:1}, function(err, vote){
+      if (err) {
+        console.log("DB ERROR");
+        return next(err);
+      }
+      console.log("Vote DB gogo");
+    });
+
   });
 });
 

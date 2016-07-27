@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Vote = mongoose.model('Vote');
 
 module.exports = function(io) {
 
@@ -61,6 +63,16 @@ module.exports = function(io) {
 
         io.emit('powerToRight', {});
         res.json({"sent": "done"});
+    });
+
+
+    router.get('/getCurrentWinning', function(req, res, next) {
+        console.log("getCurrentWinning request received.");
+
+        Vote.findOne({}, function(err, votes){
+            if(err){ return next(err); }
+            res.json(votes);
+        });
     });
 
     return router;
