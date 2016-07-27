@@ -1,0 +1,19 @@
+body {
+  font-family: "Helvetica Neue", "HelveticaNeue-Light", "Eurostile-Regular", sans-serif;
+  font-style: normal;
+  font-size: 1.5em;
+  background: transparent;
+  background-size: cover;
+  padding: 0 0 0 0;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+p {
+  font: 20px "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: #00B7FF;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
