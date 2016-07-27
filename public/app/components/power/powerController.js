@@ -9,6 +9,10 @@
         $scope.powerBalance = 50;
         $scope.leftColor = 'grad-normal';
         $scope.rightColor = 'grad-normal';
+        /* counters for future use
+        $scope.leftCount = 0;
+        $scope.rightCount = 0;
+        */
 
         /**
          * Sets the power balance. If power balance is under 50, it indicates
@@ -20,14 +24,28 @@
           $scope.applyStatusColor();
         };
 
-        $scope.powerToLeft = function () {
-          $scope.powerBalance -= 5;
+        /**
+         * Adds the AMOUNT to the power balance bar. AMOUNT can be negative.
+         * It also prevents the bar from exceeding its length.
+         * @param amount amount change of power balance. Positive values move
+         * the bar to the right, and vice versa.
+         */
+        $scope.addPowerBalance = function (amount) {
+          $scope.powerBalance += amount;
+          if ($scope.powerBalance > 99) {
+            $scope.powerBalance = 99;
+          } else if ($scope.powerBalance < 0) {
+            $scope.powerBalance = 0;
+          }
           $scope.applyStatusColor();
         };
 
+        $scope.powerToLeft = function () {
+          $scope.addPowerBalance(-5);
+        };
+
         $scope.powerToRight = function () {
-          $scope.powerBalance += 5;
-          $scope.applyStatusColor();
+          $scope.addPowerBalance(5);
         };
 
         /**
@@ -46,6 +64,13 @@
             $scope.rightColor = 'grad-safe';
           }
         };
+
+        socket.on('addPowerBalance', function(data) {
+          console.log('addPowerBalance received: ' + data.amount);
+          $scope.$apply(function() {
+            $scope.addPowerBalance(data.amount);
+          });
+        });
 
         socket.on('powerToLeft', function() {
           console.log('powerToLeft received');
