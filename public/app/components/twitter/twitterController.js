@@ -1,7 +1,6 @@
 app.controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', function($scope, $timeout, $interval, socket) {
     $scope.feedList = [];
     $scope.tweet = $scope.feedList[0];
-    console.log($scope.feedList.length);
     var intervalCall;
 
   /**
