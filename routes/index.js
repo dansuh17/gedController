@@ -72,7 +72,13 @@ module.exports = function(io) {
         Vote.findOne({}, function(err, votes){
             if(err){ return next(err); }
             res.setHeader("Access-Control-Allow-Origin", "*");
-            res.json(votes);
+            res.setHeader("content-type", "text/javascript");
+            if (req.query.callback) {
+                res.jsonp(votes);
+            }
+            else {
+                res.json(votes);
+            }
         });
     });
 
