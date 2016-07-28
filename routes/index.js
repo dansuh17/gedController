@@ -65,6 +65,14 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
+    router.post('/votesChange/:devinUp/:tomUp', function(req, res, next) {
+        console.log("votesChange");
+        Vote.findOneAndUpdate({}, {devinUp:req.params.devinUp, tomUp:req.params.tomUp}, function(err, vote) {
+            if (err) {return next(err);}
+            res.json(vote)
+        });
+    });
+
 
     router.get('/getCurrentWinning', function(req, res, next) {
         console.log("getCurrentWinning request received.");
