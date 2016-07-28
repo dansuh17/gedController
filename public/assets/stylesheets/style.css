@@ -136,7 +136,7 @@ a {
   overflow: hidden;
   position: relative;
   width: auto;
-  transition: width 1s ease;
+  transition: width 0.5s ease;
   -webkit-border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   border-top-left-radius: 10px;
