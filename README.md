@@ -10,6 +10,8 @@ GED Controller for Kiswe Production
 Install the dependencies with the following command:
 ``` js
 npm install
+
+bower install
 ```
 
 ### Twitter app
