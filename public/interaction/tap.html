@@ -4,28 +4,38 @@
   <meta charset="UTF-8">
   <title>wsof</title>
 
+  <!-- jQuery dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <!-- angular.js -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
   <!-- CSS files -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css"/>
   <link rel="stylesheet" href="tap.css">
-
-  <!-- script dependencies -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
   <!-- Sockets -->
   <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 
   <!-- custom JS files -->
-  <script src="tap.js"></script>
+  <script src="angular/tap.module.js"></script>
+  <script src="angular/tap.factory.js"></script>
+  <script src="angular/tap.controller.js"></script>
 
 </head>
-<body>
-<div id="main">
-  <div id="tapA"></div>
-  <div id="tapB"></div>
+<body ng-app="tap">
+<div id="main" ng-controller="tapCtrl">
+  <!-- invisible tapping area where tapping will let you modify the power balance bar in index.html -->
+  <div id="tapA" ng-click="moveBalanceBar(2)"></div>
+  <div id="tapB" ng-click="moveBalanceBar(-2)"></div>
+
   <!-- little cute kiswe logo at the bottom left -->
   <div id="logo">
     <a href="http://kiswe.com/" target="_blank">
-    <img src="../assets/images/kisweLogo.png" width="48" height="48"/></a>
+      <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
   </div>
 </div>
 </body>

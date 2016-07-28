@@ -54,8 +54,8 @@
          */
         $scope.applyStatusColor = function() {
           if ($scope.powerBalance >= 67) {
-            $scope.leftColor = 'grad-safe';
             $scope.rightColor = 'grad-danger';
+            $scope.leftColor = 'grad-safe';
           } else if ($scope.powerBalance >= 33) {
             $scope.leftColor = 'grad-normal';
             $scope.rightColor = 'grad-normal';
