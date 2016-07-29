@@ -81,11 +81,17 @@ module.exports = function(io) {
             if(err){ return next(err); }
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("content-type", "text/javascript");
+            //gameGoingOn;
+            //votes.push({"gameGoingOn":1});
+            var votes_ = votes.toObject();
+
+            votes_.gameGoingOn = true;
+
             if (req.query.callback) {
-                res.jsonp(votes);
+                res.jsonp(votes_);
             }
             else {
-                res.json(votes);
+                res.json(votes_);
             }
         });
     });
