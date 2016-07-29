@@ -82,16 +82,16 @@ module.exports = function(io) {
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("content-type", "text/javascript");
             //gameGoingOn;
-            //votes.push({"gameGoingOn":1});
+            /*
             var votes_ = votes.toObject();
-
             votes_.gameGoingOn = true;
+            */
 
             if (req.query.callback) {
-                res.jsonp(votes_);
+                res.jsonp(votes);
             }
             else {
-                res.json(votes_);
+                res.json(votes);
             }
         });
     });
