@@ -65,9 +65,9 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
-    router.post('/votesChange/:devinUp/:tomUp', function(req, res, next) {
+    router.post('/votesChange/:devinUp/:tomUp/:gameGoingOn', function(req, res, next) {
         console.log("votesChange");
-        Vote.findOneAndUpdate({}, {devinUp:req.params.devinUp, tomUp:req.params.tomUp}, function(err, vote) {
+        Vote.findOneAndUpdate({}, {devinUp:req.params.devinUp, tomUp:req.params.tomUp, gameGoingOn:req.params.gameGoingOn}, function(err, vote) {
             if (err) {return next(err);}
             res.json(vote)
         });
