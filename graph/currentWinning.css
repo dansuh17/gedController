@@ -8,14 +8,8 @@ body {
     stroke-width: 2px;
 }
 
-.lineAbove {
-    fill: none;
-    stroke: blue;
-    stroke-width: 2px;
-}
 
-.lineBelow{
-    fill: none;
-    stroke: red;
-    stroke-width: 2px;
+.axis.axis--x g text {
+    display: none;
+
 }
