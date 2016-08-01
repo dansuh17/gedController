@@ -1,1 +1,1 @@
-var app = angular.module('gedApp', ['ngMaterial', 'ngMdIcons', 'timer']);
+var app = angular.module('gedApp', ['timer']);
