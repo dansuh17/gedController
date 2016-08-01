@@ -1,207 +1,155 @@
+/**
+ *  This models the floating coca-cola bottles over the broadcast stream.
+ *  The user can tap on the screen to try to remove the coca-cola bottles away.
+ *  by Daniel Suh 8/1/2016
+ */
 var boids = [];
 var img;
+var logo;
 var pressed = false;
+var centerVector;
 
+/**
+ * Setup the canvas.
+ * Initialize the canvas and also initialize the boids' starting points.
+ */
 function setup() {
-  createCanvas(1024, 720);
+  var canvas = createCanvas(400, 600);
+  //canvas.position(0, 0);
+  canvas.parent('background'); // binds the canvas into html class 'background'
+  // the vector of the center of canvas
+  centerVector = createVector(width/2 ,height/2);
+
+  bg = loadImage("../../assets/images/hotgirl.jpeg");
   img = loadImage("../../assets/images/cola.png");
+  logo = loadImage("../../assets/images/kisweLogo.png");
 
   // Add an initial set of boids into the system
-  for (var i = 0; i < 100; i++) {
-    boids[i] = new Boid(random(width), random(height));
+  // boids come randomly from outside the viewbox positioned randomly across the height.
+  for (var i = 0; i < 130; i++) {
+    if (i % 2 == 0) {
+      boids[i] = new Boid(random(width + 10, width + 50), random(-20, height + 20));
+    }
+    else {
+      boids[i] = new Boid(random(-50, -10), random(-20, height + 20));
+    }
   }
 }
 
+/**
+ * The draw loop for each frame.
+ */
 function draw() {
-  background(255);
+  background(bg);
+  image(logo, 20, height - 100, 48, 48);
   // Run all the boids
   for (var i = 0; i < boids.length; i++) {
     boids[i].run(boids);
   }
+
+  // if the effects for mouse press is over, reset 'pressed'
+  if (pressed) {
+    pressed = false;
+  }
 }
 
+/**
+ * If mouse pressed, set PRESSED to true so that according
+ * effect can take place.
+ */
 function mousePressed() {
   pressed = true;
 }
 
-function mouseReleased() {
-  pressed = false;
-}
-
-// Boid class
-// Methods for Separation, Cohesion, Alignment added
+// Boid class constructor
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = p5.Vector.random2D();
   this.position = createVector(x, y);
-  this.r = 5;
+  //this.r = 5;
   this.maxspeed = 4;    // Maximum speed
-  this.maxforce = 0.05; // Maximum steering force
-  this.rotation = PI / random(-9.0, 9.0);
+  // this.maxforce = 0.05; // Maximum steering force
+  // this.rotation = PI / random(-9.0, 9.0);
+  this.inScreen = true;
 }
 
-// umbrella method of drawing boids
-Boid.prototype.run = function(boids) {
-  this.flock(boids, pressed);
+/**
+ * Runs the physical system of boids.
+ * Takes into account the effect of gravity and
+ * the effect of mouse press.
+ */
+Boid.prototype.run = function() {
+  this.gravity();
   this.update();
-  this.borders();
   this.render();
 };
 
-// Forces go into acceleration
-Boid.prototype.applyForce = function(force) {
-  this.acceleration.add(force);
+/**
+ * Simulates the gravitational force (which is actually a spring-mass system).
+ */
+Boid.prototype.gravity = function() {
+  // calculate the distance from the center to this boid
+  var distance = p5.Vector.dist(centerVector, this.position);
+  var direction = p5.Vector.sub(centerVector, this.position).normalize();
+
+  if (distance > 5) this.applyForce(direction.mult(distance / 30000.0));
+  else this.applyForce(-direction.mult(1.0/30.0));
 };
 
-Boid.prototype.repel = function(boids) {
-  for (var i = 0; i < boids.length; i++) {
-    var repelDirection = p5.Vector.sub(boids[i].position, createVector(mouseX, mouseY));
-    var distance = p5.Vector.dist(boids[i].position, createVector(mouseX, mouseY));
-    // debugging
-    boids[i].acceleration.add(repelDirection.normalize().mult(distance/100.0));
-  }
-};
-
-// We accumulate a new acceleration each time based on three rules
-Boid.prototype.flock = function(boids, pressed) {
-  // if the mouse is pressed, repel from the position of the mouse
-  if (pressed) {
-    this.repel(boids);
-    //this.applyForce(repel);
-  } else {
-    var sep = this.separate(boids); // Separation
-    var ali = this.align(boids);    // Alignment
-    var coh = this.cohesion(boids); // Cohesion
-    // Arbitrarily weigh these forces
-    sep.mult(2.5);
-    ali.mult(1.0);
-    coh.mult(1.0);
-    // Add the force vectors to acceleration
-    this.applyForce(sep);
-    this.applyForce(ali);
-    this.applyForce(coh);
-  }
-};
-
-// Method to update location
+/**
+ * Updates the acceleration, velocity, and position of each boids
+ * according to previous values.
+ */
 Boid.prototype.update = function() {
-  // Update velocity
+  // randomize acceleration to simulate drunken walker
+  this.acceleration.add(random(-0.01, 0.01), random(-0.01, 0.01));
+
+  // Update velocity, also add some randomness
   this.velocity.add(this.acceleration);
+  this.velocity.add(random(-0.05, 0.05), random(-0.03, 0.03));
+
+  // if the mouse is pressed, the nearby boids move in the opposite
+  // direction from the selected location so that it clears out the space.
+  if (pressed) {
+    var mouseVector = createVector(mouseX, mouseY);
+    this.repel(mouseVector);
+  }
+
   // Limit speed
   this.velocity.limit(this.maxspeed);
   this.position.add(this.velocity);
+
   // Reset accelertion to 0 each cycle
   this.acceleration.mult(0);
 };
 
-// A method that calculates and applies a steering force towards a target
-// STEER = DESIRED MINUS VELOCITY
-Boid.prototype.seek = function(target) {
-  var desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
-  // Normalize desired and scale to maximum speed
-  desired.normalize();
-  desired.mult(this.maxspeed);
-  // Steering = Desired minus Velocity
-  var steer = p5.Vector.sub(desired, this.velocity);
-  steer.limit(this.maxforce); // Limit to maximum steering force
-  return steer;
-};
-
-// Draw boid as a Coca Cola bottle image
+/**
+ * Actually renders the boid image.
+ */
 Boid.prototype.render = function() {
-  //fill(127, 127);
-  //stroke(200);
-  //ellipse(this.position.x, this.position.y, 16, 16);
-  //var angle = p5.Vector.angleBetween(this.acceleration, createVector(0.0, 1.0, 0.0));
-  rotate(this.rotation);
-  image(img, this.position.x, this.position.y, 30, 100);
-};
-
-// Wraparound
-Boid.prototype.borders = function() {
-  if (this.position.x < -this.r) this.position.x = width + this.r;
-  if (this.position.y < -this.r) this.position.y = height + this.r;
-  if (this.position.x > width + this.r) this.position.x = -this.r;
-  if (this.position.y > height + this.r) this.position.y = -this.r;
-};
-
-// Separation
-// Method checks for nearby boids and steers away
-Boid.prototype.separate = function(boids) {
-  var desiredseparation = 25.0;
-  var steer = createVector(0, 0);
-  var count = 0;
-  // For every boid in the system, check if it's too close
-  for (var i = 0; i < boids.length; i++) {
-    var d = p5.Vector.dist(this.position, boids[i].position);
-    // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
-    if ((d > 0) && (d < desiredseparation)) {
-      // Calculate vector pointing away from neighbor
-      var diff = p5.Vector.sub(this.position, boids[i].position);
-      diff.normalize();
-      diff.div(d); // Weight by distance
-      steer.add(diff);
-      count++; // Keep track of how many
-    }
-  }
-  // Average -- divide by how many
-  if (count > 0) {
-    steer.div(count);
-  }
-
-  // As long as the vector is greater than 0
-  if (steer.mag() > 0) {
-    // Implement Reynolds: Steering = Desired - Velocity
-    steer.normalize();
-    steer.mult(this.maxspeed);
-    steer.sub(this.velocity);
-    steer.limit(this.maxforce);
-  }
-  return steer;
-};
-
-// Alignment
-// For every nearby boid in the system, calculate the average velocity
-Boid.prototype.align = function(boids) {
-  var neighbordist = 50;
-  var sum = createVector(0, 0);
-  var count = 0;
-  for (var i = 0; i < boids.length; i++) {
-    var d = p5.Vector.dist(this.position, boids[i].position);
-    if ((d > 0) && (d < neighbordist)) {
-      sum.add(boids[i].velocity);
-      count++;
-    }
-  }
-  if (count > 0) {
-    sum.div(count);
-    sum.normalize();
-    sum.mult(this.maxspeed);
-    var steer = p5.Vector.sub(sum, this.velocity);
-    steer.limit(this.maxforce);
-    return steer;
-  } else {
-    return createVector(0, 0);
+  //rotate(this.rotation); // for random rotation
+  if (this.inScreen) {
+    image(img, this.position.x, this.position.y, 30, 100);
   }
 };
 
-// Cohesion
-// For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
-Boid.prototype.cohesion = function(boids) {
-  var neighbordist = 50;
-  var sum = createVector(0, 0); // Start with empty vector to accumulate all locations
-  var count = 0;
-  for (var i = 0; i < boids.length; i++) {
-    var d = p5.Vector.dist(this.position, boids[i].position);
-    if ((d > 0) && (d < neighbordist)) {
-      sum.add(boids[i].position); // Add location
-      count++;
-    }
-  }
-  if (count > 0) {
-    sum.div(count);
-    return this.seek(sum); // Steer towards the location
-  } else {
-    return createVector(0, 0);
+/**
+ * Adds the effect of certain force to the acceleration.
+ * @param force the force taken place on the boid
+ */
+Boid.prototype.applyForce = function(force) {
+  this.acceleration.add(force);
+};
+
+/**
+ * When the mouse is clicked, it repels the boids as if a drop of
+ * stone into water. The nearby space is cleared out.
+ * @param mouseVector
+ */
+Boid.prototype.repel = function(mouseVector) {
+  var repelDirection = p5.Vector.sub(this.position, mouseVector).normalize();
+  var dist = p5.Vector.dist(this.position, mouseVector);
+  if (dist < 150) {
+    this.velocity = repelDirection.mult(200.0 / dist);
   }
 };

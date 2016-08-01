@@ -7,7 +7,7 @@
   <!-- jQuery dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-  <!-- angular.js -->
+  <!-- tap.js -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-aria.min.js"></script>
@@ -20,12 +20,23 @@
   <!-- socket.io -->
   <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 
-  <!-- angular modules -->
+  <!-- tap modules -->
   <script src="sweep.module.js"></script>
+  <script src="sweep.controller.js"></script>
 
   <!-- p5 source -->
   <script src="p5.js"></script>
+
 </head>
-<body>
+<body ng-app="sweep">
+  <!-- little cute kiswe logo at the bottom left>
+  <div id="logo" ng-controller="sweepCtrl">
+    <a href="http://kiswe.com/" target="_blank">
+      <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
+  </div>
+  -->
+  <div id="background">
+    <!-- p5 canvas goes here -->
+  </div>
 </body>
 </html>
