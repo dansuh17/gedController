@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>currentWinning</title><meta charset="utf-8">
+
+    <link rel='stylesheet' type='text/css' href='currentWinning.css'/>
+
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+</head>
+<body>
+
+    <svg width="800" height="600"></svg>
+
+    <script>
+
+        var n = 100,                        // count
+            random = d3.randomNormal(0,1),  // initialization
+            //data2 = d3.range(0).map(random), // test-------------
+            data = d3.range(0).map(random);
+        //for color
+
+        //var tomWinning = true,
+        //    devinWinning = false;
+
+        /// check game is going on
+
+
+        var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300",
+            fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
+
+        var svg = d3.select("svg"),
+            margin = {top: 100, right: 100, bottom: 100, left: 100},
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom,
+            g = svg.append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+        // graph
+
+        var x = d3.scaleLinear()
+                .domain([0, n - 1])
+                .range([0, width]);
+
+        var y = d3.scaleLinear()
+                .domain([-100, 100])
+                .range([height, 0]);
+
+        var line = d3.line()
+                .x(function(d, i) { return x(i); })
+                .y(function(d, i) { return y(d); });
+
+
+        g.append("defs").append("clipPath")
+                .attr("id", "clip")
+                .append("rect")
+                .attr("width", width)
+                .attr("height", height);
+
+        g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + y(0) + ")")
+                .call(d3.axisBottom(x));
+
+        g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y));
+
+        g.append("g")
+                .attr("clip-path", "url(#clip)")
+                .append("path")
+                .datum(data)
+                .attr("class", "line")
+                .transition()
+                .duration(1000)
+                .ease(d3.easeLinear)
+                .on("start", tick);
+
+
+        /* **********************************************************************test
+        g.append("g")
+                .attr("clip-path", "url(#clip)")
+                .append("path")
+                .datum(data2)
+                .attr("class", "lineBelow")
+                .transition()
+                .duration(1000)
+                .ease(d3.easeLinear)
+                .on("start", tick);
+        */
+
+
+        g.append("text")
+                .attr("class", "y label")
+                .attr("text-anchor", "middle")
+                .attr("y", 10)
+                .attr("dy", ".75em")
+                .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
+
+                //.attr("transform", "rotate(-90)")
+                .text("who's winning");
+
+        //change text to img of fighters
+        /*
+        g.append("text")
+                .attr("class", "fighter a")
+                .attr("text-anchor", "middle")
+                .attr("y", 10)
+                .attr("dy", ".40em")
+                .attr("transform", "translate("+ (-margin.left/1.5) +", "+ 0 +")rotate(-90)")
+
+                //.attr("transform", "rotate(-90)")
+                .text("Fighter A");
+        */
+
+        g.append("svg:image")
+                .attr("class", "fighter a")
+                .attr("xlink:href", fighterA)
+                .attr("width", 50)
+                .attr("height", 50)
+                .attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
+
+
+        g.append("svg:image")
+                .attr("class", "fighter b")
+                .attr("xlink:href", fighterB)
+                .attr("width", 50)
+                .attr("height", 50)
+                .attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
+
+
+        //////////////
+        g.append("linearGradient")
+                .attr("id", "area-gradient")				// change from line to area
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", 0).attr("y1", y(0))
+                .attr("x2", 0).attr("y2", y(1000))
+                .selectAll("stop")
+                .data([
+                    {offset: "0%", color: "red"},
+                    {offset: "30%", color: "red"},
+                    {offset: "45%", color: "black"},
+                    {offset: "55%", color: "black"},
+                    {offset: "60%", color: "lawngreen"},
+                    {offset: "100%", color: "lawngreen"}
+                ])
+                .enter().append("stop")
+                .attr("offset", function(d) { return d.offset; })
+                .attr("stop-color", function(d) { return d.color; });
+
+
+
+        /////////////
+
+        var currentWinning = 0;
+        var gameGoingOn = true; ////////////
+
+        //tick();
+
+        function tick() {
+
+
+
+
+    // Redraw the line.
+
+
+
+            $.ajax({
+                url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
+
+                dataType: "jsonp",
+                success: function(data) {
+                    currentWinning = data.tomUp - data.devinUp;
+                    //console.log(data.tomUp);
+
+                    if(currentWinning > 0) {tomWinning = true; devinWinning = false;}
+                    else if(currentWinning < 0) {tomWinning = false; devinWinning = true;}
+
+                    ///check game is going on
+                    gameGoingOn = data.gameGoingOn;
+
+                }
+            });
+            console.log("tick");
+            if(gameGoingOn) {
+
+                //if(currentWinning>=0) {data.push(currentWinning)}
+                //else if(currentWinning<0){data2.push(currentWinning)};
+
+
+                data.push(currentWinning);
+
+                d3.select(this)
+                        .attr("d", line)
+                        .attr("transform", null);
+                // put color????
+            }
+                // Slide it to the left. --- which is no more!!
+                d3.active(this)
+                //    .attr("transform", "translate(" + x(-1) + ",0)")
+                        .transition()
+                        .on("start", tick);
+
+
+        }
+
+    </script>
+
+</body>
+</html>
+
