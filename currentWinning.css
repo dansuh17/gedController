@@ -1,0 +1,21 @@
+body {
+    font: 20px sans-serif;
+}
+
+.line{
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.lineAbove {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2px;
+}
+
+.lineBelow{
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+}
