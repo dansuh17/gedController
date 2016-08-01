@@ -24,54 +24,6 @@ var io = app.io;
 io.attach(server);
 
 /**
- * serverside socket.io listener.
- * Here, the functions that the server reacts onto
- * specific messages are defined.
- */
-var mongoose = require('mongoose');
-var Vote = mongoose.model('Vote');
-
-io.on('connection', function(socket) {
-  console.log('new connection');
-  socket.emit('welcome', {});
-
-  var tomUp;
-  var devinUp;
-  Vote.findOne({}, function(err, vote) {
-    if (err) {
-      console.log("DB ERROR");
-      return next(err);
-    }
-    console.log("retrieve from DB");
-
-    tomUp = vote.tomUp;
-    devinUp = vote.devinUp;
-
-  });
-
-
-  socket.on('addPowerBalance', function(data) {
-    io.emit('addPowerBalance', data);
-
-    if (parseInt(data.amount) > 0) {
-      tomUp += parseInt(data.amount);
-    }
-    else {
-      devinUp -= parseInt(data.amount);
-    }
-
-    Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
-      if (err) {
-        console.log("DB ERROR");
-        return next(err);
-      }
-      console.log("db store successful")
-    });
-
-  });
-});
-
-/**
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port);

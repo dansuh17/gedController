@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Vote = mongoose.model('Vote');
 
-module.exports = function(io) {
+module.exports = function(io, Vote) {
 
     /* GET home page. */
     router.get('/', function(req, res, next) {
@@ -67,12 +65,12 @@ module.exports = function(io) {
 
     router.post('/votesChange/:devinUp/:tomUp/:gameGoingOn', function(req, res, next) {
         console.log("votesChange");
-        Vote.findOneAndUpdate({}, {devinUp:req.params.devinUp, tomUp:req.params.tomUp, gameGoingOn:req.params.gameGoingOn}, function(err, vote) {
-            if (err) {return next(err);}
-            res.json(vote)
+        Vote.findOneAndUpdate({}, {devinUp:req.params.devinUp, tomUp:req.params.tomUp, gameGoingOn:req.params.gameGoingOn},
+            function(err, vote) {
+                if (err) {return next(err);}
+                res.json(vote);
         });
     });
-
 
     router.get('/getCurrentWinning', function(req, res, next) {
         console.log("getCurrentWinning request received.");
@@ -81,11 +79,6 @@ module.exports = function(io) {
             if(err){ return next(err); }
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("content-type", "text/javascript");
-            //gameGoingOn;
-            /*
-            var votes_ = votes.toObject();
-            votes_.gameGoingOn = true;
-            */
 
             if (req.query.callback) {
                 res.jsonp(votes);

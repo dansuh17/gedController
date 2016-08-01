@@ -11,17 +11,15 @@ var app = express();
 var io = socketio();
 app.io = io;
 
-// twitter embed
-var Twit = require('twit');
-
 // mongoose
 var mongoose = require('mongoose');
 require('./models/votes');
 mongoose.connect('mongodb://localhost:27017/ged');
+var Vote = mongoose.model('Vote');
 
 // routes
-var routes = require('./routes/index')(io);
-var users = require('./routes/users');
+var routes = require('./routes/index')(io, Vote);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public'));
@@ -36,7 +34,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,30 +66,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-/**
- * Twitter Socket Interface
- */
-var keys = require('./keys');
-var T = new Twit({
-  consumer_key:         keys.consumer_key,
-  consumer_secret:      keys.consumer_secret,
-  access_token:         keys.access_token,
-  access_token_secret:  keys.access_token_secret,
-});
 
-var index = {
-  hash: "#WSOF32"
-};
-
-var stream = T.stream('statuses/filter', {track: index.hash});
-stream.on('tweet', function (tweet) {
-  console.log(tweet);
-  io.emit('stream', {
-    text:tweet.text,
-    name:tweet.user.name,
-    username:tweet.user.screen_name,
-    icon:tweet.user.profile_image_url,
-    hash:index.hash});
-});
+var socket_ = require('./socket')(io, Vote);
 
 module.exports = app;
