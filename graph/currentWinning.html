@@ -14,7 +14,7 @@
 
     <script>
 
-        var n = 100,                        // count
+        var n = 90,                        // count
             random = d3.randomNormal(0,1),  // initialization
             //data2 = d3.range(0).map(random), // test-------------
             data = d3.range(0).map(random);
@@ -46,7 +46,7 @@
                 .range([0, width]);
 
         var y = d3.scaleLinear()
-                .domain([-100, 100])
+                .domain([-1, 1])
                 .range([height, 0]);
 
         var line = d3.line()
@@ -63,10 +63,12 @@
         g.append("g")
                 .attr("class", "axis axis--x")
                 .attr("transform", "translate(0," + y(0) + ")")
+                .attr("display", "none")
                 .call(d3.axisBottom(x));
 
         g.append("g")
                 .attr("class", "axis axis--y")
+                //.attr("display", "none")
                 .call(d3.axisLeft(y));
 
         g.append("g")
@@ -79,20 +81,6 @@
                 .ease(d3.easeLinear)
                 .on("start", tick);
 
-
-        /* **********************************************************************test
-        g.append("g")
-                .attr("clip-path", "url(#clip)")
-                .append("path")
-                .datum(data2)
-                .attr("class", "lineBelow")
-                .transition()
-                .duration(1000)
-                .ease(d3.easeLinear)
-                .on("start", tick);
-        */
-
-
         g.append("text")
                 .attr("class", "y label")
                 .attr("text-anchor", "middle")
@@ -103,19 +91,48 @@
                 //.attr("transform", "rotate(-90)")
                 .text("who's winning");
 
-        //change text to img of fighters
-        /*
+        //axis
+        g.append("rect")
+                .attr("x", width/3)
+                .attr("y", 0)
+                .attr("width", 1)
+                .attr("height", height)
+                .attr("fill","lightgrey")
+
+        g.append("rect")
+                .attr("x", width*2/3)
+                .attr("y", 0)
+                .attr("width", 1)
+                .attr("height", height)
+                .attr("fill","lightgrey")
+
+        g.append("rect")
+                .attr("x", width)
+                .attr("y", 0)
+                .attr("width", 1)
+                .attr("height", height)
+                .attr("fill","lightgrey")
+
+        g.append("rect")
+                .attr("x", 0)
+                .attr("y", height/2)
+                .attr("width", width)
+                .attr("height", 1)
+                .attr("fill","darkgrey")
+
+        var space = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"
+
         g.append("text")
-                .attr("class", "fighter a")
+                .attr("class", "x label")
                 .attr("text-anchor", "middle")
-                .attr("y", 10)
-                .attr("dy", ".40em")
-                .attr("transform", "translate("+ (-margin.left/1.5) +", "+ 0 +")rotate(-90)")
+                .attr("x", 10)
+                .attr("dx", ".75em")
+                .attr("transform", "translate("+ (2.78*margin.left) +", "+ 0 +")")
 
                 //.attr("transform", "rotate(-90)")
-                .text("Fighter A");
-        */
+                .text("\u00A0round1"+space+space+"round2"+space+space+"round3");
 
+        //add image of fighters
         g.append("svg:image")
                 .attr("class", "fighter a")
                 .attr("xlink:href", fighterA)
@@ -132,7 +149,7 @@
                 .attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
 
-        //////////////
+        //////////////color?
         g.append("linearGradient")
                 .attr("id", "area-gradient")				// change from line to area
                 .attr("gradientUnits", "userSpaceOnUse")
@@ -174,7 +191,8 @@
 
                 dataType: "jsonp",
                 success: function(data) {
-                    currentWinning = data.tomUp - data.devinUp;
+                    currentWinning = ((data.devinUp/(data.tomUp + data.devinUp) - 0.5))/ 0.5
+                          //  data.tomUp - data.devinUp;
                     //console.log(data.tomUp);
 
                     if(currentWinning > 0) {tomWinning = true; devinWinning = false;}
