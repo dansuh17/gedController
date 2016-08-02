@@ -1,0 +1,42 @@
+body {
+  font-family: "Helvetica Neue", "HelveticaNeue-Light", "Eurostile-Regular", sans-serif;
+  font-style: normal;
+  font-size: 1.5em;
+  background: transparent;
+  background-size: cover;
+  padding: 0 0 0 0;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+}
+
+#toggle {
+  background-color: black;
+  position: absolute;
+  bottom: 10vh;
+  left: 0;
+  width: 80%;
+  height: 90%;
+}
+
+#logo {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  bottom: 10vh;
+  left: 5vw;
+  z-index: 1000;
+}
+
+#votePic {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  bottom: 20vh;
+  right: 10vw;
+  z-index: 1;
+}
