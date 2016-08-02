@@ -1,5 +1,6 @@
 /**
  * Controller for tapping events.
+ * by Daniel Suh 7/28/2016
  */
 ;(function() {
   angular

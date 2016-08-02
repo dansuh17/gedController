@@ -12,14 +12,10 @@ var io = socketio();
 app.io = io;
 
 // mongoose
-var mongoose = require('mongoose');
-require('./models/votes');
-mongoose.connect('mongodb://localhost:27017/ged');
-var Vote = mongoose.model('Vote');
+var Vote = require('./models/votes').Vote;
 
 // routes
 var routes = require('./routes/index')(io, Vote);
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public'));
