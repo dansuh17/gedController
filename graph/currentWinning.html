@@ -60,7 +60,8 @@
 
         g.append("g")
                 .attr("class", "axis axis--y")
-                //.attr("display", "none")
+                .style("stroke", "grey")
+                .style("color", "grey")
                 .call(d3.axisLeft(y));
 
         g.append("g")
@@ -79,9 +80,10 @@
                 .attr("y", 10)
                 .attr("dy", ".75em")
                 .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
-
+                .style("fill", "darkgrey")
                 //.attr("transform", "rotate(-90)")
                 .text("who's winning");
+
 
         //axis
         g.append("rect")
@@ -119,6 +121,7 @@
                 .attr("x", width*1/6)
                 .attr("y", 0)
                 .text("round1")
+                .style("fill", "darkgrey")
 
         g.append("text")
                 .attr("class", "round")
@@ -126,6 +129,7 @@
                 .attr("x", width*3/6)
                 .attr("y", 0)
                 .text("round2")
+                .style("fill", "darkgrey")
 
         g.append("text")
                 .attr("class", "round")
@@ -133,6 +137,7 @@
                 .attr("x", width*5/6)
                 .attr("y", 0)
                 .text("round3")
+                .style("fill", "darkgrey")
 
         //add image of fighters
         g.append("svg:image")
