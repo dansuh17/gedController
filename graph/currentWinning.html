@@ -16,15 +16,7 @@
 
         var n = 90,                        // count
             random = d3.randomNormal(0,1),  // initialization
-            //data2 = d3.range(0).map(random), // test-------------
             data = d3.range(0).map(random);
-        //for color
-
-        //var tomWinning = true,
-        //    devinWinning = false;
-
-        /// check game is going on
-
 
         var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300",
             fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
@@ -175,53 +167,45 @@
         var currentWinning = 0;
         var gameGoingOn = true; ////////////
 
+        var sheet = document.getElementById('stylesheet');
         //tick();
 
         function tick() {
-
-
-
-
     // Redraw the line.
-
-
-
             $.ajax({
                 url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
-
                 dataType: "jsonp",
                 success: function(data) {
-                    currentWinning = ((data.devinUp/(data.tomUp + data.devinUp) - 0.5))/ 0.5
-                          //  data.tomUp - data.devinUp;
-                    //console.log(data.tomUp);
-
+                    currentWinning = ((data.devinUp/(data.tomUp + data.devinUp))-0.5)/0.5;
+             
                     if(currentWinning > 0) {tomWinning = true; devinWinning = false;}
                     else if(currentWinning < 0) {tomWinning = false; devinWinning = true;}
 
-                    ///check game is going on
                     gameGoingOn = data.gameGoingOn;
-
                 }
             });
             console.log("tick");
-            if(gameGoingOn) {
-
-                //if(currentWinning>=0) {data.push(currentWinning)}
-                //else if(currentWinning<0){data2.push(currentWinning)};
-
-
-                data.push(currentWinning);
-
-                d3.select(this)
-                        .attr("d", line)
-                        .attr("transform", null);
-                // put color????
+            if(gameGoingOn) {                
+                data.push(currentWinning);  
+                    
             }
-                // Slide it to the left. --- which is no more!!
                 d3.active(this)
-                //    .attr("transform", "translate(" + x(-1) + ",0)")
                         .transition()
                         .on("start", tick);
+                if(currentWinning>=0) {
+                    d3.select(this)
+                        .attr("d", line)
+                        .attr("transform", null)
+                        .style("fill", "none")
+                        .style("stroke", "blue");
+                }
+                else if(currentWinning<0){
+                    d3.select(this)
+                        .attr("d", line)
+                        .attr("transform", null)
+                        .style("fill", "none")
+                        .style("stroke", "red");
+                };
 
 
         }
