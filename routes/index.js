@@ -21,6 +21,5 @@ module.exports = function(io, Vote) {
     var timerRoute = require('./timer');
     router.use('/timer', timerRoute(io));
 
-
     return router;
 };
