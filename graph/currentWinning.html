@@ -112,17 +112,27 @@
                 .attr("height", 1)
                 .attr("fill","darkgrey")
 
-        var space = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"
+        //round 1,2,3
+        g.append("text")
+                .attr("class", "round")
+                .attr("text-anchor", "middle")
+                .attr("x", width*1/6)
+                .attr("y", 0)
+                .text("round1")
 
         g.append("text")
-                .attr("class", "x label")
+                .attr("class", "round")
                 .attr("text-anchor", "middle")
-                .attr("x", 10)
-                .attr("dx", ".75em")
-                .attr("transform", "translate("+ (2.78*margin.left) +", "+ 0 +")")
+                .attr("x", width*3/6)
+                .attr("y", 0)
+                .text("round2")
 
-                //.attr("transform", "rotate(-90)")
-                .text("\u00A0round1"+space+space+"round2"+space+space+"round3");
+        g.append("text")
+                .attr("class", "round")
+                .attr("text-anchor", "middle")
+                .attr("x", width*5/6)
+                .attr("y", 0)
+                .text("round3")
 
         //add image of fighters
         g.append("svg:image")
@@ -141,37 +151,17 @@
                 .attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
 
-        //////////////color?
-        g.append("linearGradient")
-                .attr("id", "area-gradient")				// change from line to area
-                .attr("gradientUnits", "userSpaceOnUse")
-                .attr("x1", 0).attr("y1", y(0))
-                .attr("x2", 0).attr("y2", y(1000))
-                .selectAll("stop")
-                .data([
-                    {offset: "0%", color: "red"},
-                    {offset: "30%", color: "red"},
-                    {offset: "45%", color: "black"},
-                    {offset: "55%", color: "black"},
-                    {offset: "60%", color: "lawngreen"},
-                    {offset: "100%", color: "lawngreen"}
-                ])
-                .enter().append("stop")
-                .attr("offset", function(d) { return d.offset; })
-                .attr("stop-color", function(d) { return d.color; });
-
-
-
         /////////////
 
         var currentWinning = 0;
         var gameGoingOn = true; ////////////
 
         var sheet = document.getElementById('stylesheet');
+
         //tick();
 
         function tick() {
-    // Redraw the line.
+        // Redraw the line.
             $.ajax({
                 url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
                 dataType: "jsonp",
