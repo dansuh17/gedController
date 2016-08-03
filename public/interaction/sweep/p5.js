@@ -25,7 +25,7 @@ function setup() {
 
   // Add an initial set of boids into the system
   // boids come randomly from outside the viewbox positioned randomly across the height.
-  for (var i = 0; i < 130; i++) {
+  for (var i = 0; i < 30; i++) {
     if (i % 2 == 0) {
       boids[i] = new Boid(random(width + 10, width + 50), random(-20, height + 20));
     }
@@ -39,7 +39,7 @@ function setup() {
  * The draw loop for each frame.
  */
 function draw() {
-  //background(bg);
+  background(255, 255, 255, 0);
   image(logo, 20, height - 100, 48, 48);
   // Run all the boids
   for (var i = 0; i < boids.length; i++) {
@@ -128,7 +128,7 @@ Boid.prototype.update = function() {
 Boid.prototype.render = function() {
   //rotate(this.rotation); // for random rotation
   if (this.inScreen) {
-    image(img, this.position.x, this.position.y, 30, 100);
+    image(img, this.position.x, this.position.y, 60, 200);
   }
 };
 
@@ -148,7 +148,7 @@ Boid.prototype.applyForce = function(force) {
 Boid.prototype.repel = function(mouseVector) {
   var repelDirection = p5.Vector.sub(this.position, mouseVector).normalize();
   var dist = p5.Vector.dist(this.position, mouseVector);
-  if (dist < 150) {
-    this.velocity = repelDirection.mult(200.0 / dist);
+  if (dist < 200) {
+    this.velocity = repelDirection.mult(300.0 / dist);
   }
 };

@@ -7,7 +7,7 @@
       .controller('sweepCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
         $scope.endCommercial = function() {
-          window.open("http://localhost:3000/interaction/vote/vote.html");
+          //window.open("http://localhost:3000/interaction/vote/vote.html");
         };
 
         $timeout($scope.endCommercial, 1000);

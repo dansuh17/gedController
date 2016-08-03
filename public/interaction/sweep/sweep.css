@@ -1,7 +1,8 @@
-body {
+html, body {
   height: 100vh;
   width: 100vw;
   background: transparent;
+  overflow: hidden;
 }
 
 #logo {
@@ -14,6 +15,7 @@ body {
 }
 
 canvas {
+  overflow: hidden;
   position: absolute;
   z-index: -1;
   top: 0;
