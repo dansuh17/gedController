@@ -36,6 +36,15 @@
         <script src="app/components/power/powerController.js"></script>
         <script src="app/components/power/power.directive.js"></script>
 
+        <!-- p5 dependencies -->
+        <script src="../../lib/p5.js" type="text/javascript"></script>
+        <script src="../../lib/p5.play.js" type="text/javascript"></script>
+        <script src="../../lib/p5.dom.js" type="text/javascript"></script>
+        <script src="../../lib/p5.sound.js" type="text/javascript"></script>
+
+        <!-- ballmove -->
+        <script src="interaction/ballmove/p5.particlemove.js"></script>
+
         <!-- Stylesheets -->
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
@@ -64,10 +73,15 @@
                     <h1 class="fighterName" id="rightName">Devin Powell</h1>
                 </div>
 
-                <!-- Power balance bar -->
+                <!-- Power balance bar
                 <div ng-controller="powerCtrl">
                   <power-balance></power-balance>
                 </div>
+                -->
+
+                <!-- particle clusters -->
+                <div id="ballmove"></div>
+
 
                 <!-- Twitter feed -->
                 <div class="content" ng-controller="twitCtrl">

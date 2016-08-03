@@ -4,7 +4,7 @@
  */
   var particles;
   var suns = []; // Center of Gravity
-  var margin = 100;
+  var margin = 220;
   var totalcount = 20;
   var leftcount = 10;
   var rightcount = totalcount - leftcount;
@@ -12,7 +12,9 @@
   var currightcount = 0;
 
   function setup() {
-    createCanvas(1080,720);  
+    var canvas = createCanvas(1280,500);
+    canvas.parent('ballmove');
+    canvas.style("visibility", "visible");
     textSize(15);
     noStroke();
 

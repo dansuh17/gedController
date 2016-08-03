@@ -1,4 +1,10 @@
-html, body {
+html {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+}
+
+body {
   height: 100vh;
   width: 100vw;
   background: transparent;
