@@ -5,7 +5,7 @@
   angular
       .module('tap',[])
       .factory('socketFactory', ['$rootScope', function($rootScope) {
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect();
         console.log('connected to tap factory');
 
         return {

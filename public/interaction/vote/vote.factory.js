@@ -6,11 +6,11 @@
   angular
       .module('vote',[])
       .factory('socketFactory', ['$rootScope', function($rootScope) {
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect();
         console.log('connected to tap factory');
 
         return {
-          on: function(eventName, callback){
+          on: function(eventName, callback) {
             socket.on(eventName, callback);
           },
           emit: function(eventName, data) {
@@ -19,4 +19,3 @@
         };
       }]);
 })();
-

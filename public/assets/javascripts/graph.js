@@ -1,24 +1,20 @@
-var n = 900,                        // count
-    random = d3.randomNormal(0,1),  // initialization
-    data = d3.range(0).map(random);
+var n = 900;                         // count
+var d3random = d3.randomNormal(0,1); // initialization
+var data = d3.range(0).map(d3random);
 
-var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300",
-    fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
-
+var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300";
+var fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
 var eMark = "assets/images/1470249409_interface-40.svg";
 
 var currentTick = 0;
 var svg = d3.select("svg"),
-    margin = {top: 100, right: 100, bottom: 100, left: 100},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g")
+margin = {top: 100, right: 100, bottom: 100, left: 100};
+var width = +svg.attr("width") - margin.left - margin.right;
+var height = +svg.attr("height") - margin.top - margin.bottom;
+var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-
 // graph
-
 var x = d3.scaleLinear()
     .domain([0, n - 1])
     .range([0, width]);
@@ -27,10 +23,9 @@ var y = d3.scaleLinear()
     .domain([-1, 1])
     .range([height, 0]);
 
-var line = d3.line()
+var d3line = d3.line()
     .x(function(d, i) { return x(i); })
     .y(function(d, i) { return y(d); });
-
 
 g.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -53,14 +48,11 @@ g.append("g")
     .attr("clip-path", "url(#clip)")
     .append("path")
     .datum(data)
-    .attr("class", "line")
+    .attr("class", "d3line")
     .transition()
     .duration(1000)
     .ease(d3.easeLinear)
     .on("start", tick);
-
-
-
 
 //axis
 g.append("text")
@@ -69,9 +61,7 @@ g.append("text")
     .attr("y", 10)
     .attr("dy", ".75em")
     .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
-    //.attr("transform", "rotate(-90)")
     .text("who's winning");
-
 
 g.append("rect")
     .attr("x", width/3)
@@ -134,7 +124,6 @@ g.append("svg:image")
     .attr("y", 8/9*height)
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
-
 g.append("svg:image")
     .attr("class", "fighter b")
     .attr("xlink:href", fighterB)
@@ -149,9 +138,7 @@ g.append("svg:image")
  .attr("class", "tooltip")
  .style("opacity", 0);
  */
-
 function addMark() {
-
     g.append("svg:image")
         .attr("class", "eMark")
         .attr("xlink:href", eMark)
@@ -173,8 +160,6 @@ function addMark() {
      .attr("height", 100)
      })
      */
-
-    /////////////
 }
 
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
@@ -188,7 +173,6 @@ var reqEvent = new XMLHttpRequest();
 reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_wsof32_20160727140717', true);
 reqEvent.setRequestHeader("Authorization", token);
 reqEvent.send(null);
-
 
 var isStart = false;
 var currentRound = 0;
@@ -215,8 +199,7 @@ function tick() {
                 if (currentWinning > 0) {
                     tomWinning = true;
                     devinWinning = false;
-                }
-                else if (currentWinning < 0) {
+                } else if (currentWinning < 0) {
                     tomWinning = false;
                     devinWinning = true;
                 }
@@ -228,12 +211,11 @@ function tick() {
             timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
-            for(var i = done; i<clipData.length; i++){
-                if(new Date(clipData[i].start_time).getTime() + timediff < new Date().getTime()){
+            for(var i = done; i<clipData.length; i++) {
+                if(new Date(clipData[i].start_time).getTime() + timediff < new Date().getTime()) {
                     addMark();
                     done++;
-                }
-                else{
+                } else {
                     break;
                 }
             }
@@ -256,8 +238,7 @@ function tick() {
             // if(Math.random()>0.9){
             // 	addMark();
             // }
-        }
-        else{
+        } else {
             isStart = false;
         }
 
@@ -266,19 +247,17 @@ function tick() {
             .on("start", tick);
         if (currentWinning >= 0) {
             d3.select(this)
-                .attr("d", line)
+                .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
                 .style("stroke", "blue");
         }
         else if (currentWinning < 0) {
             d3.select(this)
-                .attr("d", line)
+                .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
                 .style("stroke", "red");
-
-
         }
     }
 }
