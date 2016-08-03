@@ -248,7 +248,7 @@
             if (gameGoingOn) {
                 data.push(currentWinning);
                 currentTick++;
-                if (Math.random() > 0.5) {
+                if(Math.random()>0.9 && currentTick < n){
                     addMark();
                 }
 
