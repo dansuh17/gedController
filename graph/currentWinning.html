@@ -17,7 +17,7 @@
 
 	<script>
 
-		var n = 90,                        // count
+		var n = 900,                        // count
 			random = d3.randomNormal(0,1),  // initialization
 			data = d3.range(0).map(random);
 
@@ -65,34 +65,34 @@
 
 		g.append("g")
 		.attr("class", "axis axis--y")
-				//.attr("display", "none")
-				.attr("stroke", "darkgrey")
-				.call(d3.axisLeft(y));
+        .attr("stroke", "darkgrey")
+        .call(d3.axisLeft(y));
 
-				g.append("g")
-				.attr("clip-path", "url(#clip)")
-				.append("path")
-				.datum(data)
-				.attr("class", "line")
-				.transition()
-				.duration(1000)
-				.ease(d3.easeLinear)
-				.on("start", tick);
+        g.append("g")
+        .attr("clip-path", "url(#clip)")
+        .append("path")
+        .datum(data)
+        .attr("class", "line")
+        .transition()
+        .duration(1000)
+        .ease(d3.easeLinear)
+        .on("start", tick);
 
-				g.append("text")
-				.attr("class", "text")
-				.attr("text-anchor", "middle")
-				.attr("y", 10)
-				.attr("dy", ".75em")
-				.attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
-
-				//.attr("transform", "rotate(-90)")
-				.text("who's winning");
 
 
 
 		//axis
-		g.append("rect")
+        g.append("text")
+        .attr("class", "text")
+        .attr("text-anchor", "middle")
+        .attr("y", 10)
+        .attr("dy", ".75em")
+        .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
+        //.attr("transform", "rotate(-90)")
+        .text("who's winning");
+
+
+        g.append("rect")
 		.attr("x", width/3)
 		.attr("y", 0)
 		.attr("width", 1)
@@ -154,47 +154,60 @@
 				//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
 
-				g.append("svg:image")
-				.attr("class", "fighter b")
-				.attr("xlink:href", fighterB)
-				.attr("width", 50)
-				.attr("height", 50)
-				.attr("x", -1/7*width)
-				.attr("y", 0)
-				//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
+        g.append("svg:image")
+        .attr("class", "fighter b")
+        .attr("xlink:href", fighterB)
+        .attr("width", 50)
+        .attr("height", 50)
+        .attr("x", -1/7*width)
+        .attr("y", 0)
+        //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
-				var div = d3.select("body").append("div")
-				.attr("class", "tooltip")
-				.style("opacity", 0);
+        /* tooltip
+        var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+        */
 
+        function addMark() {
 
-				function addMark() {
-
-					g.append("svg:image")
-					.attr("class", "eMark")
-					.attr("xlink:href", eMark)
-					.attr("width", 30)
-					.attr("height", 30)
-					.attr("x", width / n * (currentTick - 1) - 15)
-					.attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
-					.on("mouseover", function () {
-						div.transition()
-						.duration(200)
-						.style("opacity", .9)
-						.attr("width", 100);
-					})
-					.on("mouseout", function () {
-						div.transition()
-						.duration(500)
-						.style("opacity", 0)
-						.attr("height", 100)
-					})
+            g.append("svg:image")
+            .attr("class", "eMark")
+            .attr("xlink:href", eMark)
+            .attr("width", 30)
+            .attr("height", 30)
+            .attr("x", width / n * (currentTick - 1) - 15)
+            .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+            /* tooltip
+            .on("mouseover", function () {
+                div.transition()
+                .duration(200)
+                .style("opacity", .9)
+                .attr("width", 100);
+            })
+            .on("mouseout", function () {
+                div.transition()
+                .duration(500)
+                .style("opacity", 0)
+                .attr("height", 100)
+            })
+            */
 
 			/////////////
 		}
 
-		var eventStartTime = new Date().getTime();
+        var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
+
+        var eventStartTime = new Date().getTime();
 		var gameStartTime;
+		var timediff = 0; // 0 for live, else archived;
+
+        var reqEvent = new XMLHttpRequest();
+
+        reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_wsof32_20160727140717', true);
+        reqEvent.setRequestHeader("Authorization", token);
+        reqEvent.send(null);
+
 
 		var isStart = false;
 		var currentRound = 0;
@@ -202,14 +215,11 @@
 		var currentWinning = 0;
 		var gameGoingOn = true; ////////////
 
-		var sheet = document.getElementById('stylesheet');
-
-
-		var req = new XMLHttpRequest();
+		var reqHighlight = new XMLHttpRequest();
 		var clipData = new Object();
+		var done = 0;
 
 		var flag = false;
-		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
 
 		function tick() {
 			// Redraw the line.
@@ -229,20 +239,30 @@
 							tomWinning = false;
 							devinWinning = true;
 						}
-
 						gameGoingOn = data.gameGoingOn;
 					}
 				});
 
 				if(flag) {
-					clipData = JSON.parse(req.response).comments.el;
+					timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
+					clipData = JSON.parse(reqHighlight.response).comments.el;
+					// timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
+					for(var i = done; i<clipData.length; i++){
+						if(new Date(clipData[i].start_time).getTime() + timediff < new Date().getTime()){
+							addMark();
+							done++;
+						}
+						else{
+							break;
+						}
+					}
 					// console.log(clipData);
 				}
 				flag = true;
-					
-			req.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
-			req.setRequestHeader("Authorization", token);
-			req.send(null);
+
+                reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
+                reqHighlight.setRequestHeader("Authorization", token);
+                reqHighlight.send(null);
 
 			if (gameGoingOn) {
 				if(!isStart){
@@ -252,9 +272,9 @@
 				isStart = true;
 				data.push(currentWinning);
 				currentTick++;
-				if(Math.random()>0.9){
-					addMark();
-				}
+				// if(Math.random()>0.9){
+				// 	addMark();
+				// }
 			}
 			else{
 				isStart = false;
