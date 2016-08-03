@@ -2,12 +2,14 @@ body {
     font: 20px sans-serif;
 }
 
-.line{
-    fill: none;
-    stroke: black;
-    stroke-width: 2px;
+.text{
+    stroke: darkgrey;
 }
 
+.line{
+    fill: none;
+    stroke-width: 2px;
+}
 
 .axis.axis--x g text {
     display: none;
