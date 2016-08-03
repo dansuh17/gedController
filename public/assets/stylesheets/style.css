@@ -5,6 +5,8 @@ html {
 }
 
 body {
+  width: 1280px;
+  height: 720px;
   background-image: url('../images/playerBackground.png');
   background-size: cover;
   padding: 0 0 0 0;
@@ -34,7 +36,7 @@ body {
 }
 
 .upperBar {
-  height: 400px;
+  height: 200px;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -236,9 +238,10 @@ a {
  * Twitter Component
  */
 .content{
-	position: relative;
+	position: absolute;
 	width: 90%;
-	height: 90%;
+	height: 300px;
+  bottom: 0;
 	text-align: center;
 	margin: 5% 5% 5% 5%;
 }
@@ -280,4 +283,12 @@ a {
 	position: absolute;
 	left: 150px;
 	overflow: hidden;
+}
+
+/*
+ *  particle floating section
+ */
+#ballmove {
+  left: 0;
+  overflow: hidden;
 }
