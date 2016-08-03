@@ -20,7 +20,6 @@ var index = {
   hash: "#WSOF32"
 };
 
-
 module.exports = function(io, Vote) {
 
   var stream = T.stream('statuses/filter', {track: index.hash});
@@ -40,10 +39,8 @@ module.exports = function(io, Vote) {
    * Here, the functions that the server reacts onto
    * specific messages are defined.
    */
-
   io.on('connection', function(socket) {
     console.log('new connection');
-    socket.emit('welcome', {});
 
     var tomUp;
     var devinUp;
@@ -56,9 +53,7 @@ module.exports = function(io, Vote) {
 
       tomUp = vote.tomUp;
       devinUp = vote.devinUp;
-
     });
-
 
     socket.on('addPowerBalance', function(data) {
       io.emit('addPowerBalance', data);
@@ -77,7 +72,16 @@ module.exports = function(io, Vote) {
         }
         console.log("db store successful")
       });
+    });
 
+    /**
+     * Listens to 'giveVoteStatus' message that receives the vote
+     * status from the users using vote.html toggle overlay.
+     */
+    socket.on('giveVoteStatus', function(data) {
+      /*
+      TODO : store the votes received from the clients to the database
+       */
     });
   });
 };

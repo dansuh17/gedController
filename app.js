@@ -62,6 +62,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+// expose socket(io, Vote) so that the server's socket
+// listens to the functions defined in ./socket.js file
 var socket_ = require('./socket')(io, Vote);
 module.exports = app;

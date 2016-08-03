@@ -53,5 +53,14 @@
               break;
           }
         };
+
+        /**
+         * On request to receive the vote toggle status,
+         * it responds with the vote status.
+         */
+        socket.on('getVoteStatus', function() {
+          console.log('getVoteStatus received');
+          socket.emit('giveVoteStatus', $scope.status);
+        });
       }]);
 })();
