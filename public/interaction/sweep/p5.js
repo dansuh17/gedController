@@ -137,6 +137,10 @@ Boid.prototype.render = function() {
   }
 };
 
+/**
+ * Determines whether the boid is out of the canvas.
+ * @returns {boolean} true if the boid is out of canvas
+ */
 Boid.prototype.isOutOfScreen = function() {
   if (this.position.x > width + 50 || this.position.x < -50) {
     return true;
