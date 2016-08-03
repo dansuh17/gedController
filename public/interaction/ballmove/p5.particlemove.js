@@ -53,7 +53,8 @@
   }
 
   function draw() {
-    background(200);  
+    background(255, 255, 255, 0);
+    clear();
     
     //take the value from slider
     rightcount = Slider.value();

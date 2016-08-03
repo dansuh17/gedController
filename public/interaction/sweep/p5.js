@@ -18,6 +18,7 @@ function setup() {
   canvas.parent('background'); // binds the canvas into html class 'background'
   // the vector of the center of canvas
   centerVector = createVector(width/2 ,height/2);
+  background(255, 255, 255, 0);
 
   bg = loadImage("../../assets/images/hotgirl.jpeg");
   img = loadImage("../../assets/images/cola.png");
@@ -41,6 +42,7 @@ function setup() {
 function draw() {
   background(255, 255, 255, 0);
   image(logo, 20, height - 100, 48, 48);
+  clear();
   // Run all the boids
   for (var i = 0; i < boids.length; i++) {
     boids[i].run(boids);
