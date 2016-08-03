@@ -14,8 +14,7 @@ var centerVector;
  * Initialize the canvas and also initialize the boids' starting points.
  */
 function setup() {
-  var canvas = createCanvas(400, 600);
-  //canvas.position(0, 0);
+  var canvas = createCanvas(1280, 720);
   canvas.parent('background'); // binds the canvas into html class 'background'
   // the vector of the center of canvas
   centerVector = createVector(width/2 ,height/2);

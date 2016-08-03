@@ -64,5 +64,4 @@ app.use(function(err, req, res, next) {
 
 
 var socket_ = require('./socket')(io, Vote);
-
 module.exports = app;

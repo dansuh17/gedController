@@ -9,7 +9,7 @@
 ;(function() {
   angular
       .module('vote')
-      .controller('voteCtrl', ['$scope', 'socketFactory', function ($scope, socketFactory) {
+      .controller('voteCtrl', ['$scope', '$timeout', 'socketFactory', function ($scope, $timeout, socketFactory) {
         // cute kiswe logo
         $scope.logoUrl = '../../assets/images/kisweLogo.png';
         $scope.currentVotePic = '../../assets/images/vote1.png';
