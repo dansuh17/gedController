@@ -4,7 +4,7 @@
  */
 var particles;
 var suns = []; // Center of Gravity
-var margin = 220;
+var p5margin = 220;
 var totalcount = 20;
 var leftcount = 10;
 var rightcount = totalcount - leftcount;
@@ -31,7 +31,7 @@ function setup() {
 
   // Create Centers of Gravity
   for (var i = 0; i < 2; i++){
-    suns[i] = new Sun(margin + i * (width - 2 * margin), height/2);
+    suns[i] = new Sun(p5margin + i * (width - 2 * p5margin), height/2);
   }
 
   particles = new Group();
@@ -44,7 +44,6 @@ function setup() {
     var n = floor(random(0,6)); // randomize the faces to draw
     particle.setSpeed(random(0,80),random(0,50));
     particle.addAnimation("normal", faces[n]);
-    particle.shapeColor = color(0,122,122);
 
     // assign the pole randomly to each particle
     if (random(0,1) < 0.5) {
@@ -123,10 +122,6 @@ function draw() {
       s.position.y = height-1;
       s.velocity.y = -abs(s.velocity.y);
     }
-
-    //set color
-    var g = round(255 * s.position.x/width);
-    s.shapeColor = color(0, g, 255-g);
   }
 
   //draw particles

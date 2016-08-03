@@ -1,7 +1,7 @@
 html {
   width: 1280px;
   height: 720px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 body {
@@ -246,7 +246,7 @@ a {
 	margin: 5% 5% 5% 5%;
 }
 
-.content li{
+.content#twitterfeed{
 	position: relative;
 	width: 700px;
 	height: 250px;
@@ -256,6 +256,7 @@ a {
 	border-radius: 2px;
 	color: #fafafa;
 }
+
 .content img{
 	position: absolute;
 	top: 25px;
@@ -265,14 +266,14 @@ a {
 }
 
 .content .name{
-    font-size: 24px;
+  font-size: 24px;
 	top: 25px;
 	height: 40px;
 	font-weight: bold;
 }
 
 .content .message{
-    font-size:24px;
+  font-size:24px;
 	top: 60px;
 	width: 500px;
 	height: 160px;
@@ -291,4 +292,20 @@ a {
 #ballmove {
   left: 0;
   overflow: hidden;
+}
+
+/*
+ * d3 graph
+ */
+.d3line{
+  fill: none;
+  stroke-width: 2px;
+}
+
+.axis.axis--x g text {
+  display: none;
+}
+
+.text{
+  stroke: darkgrey;
 }

@@ -20,7 +20,7 @@ function setup() {
   centerVector = createVector(width/2 ,height/2);
   background(255, 255, 255, 0);
 
-  bg = loadImage("../../assets/images/hotgirl.jpeg");
+  //bg = loadImage("../../assets/images/hotgirl.jpeg");
   blueAlienImg = loadImage("../../assets/images/alien_blue.png");
   //redAlienImg = loadImage("../../assets/images/alien_red.png");
   //yellowAlienImg = loadImage("../../assets/images/alien_yellow.png");
