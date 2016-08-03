@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <svg style="background-color:grey; opacity:0.9" width="800" height="600"></svg>
+    <svg width="800" height="600"></svg>
 
     <script>
 
@@ -189,7 +189,7 @@
             if(gameGoingOn) {                
                 data.push(currentWinning);  
                 currentTick++;
-                if(Math.random()>0.9){
+                if(Math.random()>0.9 && currentTick < n){
                     addMark();
                 }
                     
