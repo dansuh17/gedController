@@ -4,7 +4,7 @@
  *  by Daniel Suh 8/1/2016
  */
 var boids = [];
-var img;
+var blueAlienImg;
 var logo;
 var pressed = false;
 var centerVector;
@@ -21,7 +21,10 @@ function setup() {
   background(255, 255, 255, 0);
 
   bg = loadImage("../../assets/images/hotgirl.jpeg");
-  img = loadImage("../../assets/images/cola.png");
+  blueAlienImg = loadImage("../../assets/images/alien_blue.png");
+  //redAlienImg = loadImage("../../assets/images/alien_red.png");
+  //yellowAlienImg = loadImage("../../assets/images/alien_yellow.png");
+  //greenAlienImg = loadImage("../../assets/images/alien_green.png");
   logo = loadImage("../../assets/images/kisweLogo.png");
 
   // Add an initial set of boids into the system
@@ -70,7 +73,7 @@ function Boid(x, y) {
   //this.r = 5;
   this.maxspeed = 4;    // Maximum speed
   // this.maxforce = 0.05; // Maximum steering force
-  // this.rotation = PI / random(-9.0, 9.0);
+  this.rotation = PI / random(-9.0, 9.0);
   this.inScreen = true;
 }
 
@@ -130,7 +133,17 @@ Boid.prototype.update = function() {
 Boid.prototype.render = function() {
   //rotate(this.rotation); // for random rotation
   if (this.inScreen) {
-    image(img, this.position.x, this.position.y, 60, 200);
+    image(blueAlienImg, this.position.x, this.position.y, 200, 200);
+  }
+};
+
+Boid.prototype.isOutOfScreen = function() {
+  if (this.position.x > width + 50 || this.position.x < -50) {
+    return true;
+  } else if (this.position.y > height + 50 || this.position.y < -50) {
+    return true;
+  } else {
+    return false
   }
 };
 
