@@ -8,7 +8,7 @@
     <script src="https://d3js.org/d3.v4.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 </head>
-<body style="background-color:black;">
+<body>
 
     <svg style="background-color:grey; opacity:0.9" width="800" height="600"></svg>
 
@@ -21,6 +21,8 @@
         var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300",
             fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
 
+        var eMark = "1470249409_interface-40.svg";
+        var currentTick = 0;
         var svg = d3.select("svg"),
             margin = {top: 100, right: 100, bottom: 100, left: 100},
             width = +svg.attr("width") - margin.left - margin.right,
@@ -150,6 +152,15 @@
                 .attr("height", 50)
                 .attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
+        var addMark = function(){
+            g.append("svg:image")
+                .attr("class", "eMark")
+                .attr("xlink:href", eMark)
+                .attr("width", 30)
+                .attr("height", 30)
+                .attr("x", width/n*(currentTick-1) -15)
+                .attr("y", data[currentTick-1]*(-1)*(height/2)+(height/2)-15);
+            };
 
         /////////////
 
@@ -177,6 +188,10 @@
             //console.log("tick");
             if(gameGoingOn) {                
                 data.push(currentWinning);  
+                currentTick++;
+                if(Math.random()>0.9){
+                    addMark();
+                }
                     
             }
                 d3.active(this)
