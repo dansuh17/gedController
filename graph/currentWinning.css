@@ -2,9 +2,12 @@ body {
     font: 20px sans-serif;
 }
 
+.text{
+    stroke: darkgrey;
+}
+
 .line{
     fill: none;
-    stroke: black;
     stroke-width: 2px;
 }
 
@@ -12,4 +15,17 @@ body {
 .axis.axis--x g text {
     display: none;
 
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
