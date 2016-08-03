@@ -13,11 +13,13 @@
         // cute kiswe logo
         $scope.logoUrl = '../../assets/images/kisweLogo.png';
         $scope.currentVotePic = '../../assets/images/vote1.png';
-        $scope.status = 0; // status of the vote
+        // status of the vote - 0 : default (no vote yet cast) 1 > voted for according player
+        $scope.status = 0;
 
         /**
          * Toggles votes. Status 0 means that the user has just entered the voting system
          * having the default value.
+         * Also alerts the server that the toggle has been changed.
          */
         $scope.switchVote = function() {
           console.log('switchVote toggled');
@@ -26,15 +28,16 @@
               $scope.status = 1;
               break;
             case 1:
-              $scope.status = -1;
+              $scope.status = 2;
               break;
-            case -1:
+            case 2:
               $scope.status = 1;
               break;
             default:
               break;
           }
           $scope.changePictureUrl($scope.status);
+          socketFactory.emit('giveVoteStatus', {status: $scope.status});
         };
 
         // change the picture Url for the current supporting champion
@@ -46,7 +49,7 @@
             case 1:
               $scope.currentVotePic = '../../assets/images/vote1.png';
               break;
-            case -1:
+            case 2:
               $scope.currentVotePic = '../../assets/images/vote2.png';
               break;
             default:
@@ -58,9 +61,9 @@
          * On request to receive the vote toggle status,
          * it responds with the vote status.
          */
-        socket.on('getVoteStatus', function() {
+        socketFactory.on('getVoteStatus', function() {
           console.log('getVoteStatus received');
-          socket.emit('giveVoteStatus', $scope.status);
+          socketFactory.emit('giveVoteStatus', $scope.status);
         });
       }]);
 })();

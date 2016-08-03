@@ -79,9 +79,22 @@ module.exports = function(io, Vote) {
      * status from the users using vote.html toggle overlay.
      */
     socket.on('giveVoteStatus', function(data) {
-      /*
-      TODO : store the votes received from the clients to the database
-       */
+      // 1 : tom, 2 : devin
+      console.log("socket listened");
+      if (parseInt(data.status) == 1) {
+        tomUp++;
+        devinUp--;
+      } else if (parseInt(data.status) == 2) {
+        tomUp--;
+        devinUp++;
+      }
+      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
+        if (err) {
+          console.log("DB ERROR");
+          return next(err);
+        }
+        console.log("db store successful")
+      });
     });
   });
 };

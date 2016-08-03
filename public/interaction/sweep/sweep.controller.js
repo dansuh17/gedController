@@ -7,9 +7,9 @@
       .controller('sweepCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
         $scope.endCommercial = function() {
-          //window.open("http://localhost:3000/interaction/vote/vote.html");
+          //window.close();
         };
 
-        $timeout($scope.endCommercial, 1000);
+        $timeout($scope.endCommercial, 10000);
       }]);
 })();

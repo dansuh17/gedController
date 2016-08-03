@@ -21,7 +21,7 @@ function preload() {
 function setup() {
   var canvas = createCanvas(1024,600);
   canvas.parent('ballmove');
-  canvas.style("visibility", "0visible");
+  canvas.style("visibility", "visible");
   textSize(15);
   noStroke();
 
@@ -38,8 +38,6 @@ function setup() {
 
   for(i=0; i < totalcount; i++) {
     //set the initial position of particle
-    //var x = round(random(0,width));
-    //var y = round(random(0,height));
 
     // create particle
     var particle = createSprite(width/2, height/2, 15, 15);
