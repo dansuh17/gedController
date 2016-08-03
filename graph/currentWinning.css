@@ -16,8 +16,6 @@ body {
     stroke-width: 2px;
 }
 
-<<<<<<< HEAD
-
 .axis.axis--x g text {
     display: none;
 
@@ -35,5 +33,3 @@ div.tooltip {
     border-radius: 8px;
     pointer-events: none;
 }
-=======
->>>>>>> master
