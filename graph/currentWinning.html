@@ -3,10 +3,14 @@
 <head>
     <title>currentWinning</title><meta charset="utf-8">
 
-    <link rel='stylesheet' type='text/css' href='currentWinning.css'/>
 
-    <script src="https://d3js.org/d3.v4.js"></script>
+
+    <script src="http://d3js.org/d3.v4.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+    <link rel='stylesheet' type='text/css' href='currentWinning.css'/>
+    <script type="text/javascript" src="currentWinning.js"></script>
+
 </head>
 <body>
 
@@ -86,6 +90,8 @@
                 //.attr("transform", "rotate(-90)")
                 .text("who's winning");
 
+
+
         //axis
         g.append("rect")
                 .attr("x", width/3)
@@ -158,77 +164,150 @@
                 .attr("y", 0)
                 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
-        var addMark = function(){
+        var div = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+
+        function addMark() {
+
             g.append("svg:image")
-                .attr("class", "eMark")
-                .attr("xlink:href", eMark)
-                .attr("width", 30)
-                .attr("height", 30)
-                .attr("x", width/n*(currentTick-1) -15)
-                .attr("y", data[currentTick-1]*(-1)*(height/2)+(height/2)-15);
-            };
+                    .attr("class", "eMark")
+                    .attr("xlink:href", eMark)
+                    .attr("width", 30)
+                    .attr("height", 30)
+                    .attr("x", width / n * (currentTick - 1) - 15)
+                    .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+                    .on("mouseover", function () {
+                        div.transition()
+                                .duration(200)
+                                .style("opacity", .9)
+                                .attr("width", 100);
+                    })
+                    .on("mouseout", function () {
+                        div.transition()
+                                .duration(500)
+                                .style("opacity", 0)
+                                .attr("height", 100)
+                    })
 
-        /////////////
-
+            /////////////
+        }
         var currentWinning = 0;
         var gameGoingOn = true; ////////////
 
         var sheet = document.getElementById('stylesheet');
 
 
+        var req = new XMLHttpRequest();
+        var clipData = new Object();
+
+        var flag = false;
 
         function tick() {
-        // Redraw the line.
+            // Redraw the line.
             $.ajax({
                 url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
                 dataType: "jsonp",
-                success: function(data) {
-                    currentWinning = ((data.devinUp/(data.tomUp + data.devinUp))-0.5)/0.5;
-             
-                    if(currentWinning > 0) {tomWinning = true; devinWinning = false;}
-                    else if(currentWinning < 0) {tomWinning = false; devinWinning = true;}
+                success: function (data) {
+                    currentWinning = ((data.devinUp / (data.tomUp + data.devinUp)) - 0.5) / 0.5;
+
+                    if (currentWinning > 0) {
+                        tomWinning = true;
+                        devinWinning = false;
+                    }
+                    else if (currentWinning < 0) {
+                        tomWinning = false;
+                        devinWinning = true;
+                    }
 
                     gameGoingOn = data.gameGoingOn;
                 }
             });
+
+            if(flag) {
+                clipData = JSON.parse(req.response).comments.el;
+            }
+            flag = true;
+                    //.comments.el;
+            console.log(typeof req.response);
+            //clipData = JSON.parse(req.responseText);
+
+            //console.log(typeof clipData);
+            //console.log(typeof req.responseText);
+
+
+            req.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
+            req.setRequestHeader("Authorization", token);
+            req.send(null);
+
+
+
+
             //console.log("tick");
-            if(gameGoingOn) {                
-                data.push(currentWinning);  
+            if (gameGoingOn) {
+                data.push(currentWinning);
                 currentTick++;
-                if(Math.random()>0.9){
+                if (Math.random() > 0.5) {
                     addMark();
                 }
-                    
+
             }
-                d3.active(this)
-                        .transition()
-                        .on("start", tick);
-                if(currentWinning>=0) {
-                    d3.select(this)
+            d3.active(this)
+                    .transition()
+                    .on("start", tick);
+            if (currentWinning >= 0) {
+                d3.select(this)
                         .attr("d", line)
                         .attr("transform", null)
                         .style("fill", "none")
                         .style("stroke", "blue");
-                }
-                else if(currentWinning<0){
-                    d3.select(this)
+            }
+            else if (currentWinning < 0) {
+                d3.select(this)
                         .attr("d", line)
                         .attr("transform", null)
                         .style("fill", "none")
                         .style("stroke", "red");
-                };
 
 
+            }
         }
 
 
-        function putClips(){
 
+//putClips();
+
+var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
+var clipList = [];
+
+/*
+        function putClips() {
+            $.ajax({
+                url: "https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717",
+                dataType: "jsonp",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', token);
+                },
+                success: function (data) {
+                    console.log("it's working!");
+                }
+            });
+            clipList = data.el;
 
         }
+*/
+
+
+
+
 
 
     </script>
+
+<script>
+
+</script>
 
 </body>
 </html>
