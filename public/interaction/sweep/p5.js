@@ -39,7 +39,7 @@ function setup() {
  * The draw loop for each frame.
  */
 function draw() {
-  background(bg);
+  //background(bg);
   image(logo, 20, height - 100, 48, 48);
   // Run all the boids
   for (var i = 0; i < boids.length; i++) {
