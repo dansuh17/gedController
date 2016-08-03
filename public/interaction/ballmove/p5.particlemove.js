@@ -1,5 +1,7 @@
-  //Collision detection - Bouncing behavior
-
+/**
+ * Ball move particle physical engine design for quizquiz modeling.
+ * by Young Jin Park
+ */
   var particles;
   var suns = []; // Center of Gravity
   var margin = 100;
@@ -9,25 +11,23 @@
   var curleftcount = 0;
   var currightcount = 0;
 
-  var folderdir = "/Users/YJ/gedController/ballmove"
-
   function setup() {
     createCanvas(1080,720);  
-    textSize(15)
+    textSize(15);
     noStroke();
 
     // create sliders
     Slider = createSlider(0, totalcount, leftcount);
     Slider.position(20, 20);
 
-    // Create Center of Gravitys
+    // Create Centers of Gravity
     for (var i = 0; i < 2; i++){
-      suns[i] = new Sun(margin + i * (width - 2*margin),height/2);
+      suns[i] = new Sun(margin + i * (width - 2 * margin), height/2);
     }
 
     particles = new Group();
 
-    for(var i=0; i<totalcount; i++) {
+    for(i=0; i < totalcount; i++) {
       //set the initial position of particle
       var x = round(random(0,width));
       var y = round(random(0,height));
@@ -35,7 +35,7 @@
       // create particle
       var particle = createSprite(width/2,height/2,15,15);
       particle.setSpeed(random(0,80),random(0,50));
-      particle.addAnimation("normal",folderdir+"/assets/hakeem.png")
+      particle.addAnimation("normal", "../../assets/images/hakeem.png");
       particle.shapeColor = color(0,122,122);
 
       // assign the pole randomly to each particle
@@ -66,7 +66,7 @@
     
     //match the number of particles in each pole
     if (leftcount > curleftcount) {
-      var i = 0;
+      i = 0;
       while(leftcount != curleftcount){
         if(particles[i].pole == 1) {
           particles[i].pole = 0;
@@ -134,7 +134,6 @@ function updateParticle(p){
 
   p.velocity.x += ax;
   p.velocity.y += ay;
-
 }
 
 // Sun
