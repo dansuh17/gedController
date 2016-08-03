@@ -27,7 +27,7 @@
         <script src="assets/lib/bower_components/humanize-duration/humanize-duration.js"></script>
         <script src="assets/lib/bower_components/angular-timer/dist/angular-timer.js"></script>
 
-        <!-- angular -->
+        <!-- tap -->
         <script src="app/app.module.js"></script>
         <script src="app/components/main/mainFactory.js"></script>
         <script src="app/components/main/mainController.js"></script>
@@ -38,6 +38,12 @@
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="assets/stylesheets/style.css">
+
+
+        <!-- Graph D3 -->
+        <link rel='stylesheet' type='text/css' href='assets/stylesheets/currentWinning.css'/>
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
     </head>
     <body ng-app="gedApp" ng-controller="MainCtrl">
@@ -70,6 +76,12 @@
                         <div class="name">{{tweet.name}} (@{{tweet.username}})</div>
                         <div class="message">{{tweet.text}}</div>
                     </li>
+
+                    <!-- Graph D3 -->
+                    <div ng-show="feedList.length==0">
+                        <svg width="800" height="600"></svg>
+                        <script src="assets/javascripts/graph.js"></script>
+                    </div>
                 </div>
             </div>
 

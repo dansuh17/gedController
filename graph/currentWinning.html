@@ -13,7 +13,6 @@
 
 </head>
 <body>
-
 	<svg width="800" height="600"></svg>
 
 	<script>
@@ -210,6 +209,7 @@
 		var clipData = new Object();
 
 		var flag = false;
+		var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
 
 		function tick() {
 			// Redraw the line.
@@ -239,22 +239,11 @@
 					// console.log(clipData);
 				}
 				flag = true;
-					//.comments.el;
-					// console.log(typeof req.response);
-			//clipData = JSON.parse(req.responseText);
-
-			//console.log(typeof clipData);
-			//console.log(typeof req.responseText);
-
-
+					
 			req.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
 			req.setRequestHeader("Authorization", token);
 			req.send(null);
 
-
-
-
-			//console.log("tick");
 			if (gameGoingOn) {
 				if(!isStart){
 					currentRound++;
@@ -270,8 +259,6 @@
 			else{
 				isStart = false;
 			}
-
-
 
 			d3.active(this)
 			.transition()
@@ -294,42 +281,7 @@
 			}
 		}
 	}
-
-
-
-//putClips();
-
-var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
-var clipList = [];
-
-/*
-		function putClips() {
-			$.ajax({
-				url: "https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717",
-				dataType: "jsonp",
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader('Authorization', token);
-				},
-				success: function (data) {
-					console.log("it's working!");
-				}
-			});
-			clipList = data.el;
-
-		}
-		*/
-
-
-
-
-
-
-	</script>
-
-	<script>
-
-	</script>
-
+</script>
 </body>
 </html>
 
