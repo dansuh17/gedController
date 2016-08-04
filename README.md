@@ -2,6 +2,11 @@ GED Controller for Kiswe Production
 ===================================
 
 ## Introduction
+This application is designed for the production of Kiswe WSOF channel to enhance the user experience.
+
+It includes the main rest page which will be the default view for one of the screens in WSOF broadcast. 
+
+The app also includes the overlay page that will be attached on top of the mobile streaming view, in order to enable interaction.
 
 
 ## Installation
