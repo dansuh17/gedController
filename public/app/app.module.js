@@ -1,1 +1,1 @@
-var app = angular.module('gedApp', ['timer']);
+angular.module('gedApp', ['timer']);
