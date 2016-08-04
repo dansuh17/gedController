@@ -4,7 +4,7 @@
  *  by Daniel Suh 8/1/2016
  */
 var boids = [];
-var img;
+var blueAlienImg;
 var logo;
 var pressed = false;
 var centerVector;
@@ -14,19 +14,22 @@ var centerVector;
  * Initialize the canvas and also initialize the boids' starting points.
  */
 function setup() {
-  var canvas = createCanvas(400, 600);
-  //canvas.position(0, 0);
+  var canvas = createCanvas(1280, 720);
   canvas.parent('background'); // binds the canvas into html class 'background'
   // the vector of the center of canvas
   centerVector = createVector(width/2 ,height/2);
+  background(255, 255, 255, 0);
 
-  bg = loadImage("../../assets/images/hotgirl.jpeg");
-  img = loadImage("../../assets/images/cola.png");
+  //bg = loadImage("../../assets/images/hotgirl.jpeg");
+  blueAlienImg = loadImage("../../assets/images/alien_blue.png");
+  //redAlienImg = loadImage("../../assets/images/alien_red.png");
+  //yellowAlienImg = loadImage("../../assets/images/alien_yellow.png");
+  //greenAlienImg = loadImage("../../assets/images/alien_green.png");
   logo = loadImage("../../assets/images/kisweLogo.png");
 
   // Add an initial set of boids into the system
   // boids come randomly from outside the viewbox positioned randomly across the height.
-  for (var i = 0; i < 130; i++) {
+  for (var i = 0; i < 30; i++) {
     if (i % 2 == 0) {
       boids[i] = new Boid(random(width + 10, width + 50), random(-20, height + 20));
     }
@@ -40,8 +43,9 @@ function setup() {
  * The draw loop for each frame.
  */
 function draw() {
-  background(bg);
+  background(255, 255, 255, 0);
   image(logo, 20, height - 100, 48, 48);
+  clear();
   // Run all the boids
   for (var i = 0; i < boids.length; i++) {
     boids[i].run(boids);
@@ -69,7 +73,7 @@ function Boid(x, y) {
   //this.r = 5;
   this.maxspeed = 4;    // Maximum speed
   // this.maxforce = 0.05; // Maximum steering force
-  // this.rotation = PI / random(-9.0, 9.0);
+  this.rotation = PI / random(-9.0, 9.0);
   this.inScreen = true;
 }
 
@@ -129,7 +133,21 @@ Boid.prototype.update = function() {
 Boid.prototype.render = function() {
   //rotate(this.rotation); // for random rotation
   if (this.inScreen) {
-    image(img, this.position.x, this.position.y, 30, 100);
+    image(blueAlienImg, this.position.x, this.position.y, 200, 200);
+  }
+};
+
+/**
+ * Determines whether the boid is out of the canvas.
+ * @returns {boolean} true if the boid is out of canvas
+ */
+Boid.prototype.isOutOfScreen = function() {
+  if (this.position.x > width + 50 || this.position.x < -50) {
+    return true;
+  } else if (this.position.y > height + 50 || this.position.y < -50) {
+    return true;
+  } else {
+    return false
   }
 };
 
@@ -149,7 +167,7 @@ Boid.prototype.applyForce = function(force) {
 Boid.prototype.repel = function(mouseVector) {
   var repelDirection = p5.Vector.sub(this.position, mouseVector).normalize();
   var dist = p5.Vector.dist(this.position, mouseVector);
-  if (dist < 150) {
-    this.velocity = repelDirection.mult(200.0 / dist);
+  if (dist < 200) {
+    this.velocity = repelDirection.mult(300.0 / dist);
   }
 };
