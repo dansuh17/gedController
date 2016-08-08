@@ -68,7 +68,7 @@ g.append("text")
 //x
 make_roundBorder(3);
 function make_roundBorder(roundNum){
-    for(var i=0; i<roundNum; i++){
+    for(var i=0; i<=roundNum; i++){
         g.append("rect")
             .attr("x", width/roundNum*i)
             .attr("y", 0)
