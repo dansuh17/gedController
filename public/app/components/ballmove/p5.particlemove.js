@@ -5,12 +5,13 @@
 var particles;
 var suns = []; // Center of Gravity
 var p5margin = 220;
-var totalcount = 20;
-var leftcount = 10;
+const totalcount = 20;
+var leftcount = 10; // initial value
 var rightcount = totalcount - leftcount;
 var curleftcount = 0;
 var currightcount = 0;
 var faces = [];
+var framecount = 1000;
 
 function preload() {
   for(var i=1; i<7; i++){
@@ -25,21 +26,15 @@ function setup() {
   textSize(15);
   noStroke();
 
-  // create sliders
-  Slider = createSlider(0, totalcount, leftcount);
-  Slider.position(0, 250);
-
   // Create Centers of Gravity
-  for (var i = 0; i < 2; i++){
+  for (var i = 0; i < 2; i++) {
     suns[i] = new Sun(p5margin + i * (width - 2 * p5margin), height/2);
   }
 
   particles = new Group();
 
   for(i=0; i < totalcount; i++) {
-    //set the initial position of particle
-
-    // create particle
+    // set the initial position of particle and create particle
     var particle = createSprite(width/2, height/2, 15, 15);
     var n = floor(random(0,6)); // randomize the faces to draw
     particle.setSpeed(random(0,80),random(0,50));
@@ -63,11 +58,17 @@ function draw() {
   background(255, 255, 255, 0);
   clear();
 
-  //take the value from slider
-  rightcount = Slider.value();
-  leftcount = totalcount - rightcount;
+  const promise = getData();
 
-  text("(" + leftcount + " , " + rightcount + ")", 165, 35);
+  //take the value from ajax call
+  if (++framecount > 300) {
+    promise.success(function (data) {
+      rightcount = data.devinUp * 20 / (data.devinUp + data.tomUp); // in scale of 20
+      rightcount = Math.floor(rightcount);
+      updateCount(rightcount);
+    });
+    framecount = 0;
+  }
 
   //particles bounce against each others
   particles.bounce(particles);
@@ -75,8 +76,8 @@ function draw() {
   //match the number of particles in each pole
   if (leftcount > curleftcount) {
     i = 0;
-    while(leftcount != curleftcount){
-      if(particles[i].pole == 1) {
+    while (leftcount != curleftcount) {
+      if (particles[i].pole == 1) {
         particles[i].pole = 0;
         curleftcount += 1;
         currightcount -= 1;
@@ -85,8 +86,8 @@ function draw() {
     }
   } else if (rightcount > currightcount) {
     i = 0;
-    while(rightcount != currightcount){
-      if(particles[i].pole == 0){
+    while (rightcount != currightcount) {
+      if (particles[i].pole == 0) {
         particles[i].pole = 1;
         curleftcount -= 1;
         currightcount += 1;
@@ -96,30 +97,30 @@ function draw() {
   }
 
   //update all particles
-  for(var i=0; i<particles.length; i++) {
+  for (var i = 0; i < particles.length; i++) {
     var s = particles[i];
 
     //update particle speed
     updateParticle(s);
 
     //bounce at wall
-    if(s.position.x<0) {
+    if (s.position.x < 0) {
       s.position.x = 1;
       s.velocity.x = abs(s.velocity.x);
     }
 
-    if(s.position.x>width) {
-      s.position.x = width-1;
+    if (s.position.x > width) {
+      s.position.x = width - 1;
       s.velocity.x = -abs(s.velocity.x);
-      }
+    }
 
-    if(s.position.y<0) {
+    if (s.position.y < 0) {
       s.position.y = 1;
       s.velocity.y = abs(s.velocity.y);
     }
 
-    if(s.position.y>height) {
-      s.position.y = height-1;
+    if (s.position.y > height) {
+      s.position.y = height - 1;
       s.velocity.y = -abs(s.velocity.y);
     }
   }
@@ -128,7 +129,10 @@ function draw() {
   drawSprites();
 }
 
-//update the veloicty of particle
+/**
+ * Updates the velocity of particles.
+ * @param p the particle input
+ */
 function updateParticle(p){
   var rx = suns[p.pole].position.x - p.position.x;
   var ry = suns[p.pole].position.y - p.position.y;
@@ -140,7 +144,28 @@ function updateParticle(p){
   p.velocity.y += ay;
 }
 
-// Sun
+// Sun constructor
 function Sun(x,y) {
   this.position = createVector(x,y);
 }
+
+/**
+ * Makes and ajax call to receive the voting data to determine
+ * the number of particles on each sides.
+ */
+function getData() {
+  return $.ajax({
+    url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
+    dataType: "jsonp"
+  });
+}
+
+/**
+ * Updates the right count.
+ * @param iNewCount new right count determined from ajax call from server
+ */
+function updateCount(iNewCount) {
+  rightcount = iNewCount;
+  leftcount = totalcount - rightcount;
+}
+
