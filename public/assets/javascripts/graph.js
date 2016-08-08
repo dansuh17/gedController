@@ -1,4 +1,4 @@
-var n = 90;                         // count
+var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
@@ -33,6 +33,15 @@ g.append("defs").append("clipPath")
     .attr("width", width)
     .attr("height", height);
 
+g.append("g")
+    .attr("clip-path", "url(#clip)")
+    .append("path")
+    .datum(data)
+    .attr("class", "d3line")
+    .transition()
+    .duration(1000)
+    .ease(d3.easeLinear)
+    .on("start", tick);  /// tick is the main function that draws the line
 
 //axis
 g.append("g")
@@ -47,17 +56,6 @@ g.append("g")
     .attr("stroke", "darkgrey")
     .call(d3.axisLeft(y));
 
-g.append("g")
-    .attr("clip-path", "url(#clip)")
-    .append("path")
-    .datum(data)
-    .attr("class", "d3line")
-    .transition()
-    .duration(1000)
-    .ease(d3.easeLinear)
-    .on("start", tick);
-
-
 //axis text
 g.append("text")
     .attr("class", "text")
@@ -68,7 +66,6 @@ g.append("text")
     .text("who's winning");
 
 //x
-
 make_roundBorder(3);
 function make_roundBorder(roundNum){
     for(var i=0; i<roundNum; i++){
@@ -129,7 +126,7 @@ function put_roundTxt(roundNum) {
             .attr("x", width*(2*i-1)/6)
             .attr("y", -height*1/10)
             .attr("font-size", "20px")
-            .text("Round" + i)
+            .text("Round " + i)
             .style("fill", "greycolor")
     }
 }
@@ -184,6 +181,7 @@ function addMark() {
      })
      */
 }
+
 
 ///event id
 var eventID = "wsof_testrun_20160804140831";
