@@ -1,13 +1,12 @@
 /**
  * binds the socket and exposes socket.on and socket.emit functions.
- * by daniel suh 8/2/2016
+ * by daniel suh 8/8/2016
  */
 ;(function() {
   angular
-      .module('vote',[])
-      .factory('socketfactory', ['$rootscope', function($rootscope) {
+      .module('sweep',[])
+      .factory('socketFactory', ['$rootscope', function($rootscope) {
         var socket = io.connect();
-        console.log('connected to tap factory');
 
         return {
           on: function(eventname, callback) {

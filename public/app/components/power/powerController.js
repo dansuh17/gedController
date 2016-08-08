@@ -9,10 +9,6 @@
         $scope.powerBalance = 50;
         $scope.leftColor = 'grad-normal';
         $scope.rightColor = 'grad-normal';
-        /* counters for future use
-        $scope.leftCount = 0;
-        $scope.rightCount = 0;
-        */
 
         /**
          * Sets the power balance. If power balance is under 50, it indicates

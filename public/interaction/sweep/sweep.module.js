@@ -4,5 +4,19 @@
  * by Daniel Suh 8/2/2016
  */
 ;(function() {
-  angular.module('sweep', []);
+  angular
+      .module('sweep', ['ngRoute'])
+      .config(function($routeProvider) {
+        $routeProvider
+            .when('/empty', {
+              templateUrl : "empty.html"
+            })
+            .when('/sweep', {
+              templateUrl : "sweep.html",
+              controller : "sweepCtrl"
+            })
+            .otherwise({
+              redirectTo : '/empty'
+            });
+      });
 })();
