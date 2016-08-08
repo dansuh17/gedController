@@ -34,7 +34,8 @@
 			g = svg.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
+		///event id
+		var eventID = "wsof_wsof32_20160727140717";
 
 		// graph
 
@@ -210,7 +211,7 @@
 
         var reqEvent = new XMLHttpRequest();
 
-        reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_wsof32_20160727140717', true);
+        reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/' + eventID, true);
         reqEvent.setRequestHeader("Authorization", token);
         reqEvent.send(null);
 
@@ -270,7 +271,7 @@
 				}
 				flag = true;
 
-                reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
+                reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/' + eventID, true);
                 reqHighlight.setRequestHeader("Authorization", token);
                 reqHighlight.send(null);
 
