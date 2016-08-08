@@ -41,26 +41,11 @@ g.append("g")
     .attr("display", "none")
     .call(d3.axisBottom(x));
 
-
 g.append("g")
     .attr("class", "axis axis--y")
     .attr("display", "none")
     .attr("stroke", "darkgrey")
     .call(d3.axisLeft(y));
-/*
-g.append("g")
-    .attr("class", "axis grid--x")
-    .call(make_x_gird()
-        .tickSize(-height, 0, 0)
-        .tickFormat(""));
-
-
-g.append("g")
-    .attr("class", "axis grid--y")
-    .call(make_y_grid()
-        .tickSize(-width, 0, 0)
-        .tickFormat(""));
-*/
 
 g.append("g")
     .attr("clip-path", "url(#clip)")
@@ -132,8 +117,6 @@ function make_x_grid(gridNum) {
             .attr("width", 0.1)
             .attr("height", height)
             .attr("fill","lightgrey")
-
-
     }
 }
 
@@ -146,7 +129,6 @@ function make_y_grid(gridNum) {
             .attr("width", width)
             .attr("height", 0.1)
             .attr("fill","lightgrey")
-
     }
 }
 
