@@ -68,33 +68,18 @@ g.append("text")
     .text("who's winning");
 
 //x
-g.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
 
-g.append("rect")
-    .attr("x", width/3)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
-
-g.append("rect")
-    .attr("x", width*2/3)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
-
-g.append("rect")
-    .attr("x", width)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
+make_roundBorder(3);
+function make_roundBorder(roundNum){
+    for(var i=0; i<roundNum; i++){
+        g.append("rect")
+            .attr("x", width/roundNum*i)
+            .attr("y", 0)
+            .attr("width", 1)
+            .attr("height", height)
+            .attr("fill","lightgrey")
+    }
+}
 
 //y
 g.append("rect")
@@ -104,9 +89,10 @@ g.append("rect")
     .attr("height", 1)
     .attr("fill","darkgrey")
 
+//graph grid
+
 make_x_grid(27);
 make_y_grid(8);
-//graph grid
 
 // function for the x grid lines
 function make_x_grid(gridNum) {
@@ -132,37 +118,22 @@ function make_y_grid(gridNum) {
     }
 }
 
-
-
-
-
 //round 1,2,3
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*1/6)
-    .attr("y", -height*1/10)
-    .attr("font-size", "20px")
-    .text("Round 1")
-    .style("fill", "greycolor")
+put_roundTxt(3);
 
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*3/6)
-    .attr("y", -height*1/10)
-    .attr("font-size", "20px")
-    .text("Round 2")
-    .style("fill", "greycolor")
+function put_roundTxt(roundNum) {
+    for(var i=1; i<=roundNum; i++){
+        g.append("text")
+            .attr("class", "text")
+            .attr("text-anchor", "middle")
+            .attr("x", width*(2*i-1)/6)
+            .attr("y", -height*1/10)
+            .attr("font-size", "20px")
+            .text("Round" + i)
+            .style("fill", "greycolor")
+    }
+}
 
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*5/6)
-    .attr("y", -height*1/10)
-    .attr("font-size", "20px")
-    .text("Round 3")
-    .style("fill", "greycolor")
 
 //add image of fighters
 g.append("svg:image")
