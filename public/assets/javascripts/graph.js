@@ -1,4 +1,4 @@
-var n = 900;                         // count
+var n = 90;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
@@ -33,16 +33,34 @@ g.append("defs").append("clipPath")
     .attr("width", width)
     .attr("height", height);
 
+
+//axis
 g.append("g")
     .attr("class", "axis axis--x")
     .attr("transform", "translate(0," + y(0) + ")")
     .attr("display", "none")
     .call(d3.axisBottom(x));
 
+
 g.append("g")
     .attr("class", "axis axis--y")
+    .attr("display", "none")
     .attr("stroke", "darkgrey")
     .call(d3.axisLeft(y));
+/*
+g.append("g")
+    .attr("class", "axis grid--x")
+    .call(make_x_gird()
+        .tickSize(-height, 0, 0)
+        .tickFormat(""));
+
+
+g.append("g")
+    .attr("class", "axis grid--y")
+    .call(make_y_grid()
+        .tickSize(-width, 0, 0)
+        .tickFormat(""));
+*/
 
 g.append("g")
     .attr("clip-path", "url(#clip)")
@@ -54,7 +72,8 @@ g.append("g")
     .ease(d3.easeLinear)
     .on("start", tick);
 
-//axis
+
+//axis text
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
@@ -62,6 +81,14 @@ g.append("text")
     .attr("dy", ".75em")
     .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
     .text("who's winning");
+
+//x
+g.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 1)
+    .attr("height", height)
+    .attr("fill","lightgrey")
 
 g.append("rect")
     .attr("x", width/3)
@@ -84,6 +111,7 @@ g.append("rect")
     .attr("height", height)
     .attr("fill","lightgrey")
 
+//y
 g.append("rect")
     .attr("x", 0)
     .attr("y", height/2)
@@ -91,28 +119,68 @@ g.append("rect")
     .attr("height", 1)
     .attr("fill","darkgrey")
 
+make_x_grid(27);
+make_y_grid(8);
+//graph grid
+
+// function for the x grid lines
+function make_x_grid(gridNum) {
+    for(var i=0; i<gridNum; i++){
+        g.append("rect")
+            .attr("x", width/gridNum*i)
+            .attr("y", 0)
+            .attr("width", 0.1)
+            .attr("height", height)
+            .attr("fill","lightgrey")
+
+
+    }
+}
+
+// function for the y grid lines
+function make_y_grid(gridNum) {
+    for(var i=1; i<gridNum; i++){
+        g.append("rect")
+            .attr("x", 0)
+            .attr("y", height/gridNum*i)
+            .attr("width", width)
+            .attr("height", 0.1)
+            .attr("fill","lightgrey")
+
+    }
+}
+
+
+
+
+
 //round 1,2,3
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
     .attr("x", width*1/6)
-    .attr("y", 0)
-    .text("round1")
+    .attr("y", -height*1/10)
+    .attr("font-size", "20px")
+    .text("Round 1")
     .style("fill", "greycolor")
 
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
     .attr("x", width*3/6)
-    .attr("y", 0)
-    .text("round2")
+    .attr("y", -height*1/10)
+    .attr("font-size", "20px")
+    .text("Round 2")
+    .style("fill", "greycolor")
 
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
     .attr("x", width*5/6)
-    .attr("y", 0)
-    .text("round3")
+    .attr("y", -height*1/10)
+    .attr("font-size", "20px")
+    .text("Round 3")
+    .style("fill", "greycolor")
 
 //add image of fighters
 g.append("svg:image")
@@ -120,8 +188,9 @@ g.append("svg:image")
     .attr("xlink:href", fighterA)
     .attr("width", 50)
     .attr("height", 50)
+    .attr("y", 1/2*height - 50) //- height of image
     .attr("x", -1/7*width)
-    .attr("y", 8/9*height)
+
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
 g.append("svg:image")
@@ -129,8 +198,9 @@ g.append("svg:image")
     .attr("xlink:href", fighterB)
     .attr("width", 50)
     .attr("height", 50)
+    .attr("y", 1/2*height)
     .attr("x", -1/7*width)
-    .attr("y", 0)
+
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
 /* tooltip
@@ -255,14 +325,15 @@ function tick() {
                 .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
-                .style("stroke", "blue");
+                .style("stroke", "e91a67");
         }
         else if (currentWinning < 0) {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
-                .style("stroke", "red");
+                .style("stroke", "32bdf0");
         }
     }
 }
+
