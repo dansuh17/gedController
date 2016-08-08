@@ -15,7 +15,7 @@ var centerVector;
  */
 function setup() {
   var canvas = createCanvas(1280, 720);
-  canvas.parent('background'); // binds the canvas into html class 'background'
+  //canvas.parent('background'); // binds the canvas into html class 'background'
   // the vector of the center of canvas
   centerVector = createVector(width/2 ,height/2);
   background(255, 255, 255, 0);

@@ -13,12 +13,14 @@ var currightcount = 0;
 var faces = [];
 var framecount = 1000;
 
+/* preload images that should be used for particles */
 function preload() {
   for(var i=1; i<7; i++){
     faces[i-1] = loadImage("../../assets/images/face" + i +".png");
   }
 }
 
+/* setup the canvas before drawing calls */
 function setup() {
   var canvas = createCanvas(1024,600);
   canvas.parent('ballmove');
@@ -138,7 +140,7 @@ function updateParticle(p){
   var ry = suns[p.pole].position.y - p.position.y;
 
   var ax = 0.002 * rx - 0.1*p.velocity.x + random(-2,2);
-  var ay = 0.002 * ry - 0.1*p.velocity.y + random(-2,2); 
+  var ay = 0.002 * ry - 0.1*p.velocity.y + random(-2,2);
 
   p.velocity.x += ax;
   p.velocity.y += ay;
