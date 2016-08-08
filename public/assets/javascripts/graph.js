@@ -188,7 +188,7 @@ var flag = false;
 
 function tick() {
     // Redraw the line.
-    if(currentTick <= n){
+    if(currentTick <= n) {
 
         $.ajax({
             url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
