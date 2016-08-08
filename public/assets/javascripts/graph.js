@@ -170,7 +170,7 @@ var timediff = 0; // 0 for live, else archived;
 
 var reqEvent = new XMLHttpRequest();
 
-reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_wsof32_20160727140717', true);
+reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_testrun_20160804140831', true);
 reqEvent.setRequestHeader("Authorization", token);
 reqEvent.send(null);
 
@@ -223,7 +223,7 @@ function tick() {
         }
         flag = true;
 
-        reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_wsof32_20160727140717', true);
+        reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_testrun_20160804140831', true);
         reqHighlight.setRequestHeader("Authorization", token);
         reqHighlight.send(null);
 
