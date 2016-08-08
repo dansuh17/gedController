@@ -1,3 +1,9 @@
+html {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+}
+
 body {
   font-family: "Helvetica Neue", "HelveticaNeue-Light", "Eurostile-Regular", sans-serif;
   font-style: normal;

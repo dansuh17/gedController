@@ -22,13 +22,14 @@ Vote.find({}, function(err, results) {
   } else if (!results.length) {
     console.log("mongo : db empty - setting up initial document for first time setup");
 
-    // save a first vote!
+    // dummy schema
     var firstVote = new Vote({
       tomUp: 0,
       devinUp: 0,
       gameGoingOn: false
     });
 
+    // save a first vote!
     firstVote.save(function(err) {
       if (err) {
         return console.error(err);
@@ -38,6 +39,5 @@ Vote.find({}, function(err, results) {
     console.log("mongo : database good to go");
   }
 });
-
 
 module.exports.Vote = Vote;

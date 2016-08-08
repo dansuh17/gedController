@@ -228,8 +228,7 @@ function tick() {
             // console.log(clipData);
         }
         flag = true;
-
-        reqHighlight.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/comments/' + eventID, true);
+          reqHighlight.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/comments/' + eventID, true);
         reqHighlight.setRequestHeader("Authorization", token);
         reqHighlight.send(null);
 
