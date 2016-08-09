@@ -169,8 +169,9 @@ function addMark() {
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - gameStartTime) / 1000 + (currentRound-1)*300;
-    if(tick > currentTick){
+    var tick = (new Date(time_).getTime() + (1000*60*60*4) - gameStartTime) / 1000 + (currentRound-1)*300;
+    console.log(tick);
+    if(tick > currentTick && tick < 0){
         return;
     }
     tick = Math.floor(tick);
