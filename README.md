@@ -19,6 +19,8 @@ npm install
 bower install
 ```
 
+Also the application has Mongodb dependency, so make sure you have a mongod instance running.
+
 ### Twitter app
 Use [apps.twitter.com](https://apps.twitter.com) to register and retrieve the app keys.
 
@@ -47,3 +49,10 @@ Twitter Feed appears in the following logic :
 - If multiple feeds are received within 5 seconds, they are stacked in queue.
 - If the 5-element queue is full when another feed arrives, the feed is ignored.
 - Each feed that are pushed to the queue is guaranteed 5 seconds appearance.
+
+## Components
+This application contains:
+- Main rest-page at /public/index.html
+- Sweep interactive overlay page for commercial purposes at /interaction/sweep/
+- Tapping interactive overlay page at /interaction/tap/tap.html
+- Voting interactive overlay page at /interaction/vote/vote.html
