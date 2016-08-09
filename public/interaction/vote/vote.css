@@ -29,15 +29,6 @@ html, body {
   height: 90%;
 }
 
-#logo {
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  bottom: 10vh;
-  left: 5vw;
-  z-index: 1000;
-}
-
 #votePic {
   position: absolute;
   width: 48px;

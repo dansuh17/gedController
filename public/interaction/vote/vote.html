@@ -30,13 +30,6 @@
 <div id="main" ng-controller="voteCtrl">
   <!-- invisible tapping on the screen will switch who the user is voting for -->
   <div id="toggle" ng-click="switchVote()"></div>
-
-  <!-- little cute kiswe logo at the bottom left -->
-  <div id="logo">
-    <a href="http://kiswe.com/" target="_blank">
-      <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
-  </div>
-
   <img id="votePic" ng-src="{{currentVotePic}}" />
 </div>
 </body>

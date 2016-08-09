@@ -9,15 +9,15 @@
       .config(function($routeProvider) {
         $routeProvider
             .when('/empty', {
-              templateUrl : "empty.html"
-              //controller : "sweepEmptyCtrl"
+              templateUrl : "empty.html",
+              controller : "sweepEmptyCtrl"
             })
             .when('/sweep', {
               templateUrl : "sweep.html",
               controller : "sweepCtrl"
             })
             .otherwise({
-              redirectTo : '/sweep'
+              redirectTo : '/empty'
             });
       });
 })();

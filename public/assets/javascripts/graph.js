@@ -217,6 +217,7 @@ var clipData = new Object();
 var done = 0;
 
 var flag = false;
+var flag2 = 0;
 
 function tick() {
     // Redraw the line.
@@ -240,7 +241,11 @@ function tick() {
         });
 
         if(flag) {
-            timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
+            if(flag2<15){
+                timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
+                flag2++;
+                console.log(flag2);
+            }
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {

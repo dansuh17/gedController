@@ -11,7 +11,6 @@
       .module('vote')
       .controller('voteCtrl', ['$scope', '$timeout', 'socketFactory', function ($scope, $timeout, socketFactory) {
         // cute kiswe logo
-        $scope.logoUrl = '../../assets/images/kisweLogo.png';
         $scope.currentVotePic = '../../assets/images/vote1.png';
         // status of the vote - 0 : default (no vote yet cast) 1 > voted for according player
         $scope.status = 0;

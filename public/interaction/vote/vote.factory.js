@@ -4,8 +4,8 @@
  */
 ;(function() {
   angular
-      .module('vote',[])
-      .factory('socketFactory', ['$rootscope', function($rootscope) {
+      .module('vote')
+      .factory('socketFactory', [function() {
         var socket = io.connect();
         console.log('connected to tap factory');
 
