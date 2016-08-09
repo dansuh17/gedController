@@ -243,7 +243,7 @@ function tick() {
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {
-                if((new Date(clipData[i].start_time).getTime()) + timediff < (new Date().getTime()) {
+                if((new Date(clipData[i].start_time).getTime()) + timediff < (new Date().getTime())) {
                     addMarkAt(clipData[i].start_time);
                     done++;
                 } else {
