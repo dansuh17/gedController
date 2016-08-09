@@ -34,17 +34,6 @@ g.append("defs").append("clipPath")
     .attr("height", height);
 
 g.append("g")
-    .attr("class", "axis axis--x")
-    .attr("transform", "translate(0," + y(0) + ")")
-    .attr("display", "none")
-    .call(d3.axisBottom(x));
-
-g.append("g")
-    .attr("class", "axis axis--y")
-    .attr("stroke", "darkgrey")
-    .call(d3.axisLeft(y));
-
-g.append("g")
     .attr("clip-path", "url(#clip)")
     .append("path")
     .datum(data)
@@ -52,9 +41,22 @@ g.append("g")
     .transition()
     .duration(1000)
     .ease(d3.easeLinear)
-    .on("start", tick);
+    .on("start", tick);  /// tick is the main function that draws the line
 
 //axis
+g.append("g")
+    .attr("class", "axis axis--x")
+    .attr("transform", "translate(0," + y(0) + ")")
+    .attr("display", "none")
+    .call(d3.axisBottom(x));
+
+g.append("g")
+    .attr("class", "axis axis--y")
+    .attr("display", "none")
+    .attr("stroke", "darkgrey")
+    .call(d3.axisLeft(y));
+
+//axis text
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
@@ -63,27 +65,20 @@ g.append("text")
     .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
     .text("who's winning");
 
-g.append("rect")
-    .attr("x", width/3)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
+//x
+make_roundBorder(3);
+function make_roundBorder(roundNum){
+    for(var i=0; i<=roundNum; i++){
+        g.append("rect")
+            .attr("x", width/roundNum*i)
+            .attr("y", 0)
+            .attr("width", 1)
+            .attr("height", height)
+            .attr("fill","lightgrey")
+    }
+}
 
-g.append("rect")
-    .attr("x", width*2/3)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
-
-g.append("rect")
-    .attr("x", width)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", height)
-    .attr("fill","lightgrey")
-
+//y
 g.append("rect")
     .attr("x", 0)
     .attr("y", height/2)
@@ -91,28 +86,51 @@ g.append("rect")
     .attr("height", 1)
     .attr("fill","darkgrey")
 
+//graph grid
+
+make_x_grid(27);
+make_y_grid(8);
+
+// function for the x grid lines
+function make_x_grid(gridNum) {
+    for(var i=0; i<gridNum; i++){
+        g.append("rect")
+            .attr("x", width/gridNum*i)
+            .attr("y", 0)
+            .attr("width", 0.1)
+            .attr("height", height)
+            .attr("fill","lightgrey")
+    }
+}
+
+// function for the y grid lines
+function make_y_grid(gridNum) {
+    for(var i=1; i<gridNum; i++){
+        g.append("rect")
+            .attr("x", 0)
+            .attr("y", height/gridNum*i)
+            .attr("width", width)
+            .attr("height", 0.1)
+            .attr("fill","lightgrey")
+    }
+}
+
 //round 1,2,3
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*1/6)
-    .attr("y", 0)
-    .text("round1")
-    .style("fill", "greycolor")
+put_roundTxt(3);
 
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*3/6)
-    .attr("y", 0)
-    .text("round2")
+function put_roundTxt(roundNum) {
+    for(var i=1; i<=roundNum; i++){
+        g.append("text")
+            .attr("class", "text")
+            .attr("text-anchor", "middle")
+            .attr("x", width*(2*i-1)/6)
+            .attr("y", -height*1/10)
+            .attr("font-size", "20px")
+            .text("Round " + i)
+            .style("fill", "greycolor")
+    }
+}
 
-g.append("text")
-    .attr("class", "text")
-    .attr("text-anchor", "middle")
-    .attr("x", width*5/6)
-    .attr("y", 0)
-    .text("round3")
 
 //add image of fighters
 g.append("svg:image")
@@ -120,8 +138,9 @@ g.append("svg:image")
     .attr("xlink:href", fighterA)
     .attr("width", 50)
     .attr("height", 50)
+    .attr("y", 1/2*height - 50) //- height of image
     .attr("x", -1/7*width)
-    .attr("y", 8/9*height)
+
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
 g.append("svg:image")
@@ -129,8 +148,9 @@ g.append("svg:image")
     .attr("xlink:href", fighterB)
     .attr("width", 50)
     .attr("height", 50)
+    .attr("y", 1/2*height)
     .attr("x", -1/7*width)
-    .attr("y", 0)
+
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
 /* tooltip
@@ -158,8 +178,17 @@ function addMarkAt() {
         .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
 }
 
-
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
+
+
+///event id
+var eventID = "wsof_testrun_20160804140831";
+var eventIS = "stage-api" //if it is on the prod, use "api-v4" instead
+
+var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
+//if using prod, use this token instead.
+//"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
+>>>>>>> a7451ed6db8f3707131c212fe548145f8b7067a6
 
 var eventStartTime = new Date().getTime();
 var gameStartTime;
@@ -167,7 +196,7 @@ var timediff = 0; // 0 for live, else archived;
 
 var reqEvent = new XMLHttpRequest();
 
-reqEvent.open('GET', 'https://api-v4.kiswe.com:443/api/events/id/wsof_testrun_20160804140831', true);
+reqEvent.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/events/id/' + eventID, true);
 reqEvent.setRequestHeader("Authorization", token);
 reqEvent.send(null);
 
@@ -219,8 +248,7 @@ function tick() {
             // console.log(clipData);
         }
         flag = true;
-
-        reqHighlight.open('GET', 'https://api-v4.kiswe.com:443/api/comments/wsof_testrun_20160804140831', true);
+          reqHighlight.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/comments/' + eventID, true);
         reqHighlight.setRequestHeader("Authorization", token);
         reqHighlight.send(null);
 
@@ -247,14 +275,15 @@ function tick() {
                 .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
-                .style("stroke", "blue");
+                .style("stroke", "e91a67");
         }
         else if (currentWinning < 0) {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
                 .style("fill", "none")
-                .style("stroke", "red");
+                .style("stroke", "32bdf0");
         }
     }
 }
+
