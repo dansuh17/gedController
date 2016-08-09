@@ -169,19 +169,18 @@ function addMark() {
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - gameStartTime) / 1000 + (currentRound-1)*300;
+    var tick = (new Date(time_).getTime() + (1000*60*60*4) - gameStartTime) / 1000 + (currentRound-1)*300;
     console.log(tick);
-    if(tick > currentTick && tick < 0){
-        return;
+    if(tick < currentTick && tick > 0){
+        tick = Math.floor(tick);
+        g.append("svg:image")
+            .attr("class", "eMark")
+            .attr("xlink:href", eMark)
+            .attr("width", 30)
+            .attr("height", 30)
+            .attr("x", width / n * (tick - 1) - 15)
+            .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
     }
-    tick = Math.floor(tick);
-    g.append("svg:image")
-        .attr("class", "eMark")
-        .attr("xlink:href", eMark)
-        .attr("width", 30)
-        .attr("height", 30)
-        .attr("x", width / n * (tick - 1) - 15)
-        .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
 }
 
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
@@ -249,7 +248,7 @@ function tick() {
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {
-                if((new Date(clipData[i].start_time).getTime()) + timediff < (new Date().getTime())) {
+                if((new Date(clipData[i].start_time).getTime()) + timediff + (1000*60*60*4)< (new Date().getTime())) {
                     addMarkAt(clipData[i].start_time);
                     done++;
                 } else {
