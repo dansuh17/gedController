@@ -16,10 +16,14 @@ module.exports = function(io, Vote) {
     var votesRoute = require('./votes');
     router.use('/votes', votesRoute(io, Vote));
 
-
     /* for handling power bar */
     var timerRoute = require('./timer');
     router.use('/timer', timerRoute(io));
+
+    /* for sweep interaction page */
+    var sweepRoute = require('./sweep');
+    console.log(sweepRoute);
+    router.use('/sweep', sweepRoute(io));
 
     return router;
 };
