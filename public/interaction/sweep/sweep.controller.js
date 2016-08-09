@@ -70,7 +70,7 @@
             pFive.draw = function () {
               pFive.clear(); // clear the canvas every frame
               determineLoopContinue();
-              pFive.background(255, 255, 100, 100);
+              pFive.background(255, 255, 255, 0);
               pFive.image(logo, 20, pFive.height - 100, 48, 48);
 
 
