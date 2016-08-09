@@ -3,7 +3,7 @@
  *  The user can tap on the screen to try to remove the boids away.
  *  Uses instance mode of p5.js so that it can communicate with Angular.
  *
- *  <p>Also, this allows the canvas to be turned on / off for a certain amount of time
+ *  <p>Also, this allows the canvas to be turned on / off
  *  via socket calls so that producer can control the expose time. The canvas is
  *  turned on or off by moving between html anchors (an SPA).
  *
@@ -22,6 +22,7 @@
             var blueAlienImg;
             var pressed = false;
             var centerVector;
+            var canvas;
 
             /**
              * Preloads images before drawing canvas.
@@ -39,7 +40,8 @@
              * Initialize the canvas and also initialize the boids' starting points.
              */
             pFive.setup = function () {
-              pFive.createCanvas(window.innerWidth, window.innerHeight);
+              canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
+              canvas.id("sweepCanvas");
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
@@ -195,7 +197,7 @@
               // if the url contains "empty", stop the loop
               if(url.indexOf('empty') !== -1) {
                   pFive.noLoop();
-                  document.getElementById('defaultCanvas0').remove();
+                  document.getElementById('sweepCanvas').remove();
                   console.log("URL changed - turning off sweep canvas");
               }
             }
@@ -217,7 +219,8 @@
           };
 
           /**
-           * Socket function that wraps the goToEmptyPage function.
+           * Socket function that wraps the goToEmptyPage function,
+           * run on receiving 'goToEmptyPage' message.
            */
           socketFactory.on('goToEmptyPage', function() {
             console.log("goToEmptyPage call received");
@@ -237,7 +240,8 @@
           };
 
           /**
-           * Socket function that wraps the goToSweepPage function.
+           * Socket function that wraps the goToSweepPage function,
+           * run on receiving 'goToSweepPage' message.
            */
           socketFactory.on('goToSweepPage', function() {
             console.log("goToSweepPage call received");
