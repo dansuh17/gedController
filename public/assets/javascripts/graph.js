@@ -146,21 +146,18 @@ function addMark() {
         .attr("height", 30)
         .attr("x", width / n * (currentTick - 1) - 15)
         .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
-    /* tooltip
-     .on("mouseover", function () {
-     div.transition()
-     .duration(200)
-     .style("opacity", .9)
-     .attr("width", 100);
-     })
-     .on("mouseout", function () {
-     div.transition()
-     .duration(500)
-     .style("opacity", 0)
-     .attr("height", 100)
-     })
-     */
 }
+
+function addMarkAt() {
+    g.append("svg:image")
+        .attr("class", "eMark")
+        .attr("xlink:href", eMark)
+        .attr("width", 30)
+        .attr("height", 30)
+        .attr("x", width / n * (currentTick - 1) - 15)
+        .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+}
+
 
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
 
