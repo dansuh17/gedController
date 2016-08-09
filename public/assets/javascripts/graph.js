@@ -198,7 +198,7 @@ var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6Ij
 
 var eventStartTime = new Date().getTime();
 var gameStartTime;
-var timediff = 0; // 0 for live, else archived;
+var timediff = -14400000; // for eastern time -4;
 
 var reqEvent = new XMLHttpRequest();
 
@@ -241,10 +241,10 @@ function tick() {
         });
 
         if(flag) {
-            if(flag2<15){
+            if(flag2<2){
                 timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
                 flag2++;
-                console.log(flag2);
+                // console.log(flag2);
             }
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
