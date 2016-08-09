@@ -242,7 +242,7 @@ function tick() {
 
         if(flag) {
             if(flag2<2){
-                timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
+                timediff += eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
                 flag2++;
                 // console.log(flag2);
             }
