@@ -193,7 +193,7 @@ var eventIS = "stage-api" //if it is on the prod, use "api-v4" instead
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
 //if using prod, use this token instead.
 //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
->>>>>>> a7451ed6db8f3707131c212fe548145f8b7067a6
+// >>>>>>> a7451ed6db8f3707131c212fe548145f8b7067a6
 
 var eventStartTime = new Date().getTime();
 var gameStartTime;
