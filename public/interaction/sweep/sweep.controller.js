@@ -230,12 +230,10 @@
            * Moves to the sweep page.
            */
           $scope.goToSweepPage = function() {
-            $timeout(function() {
-              // set the location - #sweep
-              $location.hash('sweep');
-              // move anchor to the location
-              $anchorScroll();
-            });
+            // set the location - #sweep
+            $location.hash('sweep');
+            // move anchor to the location
+            $anchorScroll();
           };
 
           /**
