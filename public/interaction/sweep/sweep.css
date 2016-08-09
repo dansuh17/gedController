@@ -1,13 +1,9 @@
 html {
-  width: 1280px;
-  height: 720px;
   overflow: hidden;
   margin: 0;
 }
 
 body {
-  height: 1280vh;
-  width: 720vw;
   margin: 0;
   background: transparent;
   overflow: hidden;

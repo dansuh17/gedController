@@ -18,10 +18,8 @@
           /* P5 instance mode part */
           // P5 codes START
           var sketch = function(pFive) {
-
             var boids = [];
             var blueAlienImg;
-            var logo;
             var pressed = false;
             var centerVector;
 
@@ -34,7 +32,6 @@
               //redAlienImg = pFive.loadImage("../../assets/images/alien_red.png");
               //yellowAlienImg = pFive.loadImage("../../assets/images/alien_yellow.png");
               //greenAlienImg = pFive.loadImage("../../assets/images/alien_green.png");
-              logo = pFive.loadImage("../../assets/images/kisweLogo.png");
             };
 
             /**
@@ -42,13 +39,13 @@
              * Initialize the canvas and also initialize the boids' starting points.
              */
             pFive.setup = function () {
-              pFive.createCanvas(1280, 720);
+              pFive.createCanvas(window.innerWidth, window.innerHeight);
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
               // create boids given random initial positions outside the canvas boundaries
               // so that boids would close in from outside
-              for (var i = 0; i < 30; i++) {
+              for (var i = 0; i < 15; i++) {
                 if (i % 2 == 0) {
                   boids[i] = new Boid(
                       pFive.random(pFive.width + 10, pFive.width + 50),
@@ -71,7 +68,6 @@
               pFive.clear(); // clear the canvas every frame
               determineLoopContinue();
               pFive.background(255, 255, 255, 0);
-              pFive.image(logo, 20, pFive.height - 100, 48, 48);
 
               // Run all the boids
               for (var i = 0; i < boids.length; i++) {
@@ -198,9 +194,9 @@
               var url = window.location.href;
               // if the url contains "empty", stop the loop
               if(url.indexOf('empty') !== -1) {
-                pFive.noLoop();
-                document.getElementById('defaultCanvas0').remove();
-                console.log("URL changed - turning off sweep canvas");
+                  pFive.noLoop();
+                  document.getElementById('defaultCanvas0').remove();
+                  console.log("URL changed - turning off sweep canvas");
               }
             }
           };
@@ -221,13 +217,25 @@
           };
 
           /**
+           * Socket function that wraps the goToEmptyPage function.
+           */
+          socketFactory.on('goToEmptyPage', function() {
+            console.log("goToEmptyPage call received");
+            $scope.$apply(function() {
+              $scope.goToEmptyPage();
+            })
+          });
+
+          /**
            * Moves to the sweep page.
            */
           $scope.goToSweepPage = function() {
-            // set the location - #sweep
-            $location.hash('sweep');
-            // move anchor to the location
-            $anchorScroll();
+            $timeout(function() {
+              // set the location - #sweep
+              $location.hash('sweep');
+              // move anchor to the location
+              $anchorScroll();
+            });
           };
 
           /**
@@ -237,16 +245,6 @@
             console.log("goToSweepPage call received");
             $scope.$apply(function() {
               $scope.goToSweepPage();
-            })
-          });
-
-          /**
-           * Socket function that wraps the goToEmptyPage function.
-           */
-          socketFactory.on('goToEmptyPage', function() {
-            console.log("goToEmptyPage call received");
-            $scope.$apply(function() {
-              $scope.goToEmptyPage();
             })
           });
         }]);
