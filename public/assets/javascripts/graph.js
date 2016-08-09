@@ -239,7 +239,7 @@ function tick() {
         });
 
         if(flag) {
-            timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
+            // timediff = eventStartTime - (new Date(JSON.parse(reqEvent.response).event.start_time).getTime());
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {
