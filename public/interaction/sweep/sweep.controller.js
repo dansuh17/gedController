@@ -5,15 +5,15 @@
  *
  *  <p>Also, this allows the canvas to be turned on / off for a certain amount of time
  *  via socket calls so that producer can control the expose time. The canvas is
- *  turned on or off by moving between html anchors.
+ *  turned on or off by moving between html anchors (an SPA).
  *
  *  by Daniel Suh 8/1/2016
  */
 ;(function() {
   angular
       .module('sweep')
-      .controller('sweepCtrl', ['$scope', '$location', '$anchorScroll',
-        function ($scope, $location, $anchorScroll) {
+      .controller('sweepCtrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
+        function ($scope, $location, $anchorScroll, socketFactory) {
 
           /* P5 instance mode part */
           // P5 codes START
@@ -70,9 +70,8 @@
             pFive.draw = function () {
               pFive.clear(); // clear the canvas every frame
               determineLoopContinue();
-              pFive.background(255, 255, 100, 100);
+              pFive.background(255, 255, 255, 0);
               pFive.image(logo, 20, pFive.height - 100, 48, 48);
-
 
               // Run all the boids
               for (var i = 0; i < boids.length; i++) {
@@ -234,25 +233,21 @@
           /**
            * Socket function that wraps the goToSweepPage function.
            */
-          /*
           socketFactory.on('goToSweepPage', function() {
             console.log("goToSweepPage call received");
             $scope.$apply(function() {
               $scope.goToSweepPage();
             })
           });
-          */
 
           /**
            * Socket function that wraps the goToEmptyPage function.
            */
-          /*
           socketFactory.on('goToEmptyPage', function() {
             console.log("goToEmptyPage call received");
             $scope.$apply(function() {
               $scope.goToEmptyPage();
             })
           });
-          */
         }]);
 })();

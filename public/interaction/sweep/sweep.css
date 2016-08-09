@@ -6,8 +6,8 @@ html {
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
+  height: 1280vh;
+  width: 720vw;
   margin: 0;
   background: transparent;
   overflow: hidden;

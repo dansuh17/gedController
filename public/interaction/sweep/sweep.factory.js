@@ -1,11 +1,11 @@
 /**
- * binds the socket and exposes socket.on and socket.emit functions.
+ * Binds the socket and exposes socket.on and socket.emit functions.
  * by daniel suh 8/8/2016
  */
 ;(function() {
   angular
-      .module('sweep',[])
-      .factory('socketFactory', ['$rootscope', function($rootscope) {
+      .module('sweep')
+      .factory('socketFactory', [function() {
         var socket = io.connect();
 
         return {
