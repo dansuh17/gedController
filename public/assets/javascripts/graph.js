@@ -169,7 +169,7 @@ function addMark() {
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() + (1000*60*60*4) - gameStartTime) / 1000 + (currentRound-1)*300;
+    var tick = (new Date(time_).getTime() + (1000*60*60*2) - gameStartTime) / 1000 + (currentRound-1)*300;
     console.log(tick);
     if(tick < currentTick && tick > 0){
         tick = Math.floor(tick);
@@ -249,7 +249,7 @@ function tick() {
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {
-                if((new Date(clipData[i].start_time).getTime()) + timediff + (1000*60*60*4)< (new Date().getTime())) {
+                if((new Date(clipData[i].start_time).getTime()) + timediff + (1000*60*60*2)< (new Date().getTime())) {
                     addMarkAt(clipData[i].start_time);
                     done++;
                 } else {
