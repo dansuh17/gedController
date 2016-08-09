@@ -16,7 +16,6 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
-
     router.post('/powerCommand/powerToLeft', function(req, res, next) {
         console.log("power To Left by five");
 
@@ -24,14 +23,12 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
-
     router.post('/powerCommand/powerToRight', function(req, res, next) {
         console.log("power To Right by five");
 
         io.emit('powerToRight', {});
         res.json({"sent": "done"});
     });
-
 
     return router;
 };

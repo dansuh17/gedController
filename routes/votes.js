@@ -12,7 +12,6 @@ module.exports = function(io, Vote) {
         });
     });
 
-
     router.get('/getCurrentWinning', function(req, res, next) {
         console.log("getCurrentWinning request received.");
 
@@ -32,5 +31,4 @@ module.exports = function(io, Vote) {
 
 
     return router;
-}
-
+};
