@@ -193,7 +193,7 @@ var eventIS = "stage-api" //if it is on the prod, use "api-v4" instead
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
 //if using prod, use this token instead.
 //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
->>>>>>> a7451ed6db8f3707131c212fe548145f8b7067a6
+// >>>>>>> a7451ed6db8f3707131c212fe548145f8b7067a6
 
 var eventStartTime = new Date().getTime();
 var gameStartTime;
@@ -243,7 +243,7 @@ function tick() {
             clipData = JSON.parse(reqHighlight.response).comments.el;
             // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
             for(var i = done; i<clipData.length; i++) {
-                if((new Date(clipData[i].start_time).getTime()) + timediff < (new Date().getTime()) {
+                if((new Date(clipData[i].start_time).getTime()) + timediff < (new Date().getTime())) {
                     addMarkAt(clipData[i].start_time);
                     done++;
                 } else {
