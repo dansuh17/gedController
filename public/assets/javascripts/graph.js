@@ -168,14 +168,19 @@ function addMark() {
         .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
 }
 
-function addMarkAt() {
+function addMarkAt(time_) {
+    var tick = (new Date(time_).getTime() - gameStartTime) / 1000 + (currentRound-1)*300;
+    if(tick > currentTick){
+        return;
+    }
+    tick = Math.floor(tick);
     g.append("svg:image")
         .attr("class", "eMark")
         .attr("xlink:href", eMark)
         .attr("width", 30)
         .attr("height", 30)
-        .attr("x", width / n * (currentTick - 1) - 15)
-        .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+        .attr("x", width / n * (tick - 1) - 15)
+        .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
 }
 
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s";
