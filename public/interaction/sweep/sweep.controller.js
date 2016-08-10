@@ -19,20 +19,22 @@
           ///////////////////// P5 codes START ////////////////////
           var sketch = function(pFive) {
             var boids = [];
+            var images = [];
             var blueAlienImg;
             var pressed = false;
             var centerVector;
             var canvas;
+            const imageHalfWidth = 100;
+            const imageHalfHeight = 100;
 
             /**
              * Preloads images before drawing canvas.
              */
             pFive.preload = function() {
-              blueAlienImg = pFive.loadImage("../../assets/images/alien_blue.png");
-              //bg = pFive.loadImage("../../assets/images/hotgirl.jpeg");
-              //redAlienImg = pFive.loadImage("../../assets/images/alien_red.png");
-              //yellowAlienImg = pFive.loadImage("../../assets/images/alien_yellow.png");
-              //greenAlienImg = pFive.loadImage("../../assets/images/alien_green.png");
+              images[0] = pFive.loadImage("../../assets/images/alien_blue.png");
+              images[1] = pFive.loadImage("../../assets/images/alien_red.png");
+              images[2] = pFive.loadImage("../../assets/images/alien_yellow.png");
+              images[3] = pFive.loadImage("../../assets/images/alien_green.png");
             };
 
             /**
@@ -41,10 +43,6 @@
              */
             pFive.setup = function () {
               setupCanvas();
-              /*
-              canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
-              canvas.id("sweepCanvas");
-              */
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
@@ -54,13 +52,15 @@
                 if (i % 2 == 0) {
                   boids[i] = new Boid(
                       pFive.random(pFive.width + 10, pFive.width + 50),
-                      pFive.random(-20, pFive.height + 20)
+                      pFive.random(-20, pFive.height + 20),
+                      i
                   );
                 }
                 else {
                   boids[i] = new Boid(
                       pFive.random(-50, -10),
-                      pFive.random(-20, pFive.height + 20)
+                      pFive.random(-20, pFive.height + 20),
+                      i
                   );
                 }
               }
@@ -95,11 +95,14 @@
 
             /**
              * Boid class constructor
+             *
              * @param x original x position
              * @param y original y position
+             * @param id identification number of this Boid
              * @constructor constructs a single Boid at given x, y position.
              */
-            function Boid(x, y) {
+            function Boid(x, y, id) {
+              this.id = id;
               this.acceleration = pFive.createVector(0, 0);
               this.velocity = p5.Vector.random2D();
               this.position = pFive.createVector(x, y);
@@ -163,12 +166,14 @@
              */
             Boid.prototype.render = function() {
               if (this.inScreen) {
-                pFive.image(blueAlienImg, this.position.x, this.position.y, 200, 200);
+                pFive.image(images[this.id % 4], this.position.x, this.position.y,
+                    2 * imageHalfWidth, 2 * imageHalfHeight);
               }
             };
 
             /**
              * Adds the effect of certain force to the acceleration.
+             *
              * @param force the force taken place on the boid
              */
             Boid.prototype.applyForce = function(force) {
@@ -178,14 +183,20 @@
             /**
              * When the mouse is clicked, it repels the boids as if a drop of
              * stone into water. The nearby space is cleared out.
+             *
+             * <p>imageCenterVector variable accounts for the difference in image's center
+             * and the position of the image, which points to the top-left corner of the image.
+             *
              * @param mouseVector the point of mouse click
              */
             Boid.prototype.repel = function(mouseVector) {
-              var repelDirection = p5.Vector.sub(this.position, mouseVector).normalize();
-              var dist = p5.Vector.dist(this.position, mouseVector);
+              var imageCenterVector =
+                  pFive.createVector(this.position.x + imageHalfWidth, this.position.y + imageHalfHeight);
+              var repelDirection = p5.Vector.sub(imageCenterVector, mouseVector).normalize();
+              var dist = p5.Vector.dist(imageCenterVector, mouseVector);
 
               // within a certain range of the point clicked, repel the boids
-              if (dist < 200) {
+              if (dist < 300) {
                 this.velocity = repelDirection.mult(300.0 / dist);
               }
             };
