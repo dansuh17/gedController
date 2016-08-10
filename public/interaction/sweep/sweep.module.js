@@ -12,7 +12,7 @@
               templateUrl : "empty.html",
               controller : "sweepEmptyCtrl"
             })
-            .when('/sweep', {
+            .when('/sweep_icon', {
               templateUrl : "sweep.html",
               controller : "sweepCtrl"
             })
