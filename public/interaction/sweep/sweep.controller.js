@@ -24,6 +24,8 @@
             var pressed = false;
             var centerVector;
             var canvas;
+            const imageHalfWidth = 100;
+            const imageHalfHeight = 100;
 
             /**
              * Preloads images before drawing canvas.
@@ -93,6 +95,7 @@
 
             /**
              * Boid class constructor
+             *
              * @param x original x position
              * @param y original y position
              * @param id identification number of this Boid
@@ -163,12 +166,14 @@
              */
             Boid.prototype.render = function() {
               if (this.inScreen) {
-                pFive.image(images[this.id % 4], this.position.x, this.position.y, 200, 200);
+                pFive.image(images[this.id % 4], this.position.x, this.position.y,
+                    2 * imageHalfWidth, 2 * imageHalfHeight);
               }
             };
 
             /**
              * Adds the effect of certain force to the acceleration.
+             *
              * @param force the force taken place on the boid
              */
             Boid.prototype.applyForce = function(force) {
@@ -178,14 +183,20 @@
             /**
              * When the mouse is clicked, it repels the boids as if a drop of
              * stone into water. The nearby space is cleared out.
+             *
+             * <p>imageCenterVector variable accounts for the difference in image's center
+             * and the position of the image, which points to the top-left corner of the image.
+             *
              * @param mouseVector the point of mouse click
              */
             Boid.prototype.repel = function(mouseVector) {
-              var repelDirection = p5.Vector.sub(this.position, mouseVector).normalize();
-              var dist = p5.Vector.dist(this.position, mouseVector);
+              var imageCenterVector =
+                  pFive.createVector(this.position.x + imageHalfWidth, this.position.y + imageHalfHeight);
+              var repelDirection = p5.Vector.sub(imageCenterVector, mouseVector).normalize();
+              var dist = p5.Vector.dist(imageCenterVector, mouseVector);
 
               // within a certain range of the point clicked, repel the boids
-              if (dist < 200) {
+              if (dist < 300) {
                 this.velocity = repelDirection.mult(300.0 / dist);
               }
             };
