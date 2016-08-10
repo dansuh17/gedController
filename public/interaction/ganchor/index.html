@@ -3,8 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <title>graph anchor page</title>
+
+  <!-- jQuery dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <!-- angular -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
+  <!-- Graph D3 -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+  <!-- Modules -->
+  <script src="ganchor.module.js"></script>
+
+  <!-- Controllers -->
+  <script src="ganchor.controller.js"></script>
+
 </head>
-<body>
-  <img ng-src="{{anchor_button}}" ng-click />
+<body ng-app="ganchor">
+<div class="container" ng-controller="ganchorCtrl">
+
+  <div class="page-header text-center">
+    <h1>ngShow and ngHide: Booleans</h1>
+  </div>
+
+  <!-- Show graph =========================================================== -->
+  <div class="row text-center">
+
+
+    <div class="col-xs-6" ng-show="graphOn">
+      <img ng-src="http://i.imgur.com/vkW3Lhe.jpg" class="img-responsive img-thumbnail">
+      <div id="graph">
+        <svg width="800" height="600"></svg>
+        <script src="../../assets/javascripts/graph.js"></script>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+
+      <!-- change graphOn to not true or true -->
+      <a href="#" ng-click="graphOn = !graphOn" class="btn btn-primary btn-lg"><img src="../../assets/images/graph_icon.png" width="50px" height="50px"/></a>
+    </div>
+
+  </div>
+
+</div>
+
+
 </body>
 </html>
