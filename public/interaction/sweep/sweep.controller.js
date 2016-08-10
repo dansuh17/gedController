@@ -19,6 +19,7 @@
           ///////////////////// P5 codes START ////////////////////
           var sketch = function(pFive) {
             var boids = [];
+            var images = [];
             var blueAlienImg;
             var pressed = false;
             var centerVector;
@@ -28,11 +29,10 @@
              * Preloads images before drawing canvas.
              */
             pFive.preload = function() {
-              blueAlienImg = pFive.loadImage("../../assets/images/alien_blue.png");
-              //bg = pFive.loadImage("../../assets/images/hotgirl.jpeg");
-              //redAlienImg = pFive.loadImage("../../assets/images/alien_red.png");
-              //yellowAlienImg = pFive.loadImage("../../assets/images/alien_yellow.png");
-              //greenAlienImg = pFive.loadImage("../../assets/images/alien_green.png");
+              images[0] = pFive.loadImage("../../assets/images/alien_blue.png");
+              images[1] = pFive.loadImage("../../assets/images/alien_red.png");
+              images[2] = pFive.loadImage("../../assets/images/alien_yellow.png");
+              images[3] = pFive.loadImage("../../assets/images/alien_green.png");
             };
 
             /**
@@ -41,10 +41,6 @@
              */
             pFive.setup = function () {
               setupCanvas();
-              /*
-              canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
-              canvas.id("sweepCanvas");
-              */
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
@@ -54,13 +50,15 @@
                 if (i % 2 == 0) {
                   boids[i] = new Boid(
                       pFive.random(pFive.width + 10, pFive.width + 50),
-                      pFive.random(-20, pFive.height + 20)
+                      pFive.random(-20, pFive.height + 20),
+                      i
                   );
                 }
                 else {
                   boids[i] = new Boid(
                       pFive.random(-50, -10),
-                      pFive.random(-20, pFive.height + 20)
+                      pFive.random(-20, pFive.height + 20),
+                      i
                   );
                 }
               }
@@ -97,9 +95,11 @@
              * Boid class constructor
              * @param x original x position
              * @param y original y position
+             * @param id identification number of this Boid
              * @constructor constructs a single Boid at given x, y position.
              */
-            function Boid(x, y) {
+            function Boid(x, y, id) {
+              this.id = id;
               this.acceleration = pFive.createVector(0, 0);
               this.velocity = p5.Vector.random2D();
               this.position = pFive.createVector(x, y);
@@ -163,7 +163,7 @@
              */
             Boid.prototype.render = function() {
               if (this.inScreen) {
-                pFive.image(blueAlienImg, this.position.x, this.position.y, 200, 200);
+                pFive.image(images[this.id % 4], this.position.x, this.position.y, 200, 200);
               }
             };
 
