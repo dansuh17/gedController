@@ -20,36 +20,27 @@
   <!-- Controllers -->
   <script src="ganchor.controller.js"></script>
 
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="graph.css">
+
 </head>
 <body ng-app="ganchor">
-<div class="container" ng-controller="ganchorCtrl">
+<div id="Maincontainer" ng-controller="ganchorCtrl">
 
-  <div class="page-header text-center">
-    <h1>ngShow and ngHide: Booleans</h1>
-  </div>
-
-  <!-- Show graph =========================================================== -->
-  <div class="row text-center">
-
-
-    <div class="col-xs-6" ng-show="graphOn">
-      <img ng-src="http://i.imgur.com/vkW3Lhe.jpg" class="img-responsive img-thumbnail">
+  <div id="graphContainer">
+    <!-- graph -->
+    <div class="graph" ng-show="graphOn">
       <div id="graph">
         <svg width="800" height="600"></svg>
         <script src="../../assets/javascripts/graph.js"></script>
       </div>
     </div>
-
-    <div class="col-xs-6">
-
-      <!-- change graphOn to not true or true -->
-      <a href="#" ng-click="graphOn = !graphOn" class="btn btn-primary btn-lg"><img src="../../assets/images/graph_icon.png" width="50px" height="50px"/></a>
-    </div>
-
   </div>
 
+  <!-- graph on/off toggle button image -->
+  <img id="graphToggleIcon" ng-click="graphOn = !graphOn"
+       src="../../assets/images/graph_icon.png"/>
+
 </div>
-
-
 </body>
 </html>

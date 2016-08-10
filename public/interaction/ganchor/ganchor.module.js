@@ -7,7 +7,3 @@
   angular
       .module('ganchor', [])
 })();
-
-//var ganchor = angular.module("ganchor", []);
-
-

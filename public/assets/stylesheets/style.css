@@ -108,10 +108,6 @@ body {
   margin-left: 55px;
 }
 
-a {
-  color: #00B7FF;
-}
-
 /* Power Balance Bar */
 .progress {
   background-color: #777777;
@@ -313,6 +309,6 @@ a {
   display: none;
 }
 
-.text{
+.text {
   stroke: darkgrey;
 }
