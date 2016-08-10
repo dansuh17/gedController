@@ -9,6 +9,9 @@
         var socket = io.connect();
         console.log('connected to tap factory');
 
+        // check in to the db
+        socket.emit('giveVoteStatus', 0);
+
         return {
           on: function(eventname, callback) {
             socket.on(eventname, callback);

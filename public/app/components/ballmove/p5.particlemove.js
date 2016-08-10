@@ -4,7 +4,6 @@
  */
 var particles;
 var suns = []; // Center of Gravity
-var p5margin = 220;
 const totalcount = 20;
 var leftcount = 10; // initial value
 var rightcount = totalcount - leftcount;
@@ -18,6 +17,9 @@ function preload() {
   for(var i=1; i<7; i++){
     faces[i-1] = loadImage("../../assets/images/face" + i +".png");
   }
+
+  helveticanue_bold = loadFont("../../assets/font/HelveticaNeue_Bold.ttf");
+  helveticanue = loadFont("../../assets/font/HelveticaNeue-Medium.otf");
 }
 
 /* setup the canvas before drawing calls */
@@ -29,9 +31,8 @@ function setup() {
   noStroke();
 
   // Create Centers of Gravity
-  for (var i = 0; i < 2; i++) {
-    suns[i] = new Sun(p5margin + i * (width - 2 * p5margin), height/2);
-  }
+  suns[0] = new Sun(170, height/2 - 120);
+  suns[1] = new Sun(width - 110,height/2 - 120);
 
   particles = new Group();
 
@@ -60,9 +61,27 @@ function draw() {
   background(255, 255, 255, 0);
   clear();
 
-  const promise = getData();
+  // add text
+  textSize(60);
+  fill(24,24,24);
+  strokeWeight(4);
+  stroke(207,207,207);
+  textFont(helveticanue_bold);
+  text(leftcount * 5 + "%", 110, suns[0].position.y);
+  text(rightcount * 5 + "%", 850, suns[1].position.y);
+
+  textSize(55);
+  noStroke();
+  fill(119,119,119);
+  textFont(helveticanue);
+  textAlign(CENTER);
+  text("WHO WILL WIN?",width/2+25,height/2-130);
+
+  textSize(40);
+  text("VOTE NOW",width/2+25,height/2-90);
 
   //take the value from ajax call
+  const promise = getData();
   if (++framecount > 300) {
     promise.success(function (data) {
       rightcount = data.devinUp * 20 / (data.devinUp + data.tomUp); // in scale of 20
@@ -106,23 +125,24 @@ function draw() {
     updateParticle(s);
 
     //bounce at wall
-    if (s.position.x < 0) {
-      s.position.x = 1;
+    var wallmargin = 35;
+    if (s.position.x < wallmargin) {
+      s.position.x = wallmargin + 1;
       s.velocity.x = abs(s.velocity.x);
     }
 
-    if (s.position.x > width) {
-      s.position.x = width - 1;
+    if (s.position.x > width - wallmargin) {
+      s.position.x = width - wallmargin - 1;
       s.velocity.x = -abs(s.velocity.x);
     }
 
-    if (s.position.y < 0) {
-      s.position.y = 1;
+    if (s.position.y < wallmargin) {
+      s.position.y = wallmargin + 1;
       s.velocity.y = abs(s.velocity.y);
     }
 
-    if (s.position.y > height) {
-      s.position.y = height - 1;
+    if (s.position.y > height - wallmargin) {
+      s.position.y = height - wallmargin - 1;
       s.velocity.y = -abs(s.velocity.y);
     }
   }
@@ -158,6 +178,7 @@ function Sun(x,y) {
 function getData() {
   return $.ajax({
     url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
+    //url: "http://localhost:3000/votes/getCurrentWinning", // keep this for testing purposes
     dataType: "jsonp"
   });
 }

@@ -2,13 +2,13 @@ var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
-var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300";
-var fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
+var fighterA = "assets/images/vote1.png";
+var fighterB = "assets/images/vote2.png";
 var eMark = "assets/images/1470249409_interface-40.svg";
 
 var currentTick = 0;
 var svg = d3.select("svg"),
-margin = {top: 100, right: 100, bottom: 100, left: 100};
+    margin = {top: 100, right: 100, bottom: 100, left: 100};
 var width = +svg.attr("width") - margin.left - margin.right;
 var height = +svg.attr("height") - margin.top - margin.bottom;
 var g = svg.append("g")
@@ -246,20 +246,22 @@ function tick() {
                 flag2++;
                 // console.log(flag2);
             }
-            clipData = JSON.parse(reqHighlight.response).comments.el;
-            // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
-            for(var i = done; i<clipData.length; i++) {
-                if((new Date(clipData[i].start_time).getTime()) + timediff + (1000*60*60*2)< (new Date().getTime())) {
-                    addMarkAt(clipData[i].start_time);
-                    done++;
-                } else {
-                    break;
+            if(reqHighlight.response.length > 10){
+                clipData = JSON.parse(reqHighlight.response).comments.el;
+                // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
+                for(var i = done; i<clipData.length; i++) {
+                    if((new Date(clipData[i].start_time).getTime()) + timediff + (1000*60*60*2)< (new Date().getTime())) {
+                        addMarkAt(clipData[i].start_time);
+                        done++;
+                    } else {
+                        break;
+                    }
                 }
             }
             // console.log(clipData);
         }
         flag = true;
-          reqHighlight.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/comments/' + eventID, true);
+        reqHighlight.open('GET', 'https://' + eventIS +'.kiswe.com:443/api/comments/' + eventID, true);
         reqHighlight.setRequestHeader("Authorization", token);
         reqHighlight.send(null);
 
