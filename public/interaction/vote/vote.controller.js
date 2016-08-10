@@ -21,7 +21,7 @@
          * Also alerts the server that the toggle has been changed.
          */
         $scope.switchVote = function() {
-          console.log('switchVote toggled');
+          var currentStatus = $scope.status;
           switch($scope.status) {
             case 0:
               $scope.status = 1;
@@ -36,7 +36,7 @@
               break;
           }
           $scope.changePictureUrl($scope.status);
-          socketFactory.emit('giveVoteStatus', {status: $scope.status});
+          socketFactory.emit('giveVoteStatus', {status: $scope.status, prevStatus: currentStatus});
         };
 
         // change the picture Url for the current supporting champion

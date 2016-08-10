@@ -158,6 +158,7 @@ function Sun(x,y) {
 function getData() {
   return $.ajax({
     url: "http://ged.uwcj.kr:3000/votes/getCurrentWinning",
+    //url: "http://localhost:3000/votes/getCurrentWinning", // keep this for testing purposes
     dataType: "jsonp"
   });
 }

@@ -33,7 +33,7 @@ html, body {
   position: absolute;
   width: 48px;
   height: 48px;
-  bottom: 20vh;
-  right: 10vw;
+  top: 10vh;
+  left: 10vw;
   z-index: 1;
 }
