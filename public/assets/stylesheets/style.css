@@ -1,7 +1,7 @@
 html {
   width: 1280px;
   height: 720px;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 
 body {
@@ -106,10 +106,6 @@ body {
   text-align: center;
   margin-top: 0px;
   margin-left: 55px;
-}
-
-a {
-  color: #00B7FF;
 }
 
 /* Power Balance Bar */
@@ -313,6 +309,6 @@ a {
   display: none;
 }
 
-.text{
+.text {
   stroke: darkgrey;
 }

@@ -2,8 +2,8 @@ var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
-var fighterA = "assets/images/vote1.png";
-var fighterB = "assets/images/vote2.png";
+var fighterA = "../../assets/images/vote1.png";
+var fighterB = "../../assets/images/vote2.png";
 var eMark = "assets/images/1470249409_interface-40.svg";
 
 var currentTick = 0;
