@@ -16,7 +16,7 @@
         function ($scope, $location, $anchorScroll, socketFactory) {
 
           /* P5 instance mode part */
-          // P5 codes START
+          ///////////////////// P5 codes START ////////////////////
           var sketch = function(pFive) {
             var boids = [];
             var blueAlienImg;
@@ -40,8 +40,11 @@
              * Initialize the canvas and also initialize the boids' starting points.
              */
             pFive.setup = function () {
+              setupCanvas();
+              /*
               canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
               canvas.id("sweepCanvas");
+              */
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
@@ -195,27 +198,32 @@
             function determineLoopContinue() {
               var url = window.location.href;
               // if the url contains "empty", stop the loop
-              if(url.indexOf('empty') !== -1) {
+              if(url.indexOf('sweep_icon') === -1) {
                   pFive.noLoop();
                   document.getElementById('sweepCanvas').remove();
                   console.log("URL changed - turning off sweep canvas");
               }
+            }
+
+            /**
+             * Create a canvas.
+             */
+            function setupCanvas() {
+              canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
+              canvas.id("sweepCanvas");
             }
           };
 
           /* instantiate p5 canvas */
           var myp5 = new p5(sketch);
 
-          // P5 codesEND
+          ///////////////////// P5 codes END ////////////////////
 
           /**
-           * Moves to the anchor with empty page.
+           * Moves to the empty page.
            */
           $scope.goToEmptyPage = function() {
-            // set the location - #empty
-            $location.hash('empty');
-            // move anchor to the location
-            $anchorScroll();
+            $location.path('/empty');
           };
 
           /**
@@ -223,30 +231,9 @@
            * run on receiving 'goToEmptyPage' message.
            */
           socketFactory.on('goToEmptyPage', function() {
-            console.log("goToEmptyPage call received");
+            console.log("goToEmptyPage call received - sweep");
             $scope.$apply(function() {
               $scope.goToEmptyPage();
-            })
-          });
-
-          /**
-           * Moves to the sweep page.
-           */
-          $scope.goToSweepPage = function() {
-            // set the location - #sweep
-            $location.hash('sweep');
-            // move anchor to the location
-            $anchorScroll();
-          };
-
-          /**
-           * Socket function that wraps the goToSweepPage function,
-           * run on receiving 'goToSweepPage' message.
-           */
-          socketFactory.on('goToSweepPage', function() {
-            console.log("goToSweepPage call received");
-            $scope.$apply(function() {
-              $scope.goToSweepPage();
             })
           });
         }]);
