@@ -7,7 +7,7 @@ html {
 body {
   width: 1280px;
   height: 720px;
-  background-image: url('../images/playerBackground.png');
+  background-image: url('../images/restBackground.png');
   background-size: cover;
   padding: 0 0 0 0;
   margin: 0 auto;
@@ -52,59 +52,64 @@ body {
   -webkit-flex-direction: column;
   flex-direction: column;
   width: 15%;
-  height: 150px;
+  height: 100%;
+  margin-top: 10px;
+  margin-right: 0px;
 }
 
 /* 'round' + round number */
 .roundNumber {
-  width: 100%;
+  width: 110%;  
+  height: 120%;  
   background-color: #f9423a;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-border-bottom-left-radius: 10px;
-  -moz-border-radius-bottomleft: 10px;
-  border-bottom-left-radius: 10px;
-  -webkit-border-bottom-right-radius: 10px;
-  -moz-border-radius-bottomright: 10px;
-  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   -webkit-align-items: center;
   align-items: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 10px;
   color: white;
+  margin-left: 20px;
 }
 
 #round {
   display: -webkit-flex;
   display:flex;
   text-align: center;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 #number {
   display: -webkit-flex;
   display:flex;
   text-align: center;
-  font-size: 60px;
+  font-weight: bold;
+  font-size: 90px;
+  margin-top: -20px;
 }
 
 .timer{
   color: white;
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0px;
+  margin-left: 55px;
 }
 
 a {
   color: #00B7FF;
-}
-
-.fighterName {
-  color: white;
-  font-size: 300%;
-  text-align: center;
 }
 
 /* Power Balance Bar */
@@ -240,14 +245,14 @@ a {
 .content{
 	position: absolute;
 	width: 90%;
-	height: 300px;
+	height: 130px;
   bottom: 0;
 	text-align: center;
-	margin: 5% 5% 5% 5%;
+	margin: 5% 5% 5% 9%;
 }
 
 .content#twitterfeed{
-	position: relative;
+	position: absolute;
 	width: 700px;
 	height: 250px;
 	background: #61bcf6;
@@ -269,15 +274,17 @@ a {
   font-size: 24px;
 	top: 25px;
 	height: 40px;
-	font-weight: bold;
+	/* font-weight: bold; */
+  color: #ffffff;
 }
 
 .content .message{
-  font-size:24px;
+  font-size:32px;
 	top: 60px;
-	width: 500px;
-	height: 160px;
+	width: 700px;
+	height: 70px;
 	text-align: left;
+  color: #ffffff;
 }
 
 .content .name, .content .message{
@@ -308,5 +315,4 @@ a {
 
 .text{
   stroke: darkgrey;
-  fill: darkgrey;
 }
