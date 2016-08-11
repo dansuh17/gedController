@@ -54,23 +54,17 @@ module.exports = function(io, Vote) {
     });
 
 
-    socket.on('addPowerBalance', function(data) {
-      io.emit('addPowerBalance', data);
-
-      if (parseInt(data.amount) > 0) {
-        tomUp += parseInt(data.amount);
+    socket.on('timerCmd', function(data) {
+      if (data.timerCmd == "finished") {
+        console.log("SOCKET ON : timerCmd - " + data.timerCmd);
+        Vote.findOneAndUpdate({}, {$set : { gameGoingOn:false }}, function(err, vote) {
+              if (err) {
+                console.log("ERROR");
+                return next(err);
+              }
+            }
+        );
       }
-      else {
-        devinUp -= parseInt(data.amount);
-      }
-
-      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
-        if (err) {
-          console.log("DB ERROR");
-          return next(err);
-        }
-        console.log("db store successful")
-      });
     });
 
     /**
@@ -115,5 +109,27 @@ module.exports = function(io, Vote) {
         console.log("db store successful - result : tomUp: " + tomUp, " devinUp: " + devinUp);
       });
     });
+
+
+    /* NOT USED */
+    socket.on('addPowerBalance', function(data) {
+      io.emit('addPowerBalance', data);
+
+      if (parseInt(data.amount) > 0) {
+        tomUp += parseInt(data.amount);
+      }
+      else {
+        devinUp -= parseInt(data.amount);
+      }
+
+      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
+        if (err) {
+          console.log("DB ERROR");
+          return next(err);
+        }
+        console.log("db store successful")
+      });
+    });
+
   });
 };
