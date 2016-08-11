@@ -22,8 +22,10 @@ module.exports = function(io, Vote) {
 
     /* for sweep interaction page */
     var sweepRoute = require('./sweep');
-    console.log(sweepRoute);
     router.use('/sweep', sweepRoute(io));
+
+    var panelRoute = require('./panel');
+    router.use('/panel', panelRoute(io, Vote));
 
     return router;
 };
