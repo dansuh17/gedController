@@ -4,14 +4,17 @@ var router = express.Router();
 module.exports = function(io) {
 
     router.post('/setRoundNo/:roundNo', function(req, res, next) {
-        console.log("roundNo changed via API.");
-        var newRoundNo = req.params.roundNo;
+        console.log("API CALL : POST /timer/setRoundNo/:" + req.params.roundNo);
+
+        // to the rest page.
         io.emit('roundNo', {
-            roundNo: newRoundNo
+            roundNo: req.params.roundNo
         });
+
         res.json({"sent": "done"});
     });
 
+    //TODO : better to be separated.
     router.post('/timerCmd/:cmd', function(req, res, next) {
         //start, stop, reset
         console.log("timer command called via API");
