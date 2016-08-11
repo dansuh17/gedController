@@ -2,9 +2,9 @@ var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
-var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20151018082752_1DX_3720.JPG&&width=200&&height=300";
-var fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
-var eMark = "assets/images/1470249409_interface-40.svg";
+var fighterA = "assets/images/profile.png";
+var fighterB = "assets/images/profile.png";
+var eMark = "assets/images/emark.svg";
 
 var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
 var jsTime = 0;
@@ -21,13 +21,12 @@ var div = g.append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-
 function addMark() {
     console.log("working")
     //if(reqHighlight.response.length > 10) {
          // tempHL = JSON.parse(reqHighlight.response).comments;
-         var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
-         console.log(tempHL);
+     var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
+     console.log(tempHL);
     //}
     done++;
     g.append("svg:image:title")
@@ -48,14 +47,14 @@ function addMark() {
                 .style("top", (d3.event.pageY - 28) + "px");
         })
         .on("mouseout", function () {
-            div.transition()
+            this.transition()
                 .duration(500)
                 .style("opacity", 0);
         });
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - eventStartTime) / 1000 + (currentRound - 1) * 300;
+    var tick = (new Date(time_).getTime() - eventStartTime*1000*60*2) / 1000 + (currentRound - 1) * 300;
     console.log("tick : "+tick);
 
     // if (tick < currentTick && tick > 0)
@@ -207,6 +206,7 @@ function tick() {
             currentTick++;
             if (Math.random() > 0.8) {
                 addMark();
+
             }
         } else {
             isStart = false;
