@@ -1,23 +1,14 @@
 html {
-  width: 1280px;
-  height: 720px;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
+  margin: 0;
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
+  margin: 0;
   background: transparent;
   overflow: hidden;
-}
-
-#logo {
-  position: fixed;
-  width: 48px;
-  height: 48px;
-  bottom: 10vh;
-  left: 5vw;
-  z-index: 1000;
 }
 
 canvas {

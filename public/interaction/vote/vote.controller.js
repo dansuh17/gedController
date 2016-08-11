@@ -11,8 +11,7 @@
       .module('vote')
       .controller('voteCtrl', ['$scope', '$timeout', 'socketFactory', function ($scope, $timeout, socketFactory) {
         // cute kiswe logo
-        $scope.logoUrl = '../../assets/images/kisweLogo.png';
-        $scope.currentVotePic = '../../assets/images/vote1.png';
+        $scope.currentVotePic = '../../assets/images/vote0.png';
         // status of the vote - 0 : default (no vote yet cast) 1 > voted for according player
         $scope.status = 0;
 
@@ -22,7 +21,7 @@
          * Also alerts the server that the toggle has been changed.
          */
         $scope.switchVote = function() {
-          console.log('switchVote toggled');
+          var currentStatus = $scope.status;
           switch($scope.status) {
             case 0:
               $scope.status = 1;
@@ -37,7 +36,7 @@
               break;
           }
           $scope.changePictureUrl($scope.status);
-          socketFactory.emit('giveVoteStatus', {status: $scope.status});
+          socketFactory.emit('giveVoteStatus', {status: $scope.status, prevStatus: currentStatus});
         };
 
         // change the picture Url for the current supporting champion

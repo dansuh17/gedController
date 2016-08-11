@@ -1,15 +1,12 @@
 /**
  * Binds the socket and exposes socket.on and socket.emit functions.
- * by Daniel Suh 8/2/2016
+ * by daniel suh 8/8/2016
  */
 ;(function() {
   angular
-      .module('vote')
+      .module('sweep')
       .factory('socketFactory', [function() {
         var socket = io.connect();
-
-        // check in to the db
-        socket.emit('giveVoteStatus', 0);
 
         return {
           on: function(eventname, callback) {

@@ -24,7 +24,7 @@ module.exports = function(io, Vote) {
 
   var stream = T.stream('statuses/filter', {track: index.hash});
   stream.on('tweet', function (tweet) {
-    console.log(tweet);
+    //console.log(tweet);
     io.emit('stream', {
       text:tweet.text,
       name:tweet.user.name,
@@ -32,7 +32,6 @@ module.exports = function(io, Vote) {
       icon:tweet.user.profile_image_url,
       hash:index.hash});
   });
-
 
   /**
    * serverside socket.io listener.
@@ -49,11 +48,11 @@ module.exports = function(io, Vote) {
         console.log("DB ERROR");
         return next(err);
       }
-      console.log("retrieve from DB");
 
       tomUp = vote.tomUp;
       devinUp = vote.devinUp;
     });
+
 
     socket.on('addPowerBalance', function(data) {
       io.emit('addPowerBalance', data);
@@ -77,23 +76,43 @@ module.exports = function(io, Vote) {
     /**
      * Listens to 'giveVoteStatus' message that receives the vote
      * status from the users using vote.html toggle overlay.
+     * The socket message sender is defined in interaction/vote/vote.controller.js
      */
     socket.on('giveVoteStatus', function(data) {
       // 1 : tom, 2 : devin
-      console.log("socket listened");
-      if (parseInt(data.status) == 1) {
-        tomUp++;
-        devinUp--;
-      } else if (parseInt(data.status) == 2) {
-        tomUp--;
-        devinUp++;
-      }
-      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
+      console.log("socket 'giveVoteStatus' received : " + data.status + " " + data.prevStatus);
+      var status = data.status;
+      var prevStatus = data.prevStatus;
+      Vote.findOne({}, function(err, vote) {
         if (err) {
           console.log("DB ERROR");
           return next(err);
         }
-        console.log("db store successful")
+
+        var tomUp = vote.tomUp;
+        var devinUp = vote.devinUp;
+
+        // cast different vote according to status
+        if (status == 1) {
+          tomUp++;
+          if (prevStatus != 0) {
+            devinUp--;
+          }
+        } else if (status == 2) {
+          devinUp++;
+          if (prevStatus != 0) {
+            tomUp--;
+          }
+        }
+
+        // update with the new data
+        Vote.findOneAndUpdate({}, {tomUp: tomUp, devinUp: devinUp}, function(err, vote) {
+          if (err) {
+            return next(err);
+          }
+        });
+
+        console.log("db store successful - result : tomUp: " + tomUp, " devinUp: " + devinUp);
       });
     });
   });

@@ -31,7 +31,7 @@
         <script src="assets/lib/bower_components/humanize-duration/humanize-duration.js"></script>
         <script src="assets/lib/bower_components/angular-timer/dist/angular-timer.js"></script>
 
-        <!-- tap -->
+        <!-- components -->
         <script src="app/app.module.js"></script>
         <script src="app/components/main/mainFactory.js"></script>
         <script src="app/components/main/mainController.js"></script>
@@ -46,7 +46,6 @@
         <script src="../../lib/p5.dom.js" type="text/javascript"></script>
         <script src="../../lib/p5.sound.js" type="text/javascript"></script>
 
-
         <!-- Stylesheets -->
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
@@ -55,9 +54,7 @@
         <div id="bodyContainer">
             <!-- this will contain everything -->
             <div id="flexMainBody">
-
                 <div class="upperBar" ng-controller="timeCtrl">
-                    <h1 class="fighterName" id="leftName">Tom Marcellino</h1>
                     <!-- container for round number + timer -->
                     <div class="gameInfo">
                         <div class="roundNumber">
@@ -66,7 +63,6 @@
                         </div>
                         <timer class="timer" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
                     </div>
-                    <h1 class="fighterName" id="rightName">Devin Powell</h1>
                 </div>
 
                 <!-- Power balance bar
@@ -77,19 +73,12 @@
 
                 <!-- particle clusters -->
                 <div id="ballmove"></div>
-
                 <div class="content" ng-controller="twitCtrl">
                     <!-- Twitter feed -->
                     <div id="twitterfeed" ng-hide="feedList.length==0">
                         <img ng-src="{{tweet.icon}}" alt>
                         <div class="name">{{tweet.name}} (@{{tweet.username}})</div>
                         <div class="message">{{tweet.text}}</div>
-                    </div>
-
-                    <!-- Graph D3 -->
-                    <div id="graph" ng-show="feedList.length==0">
-                        <svg width="800" height="300"></svg>
-                        <script src="assets/javascripts/graph.js"></script>
                     </div>
                 </div>
             </div>
@@ -98,7 +87,7 @@
             <div id="flexPipSpace"></div>
 
             <!-- ballmove include -- need to resolve global variable conflicts -->
-            <script src="interaction/ballmove/p5.particlemove.js"></script>
+            <script src="app/components/ballmove/p5.particlemove.js"></script>
         </div>
     </body>
 </html>

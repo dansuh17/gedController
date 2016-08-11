@@ -2,31 +2,46 @@ var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
-var fighterA = "assets/images/profile.png";
-var fighterB = "assets/images/profile.png";
-var eMark = "assets/images/emark.svg";
+
+var fighterA = "../../assets/images/vote1.png";
+var fighterB = "../../assets/images/vote2.png";
+var eMark = "../../assets/images/emark.svg";
 
 var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
 var jsTime = 0;
 
+
 var currentTick = 0;
-var svg = d3.select("svg"),
-    margin = {top: 100, right: 100, bottom: 100, left: 100};
-var width = +svg.attr("width") - margin.left - margin.right;
-var height = +svg.attr("height") - margin.top - margin.bottom;
+var svg = d3.select("svg")
+            // .classed("svg-container", true)
+            // responsive SVG needs these 2 attributes and no width and height attr
+            // .attr("preserveAspectRatio", "xMinYMin meet")
+            // .attr("viewBox", "0 0 600 400")
+            margin = {top: 100, right: 100, bottom: 100, left: 100};
+// var width = +svg.attr("vw") - margin.left - margin.right;
+// var height = +svg.attr("height") - margin.top - margin.bottom;
+
+var width = parseInt(d3.select("#myGraph").style("width")) - margin.left - margin.right;
+var height = parseInt(d3.select("#myGraph").style("height")) - margin.top - margin.bottom;
+
+
 var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // class to make it responsive
+    // .classed("svg-content-responsive", true);
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var div = g.append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
 function addMark() {
-    console.log("working")
+    ////////////////////////////////toooltip!
+    // console.log("working")
     //if(reqHighlight.response.length > 10) {
          // tempHL = JSO    N.parse(reqHighlight.response).comments;
      var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
-     console.log(tempHL);
+     // console.log(tempHL);
     //}
     done++;
     g.append("svg:image:title")
@@ -125,7 +140,7 @@ var isStart = false;
 var currentRound = 0;
 
 var currentWinning = 0;
-var gameGoingOn = true; ////////////
+var gameGoingOn = false; ////////////
 
 var reqHighlight = new XMLHttpRequest();
 
@@ -281,6 +296,7 @@ g.append("g")
     .call(d3.axisLeft(y));
 
 //axis text
+/*
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
@@ -288,6 +304,7 @@ g.append("text")
     .attr("dy", ".75em")
     .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
     .text("who's winning");
+*/
 
 //x
 make_roundBorder(3);
@@ -298,7 +315,7 @@ function make_roundBorder(roundNum){
             .attr("y", 0)
             .attr("width", 1)
             .attr("height", height)
-            .attr("fill","lightgrey")
+            .attr("fill","lightgrey");
     }
 }
 
@@ -308,7 +325,7 @@ g.append("rect")
     .attr("y", height/2)
     .attr("width", width)
     .attr("height", 1)
-    .attr("fill","darkgrey")
+    .attr("fill","darkgrey");
 
 //graph grid
 
@@ -335,7 +352,7 @@ function make_y_grid(gridNum) {
             .attr("y", height/gridNum*i)
             .attr("width", width)
             .attr("height", 0.1)
-            .attr("fill","lightgrey")
+            .attr("fill","lightgrey");
     }
 }
 
@@ -348,10 +365,11 @@ function put_roundTxt(roundNum) {
             .attr("class", "text")
             .attr("text-anchor", "middle")
             .attr("x", width*(2*i-1)/6)
-            .attr("y", -height*1/10)
-            .attr("font-size", "20px")
+            .attr("y", -height/10)
+            .attr("font-size", "30px")
+            .attr("font-family", "HelveticaNeue")
             .text("Round " + i)
-            .style("fill", "greycolor")
+            .style("fill", "white");
     }
 }
 
@@ -363,7 +381,7 @@ g.append("svg:image")
     .attr("width", 50)
     .attr("height", 50)
     .attr("y", 1/2*height - 50) //- height of image
-    .attr("x", -1/7*width)
+    .attr("x", -1/7*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
@@ -373,7 +391,7 @@ g.append("svg:image")
     .attr("width", 50)
     .attr("height", 50)
     .attr("y", 1/2*height)
-    .attr("x", -1/7*width)
+    .attr("x", -1/7*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
@@ -382,4 +400,3 @@ g.append("svg:image")
  .attr("class", "tooltip")
  .style("opacity", 0);
  */
-
