@@ -24,15 +24,6 @@
         //timer
         $scope.timerRunning = false;
 
-        $scope.startTimer = function () {
-        };
-
-        $scope.stopTimer = function () {
-        };
-
-        $scope.resetTimer = function () {
-        };
-
         socket.on('timerCmd', function (data) {
           console.log("timer command received. " + data.timerCmd);
 
