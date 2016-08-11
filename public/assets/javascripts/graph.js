@@ -225,6 +225,7 @@ function addMarkAt(time_) {
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
 
     var gameStartTime;
+    var timeZone = -1000*60*60*4 + 1000*60*20; // for eastern time -4;
     var eventStartTime = new Date().getTime() + timeZone;
     var timediff = 0;
 
@@ -308,7 +309,7 @@ function addMarkAt(time_) {
             if (gameGoingOn) {
                 if (!isStart) {
                     currentRound++;
-                    gameStartTime = new Date().getTime() + timezone;
+                    gameStartTime = new Date().getTime();
                 }
                 isStart = true;
                 data.push(currentWinning);
