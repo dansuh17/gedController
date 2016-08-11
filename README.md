@@ -24,7 +24,7 @@ contains:
 A video overlay that the user can tap on and have gamelike experience.
 [http://ged.uwcj.kr:3000/interaction/sweep](http://ged.uwcj.kr:3000/interaction/sweep) redirects to empty page.
 
-The interactive page is : [http://ged.uwcj.kr:3000/interaction/sweep/#/sweep](http://ged.uwcj.kr:3000/interaction/sweep/#/sweep)
+The interactive page is : [http://ged.uwcj.kr:3000/interaction/sweep/#/sweep_icon](http://ged.uwcj.kr:3000/interaction/sweep/#/sweep_icon)
 
 ### Tapping interactive overlay page
 [http://ged.uwcj.kr:3000/interaction/tap/tap.html](http://ged.uwcj.kr:3000/interaction/tap/tap.html)
