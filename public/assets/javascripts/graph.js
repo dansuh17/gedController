@@ -24,7 +24,7 @@ var div = g.append("div")
 function addMark() {
     console.log("working")
     //if(reqHighlight.response.length > 10) {
-         // tempHL = JSON.parse(reqHighlight.response).comments;
+         // tempHL = JSO    N.parse(reqHighlight.response).comments;
      var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
      console.log(tempHL);
     //}
