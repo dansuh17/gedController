@@ -312,8 +312,8 @@ g.append("rect")
 
 //graph grid
 
-make_x_grid(27);
-make_y_grid(8);
+// make_x_grid(27);
+// make_y_grid(8);
 
 // function for the x grid lines
 function make_x_grid(gridNum) {
