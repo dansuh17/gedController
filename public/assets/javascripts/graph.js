@@ -54,7 +54,7 @@ function addMark() {
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - eventStartTime*1000*60*2) / 1000 + (currentRound - 1) * 300;
+    var tick = (new Date(time_).getTime() - eventStartTime) / 1000 + (currentRound - 1) * 300;
     console.log("tick : "+tick);
 
     // if (tick < currentTick && tick > 0)
