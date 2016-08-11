@@ -27,9 +27,9 @@
 <body ng-app="ganchor">
 <div id="Maincontainer" ng-controller="ganchorCtrl">
 
-  <div id="graphContainer">
+  <div id="graphContainer" ng-show="graphOn">
     <!-- graph part that brings up d3.js source -->
-    <div class="graph" ng-show="graphOn">
+    <div class="graph">
       <svg width="70vw" height="70vh"></svg>
       <script src="../../assets/javascripts/graph.js"></script>
     </div>
