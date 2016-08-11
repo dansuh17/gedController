@@ -54,6 +54,19 @@ module.exports = function(io, Vote) {
     });
 
 
+    socket.on('timerCmd', function(data) {
+      if (data.timerCmd == "finished") {
+        console.log("SOCKET ON : timerCmd - " + data.timerCmd);
+        Vote.findOneAndUpdate({}, {$set : { gameGoingOn:false }}, function(err, vote) {
+              if (err) {
+                console.log("ERROR");
+                return next(err);
+              }
+            }
+        );
+      }
+    });
+
     /**
      * Listens to 'giveVoteStatus' message that receives the vote
      * status from the users using vote.html toggle overlay.

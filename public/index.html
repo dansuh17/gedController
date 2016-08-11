@@ -61,7 +61,7 @@
                             <span id="round"> ROUND </span>
                             <span id="number"> {{ roundNo }} </span>
                         </div>
-                        <timer class="timer" auto-start="false" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                        <timer class="timer" finish-callback="finish_callback()" auto-start="false" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
                     </div>
                 </div>
 
