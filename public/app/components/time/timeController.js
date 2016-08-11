@@ -61,7 +61,5 @@
             $scope.$broadcast('timer-set-countdown', data.countdown);
           }
         });
-
-        $scope.timerRunning = true;
       }]);
 })();
