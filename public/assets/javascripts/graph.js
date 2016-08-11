@@ -158,6 +158,8 @@ g.append("svg:image")
  .attr("class", "tooltip")
  .style("opacity", 0);
  */
+
+
 function addMark() {
     g.append("svg:image")
         .attr("class", "eMark")
@@ -171,8 +173,36 @@ function addMark() {
 function addMarkAt(time_) {
     var tick = (new Date(time_).getTime() - gameStartTime) / 1000 + (currentRound-1)*300;
     console.log(tick);
+<<<<<<< Updated upstream
     if(tick > currentTick && tick < 0){
         return;
+=======
+    if(tick < currentTick && tick > 0){
+        tick = Math.floor(tick);
+        var tempHighlight = JSON.parse(reqHighlight.response).comments.el;
+        var tempHighlightVideo
+        g.append("svg:image")
+            .attr("class", "eMark")
+            .attr("xlink:href", eMark)
+            .attr("width", 30)
+            .attr("height", 30)
+            .attr("x", width / n * (tick - 1) - 15)
+            .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+            ///tooltip
+            .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div	.html(JSON.parse(reqHighlight.response).comments.el[done]) // done is variable for the order of highlights
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+            .on("mouseout", function(d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+>>>>>>> Stashed changes
     }
     tick = Math.floor(tick);
     g.append("svg:image")
@@ -271,9 +301,9 @@ function tick() {
             isStart = true;
             data.push(currentWinning);
             currentTick++;
-            // if(Math.random()>0.9){
-            // 	addMark();
-            // }
+             if(Math.random()>0.8){
+             	addMark();
+             }
         } else {
             isStart = false;
         }
