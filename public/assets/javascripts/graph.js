@@ -171,12 +171,12 @@ function addMark() {
 }
 
 function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - gameStartTime) / 1000 + (currentRound-1)*300;
+    var tick = (new Date(time_).getTime() - gameStartTime+1000*60*60*2) / 1000 + (currentRound-1)*300;
     console.log(tick);
-<<<<<<< Updated upstream
+
     if(tick > currentTick && tick < 0){
         return;
-=======
+
     if(tick < currentTick && tick > 0){
         tick = Math.floor(tick);
         var tempHighlight = JSON.parse(reqHighlight.response).comments.el;
@@ -202,7 +202,7 @@ function addMarkAt(time_) {
                     .duration(500)
                     .style("opacity", 0);
             });
->>>>>>> Stashed changes
+
     }
     tick = Math.floor(tick);
     g.append("svg:image")
