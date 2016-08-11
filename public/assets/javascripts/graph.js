@@ -6,7 +6,7 @@ var fighterA = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sh
 var fighterB = "http://www.sherdog.com/image_crop.php?image=http://www.origin.sherdog.com/_images/fighter/20160619102650_DevinPowell.JPG&&width=200&&height=300";
 var eMark = "assets/images/1470249409_interface-40.svg";
 
-var timezone = -(1000*60*60*4) + (1000*60*20.7); //- jsTime
+var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
 var jsTime = 0;
 
 var currentTick = 0;
@@ -179,8 +179,9 @@ function addMarkAt(time_) {
 
     if (tick < currentTick && tick > 0) {
         tick = Math.floor(tick);
-        var tempHighlight = JSON.parse(reqHighlight.response).comments.el;
-        var tempHighlightVideo = 0;
+        var tempHL = JSON.parse(reqHighlight.response).comments;
+        var tempHLP = tempHL.vsrc +"/"+ tempHL.evid +"/highlights/"+ clipData[done].files[1];
+
         done++;
         g.append("svg:image")
             .attr("class", "eMark")
@@ -192,7 +193,7 @@ function addMarkAt(time_) {
             ///tooltip
             .on("mouseover", function (d) {
                 div.transition()
-                    .duration(200)
+                    .duration(1000)
                     .style("opacity", .9);
                 div.html(JSON.parse(reqHighlight.response).comments.el[done]) // done is variable for the order of highlights
                     .style("left", (d3.event.pageX) + "px")
@@ -219,12 +220,13 @@ function addMarkAt(time_) {
         //"stage-api";
 
     var token =
-        //for stage, use this token
-        //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
         //for prod, use this token
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
+        //for stage, use this token
+        //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
 
-    var gameStartTime;
+
+var gameStartTime;
     var timeZone = -1000*60*60*4 + 1000*60*20; // for eastern time -4;
     var eventStartTime = new Date().getTime() + timeZone;
     var timediff = 0;
@@ -268,7 +270,7 @@ function addMarkAt(time_) {
                     gameGoingOn = data.gameGoingOn;
                 }
             });
-
+            if(reqHighlight.response.length > 10){
             if (flag) {
                 if (flag2 < 1) {
                     timediff += eventStartTime - ((new Date(JSON.parse(reqEvent.response).event.start_time).getTime()));
@@ -279,7 +281,7 @@ function addMarkAt(time_) {
                     console.log("current event play : "+new Date(eventStartTime));
                     console.log("time diff in : "+timediff/1000/60/60/24 + " day + "+(timediff/1000/60/60)%24 + " hours");
                 }
-                if(reqHighlight.response.length > 10) {
+            if(reqHighlight.response.length > 10) {
                     clipData = JSON.parse(reqHighlight.response).comments.el;
                     if (flag2 < 1) {
                         console.log("first clip time in db : " + clipData[0].start_time);
@@ -290,7 +292,7 @@ function addMarkAt(time_) {
                     // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
                     for (var i = done; i < clipData.length; i++) {
                         var startIn = (new Date(clipData[i].start_time).getTime()) + timediff - (new Date().getTime() + timezone);
-                        console.log(startIn);
+                        // console.log(startIn);
                         if (startIn < 0) {
                             addMarkAt(clipData[i].start_time);
                             // done++;
@@ -299,6 +301,7 @@ function addMarkAt(time_) {
                         }
                     }
                 }
+            }
                 // console.log(clipData);
             }
             flag = true;
