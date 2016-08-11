@@ -1,6 +1,6 @@
 html {
-  width: 1280px;
-  height: 720px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -31,8 +31,8 @@ html, body {
 
 #votePic {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 10vh;
+  height: 10vh;
   top: 10vh;
   left: 10vw;
   z-index: 1;
