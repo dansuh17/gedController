@@ -7,20 +7,21 @@
  *  via socket calls so that producer can control the expose time. The canvas is
  *  turned on or off by moving between html anchors (an SPA).
  *
- *  templateUrl : /sweep_icon
+ *  !! second version of sweep using rotating gloves.
+ *  templateUrl : /sweep_gloves
  *  by Daniel Suh 8/1/2016
  */
 ;(function() {
   angular
       .module('sweep')
-      .controller('sweepCtrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
+      .controller('sweep2Ctrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
         function ($scope, $location, $anchorScroll, socketFactory) {
 
           /* P5 instance mode part */
           ///////////////////// P5 codes START ////////////////////
           var sketch = function(pFive) {
             var boids = [];
-            var images = [];
+            var gloveImage;
             var pressed = false;
             var centerVector;
             var canvas;
@@ -31,10 +32,7 @@
              * Preloads images before drawing canvas.
              */
             pFive.preload = function() {
-              images[0] = pFive.loadImage("../../assets/images/alien_blue.png");
-              images[1] = pFive.loadImage("../../assets/images/alien_red.png");
-              images[2] = pFive.loadImage("../../assets/images/alien_yellow.png");
-              images[3] = pFive.loadImage("../../assets/images/alien_green.png");
+              gloveImage = pFive.loadImage("../../assets/images/gloves.png");
             };
 
             /**
@@ -107,7 +105,6 @@
               this.velocity = p5.Vector.random2D();
               this.position = pFive.createVector(x, y);
               this.maxspeed = 4;    // Maximum speed
-              // this.rotation = pFive.PI / pFive.random(-9.0, 9.0);
               this.inScreen = true;
             }
 
@@ -166,7 +163,7 @@
              */
             Boid.prototype.render = function() {
               if (this.inScreen) {
-                pFive.image(images[this.id % 4], this.position.x, this.position.y,
+                pFive.image(gloveImage, this.position.x, this.position.y,
                     2 * imageHalfWidth, 2 * imageHalfHeight);
               }
             };
@@ -209,10 +206,10 @@
             function determineLoopContinue() {
               var url = window.location.href;
               // if the url contains "empty", stop the loop
-              if(url.indexOf('sweep_icon') === -1) {
-                  pFive.noLoop();
-                  document.getElementById('sweepCanvas').remove();
-                  console.log("URL changed - turning off sweep canvas");
+              if(url.indexOf('sweep_gloves') === -1) {
+                pFive.noLoop();
+                document.getElementById('sweepCanvas').remove();
+                console.log("URL changed - turning off sweep canvas");
               }
             }
 
