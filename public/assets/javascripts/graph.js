@@ -17,30 +17,54 @@ var height = +svg.attr("height") - margin.top - margin.bottom;
 var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var div = g.append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
 function addMark() {
-    g.append("svg:image")
+    console.log("working")
+    //if(reqHighlight.response.length > 10) {
+         // tempHL = JSON.parse(reqHighlight.response).comments;
+         var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
+         console.log(tempHL);
+    //}
+    done++;
+    g.append("svg:image:title")
         .attr("class", "eMark")
         .attr("xlink:href", eMark)
         .attr("width", 30)
         .attr("height", 30)
         .attr("x", width / n * (currentTick - 1) - 15)
         .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
+        .on("mouseover", function () {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(tempHL) // done is variable for the order of highlights
+                .attr("width", 30)
+                .attr("height", 30)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function () {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
 }
-
-var tempHLP = JSON.parse(reqHighlight.response).comments;
-var tempHL = tempHL.vsrc +"/"+ tempHL.evid +"/highlights/"+ clipData[done].files[1];
-
 
 function addMarkAt(time_) {
     var tick = (new Date(time_).getTime() - eventStartTime) / 1000 + (currentRound - 1) * 300;
     console.log("tick : "+tick);
 
-    if (tick < currentTick && tick > 0) {
+    // if (tick < currentTick && tick > 0)
+    if(true){
         tick = Math.floor(tick);
-        //var tempHL = JSON.parse(reqHighlight.response).comments;
-        //var tempHLP = tempHL.vsrc +"/"+ tempHL.evid +"/highlights/"+ clipData[done].files[1];
-        cosole.log(tempHLP)
-
+        if(reqHighlight.response.length > 10) {
+            var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[1];
+            console.log(tempHL);
+        }
         done++;
         g.append("svg:image")
             .attr("class", "eMark")
@@ -50,15 +74,17 @@ function addMarkAt(time_) {
             .attr("x", width / n * (tick - 1) - 15)
             .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
             ///tooltip
-            .on("mouseover", function (d) {
+            .on("mouseover", function () {
                 div.transition()
-                    .duration(1000)
+                    .duration(200)
                     .style("opacity", .9);
-                div.html(JSON.parse(reqHighlight.response).comments.el[done]) // done is variable for the order of highlights
+                div.html(tempHLV) // done is variable for the order of highlights
+                    .attr("width", 30)
+                    .attr("height", 30)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
-            .on("mouseout", function (d) {
+            .on("mouseout", function () {
                 div.transition()
                     .duration(500)
                     .style("opacity", 0);
@@ -103,6 +129,8 @@ var currentWinning = 0;
 var gameGoingOn = true; ////////////
 
 var reqHighlight = new XMLHttpRequest();
+
+var clipInfo = new Object();
 var clipData = new Object();
 var done = 0;
 
@@ -141,7 +169,8 @@ function tick() {
                     console.log("current event play : " + new Date(eventStartTime));
                     console.log("time diff in : " + timediff / 1000 / 60 / 60 / 24 + " day + " + (timediff / 1000 / 60 / 60) % 24 + " hours");
                 }
-                clipData = JSON.parse(reqHighlight.response).comments.el;
+                clipInfo = JSON.parse(reqHighlight.response).comments;
+                clipData = clipInfo.el;
                 if (flag2 < 1) {
                     console.log("first clip time in db : " + clipData[0].start_time);
                     console.log("first clip time in date format : " + new Date(clipData[0].start_time));
@@ -153,7 +182,7 @@ function tick() {
                     var startIn = (new Date(clipData[i].start_time).getTime()) + timediff - (new Date().getTime() + timezone);
                     // console.log(startIn);
                     if (startIn < 0) {
-                        addMarkAt(clipData[i].start_time);
+                        // addMarkAt();
                         // done++;
                     } else {
                         break;
@@ -177,7 +206,7 @@ function tick() {
             data.push(currentWinning);
             currentTick++;
             if (Math.random() > 0.8) {
-                addMarkAt();
+                addMark();
             }
         } else {
             isStart = false;
