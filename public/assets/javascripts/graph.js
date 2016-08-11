@@ -57,6 +57,7 @@ g.append("g")
     .call(d3.axisLeft(y));
 
 //axis text
+/*
 g.append("text")
     .attr("class", "text")
     .attr("text-anchor", "middle")
@@ -64,6 +65,7 @@ g.append("text")
     .attr("dy", ".75em")
     .attr("transform", "translate("+ (-margin.left/1.5) +", "+ (height/2) +")rotate(-90)")
     .text("who's winning");
+*/
 
 //x
 make_roundBorder(3);
@@ -74,7 +76,7 @@ function make_roundBorder(roundNum){
             .attr("y", 0)
             .attr("width", 1)
             .attr("height", height)
-            .attr("fill","lightgrey")
+            .attr("fill","lightgrey");
     }
 }
 
@@ -84,7 +86,7 @@ g.append("rect")
     .attr("y", height/2)
     .attr("width", width)
     .attr("height", 1)
-    .attr("fill","darkgrey")
+    .attr("fill","darkgrey");
 
 //graph grid
 
@@ -111,7 +113,7 @@ function make_y_grid(gridNum) {
             .attr("y", height/gridNum*i)
             .attr("width", width)
             .attr("height", 0.1)
-            .attr("fill","lightgrey")
+            .attr("fill","lightgrey");
     }
 }
 
@@ -124,10 +126,11 @@ function put_roundTxt(roundNum) {
             .attr("class", "text")
             .attr("text-anchor", "middle")
             .attr("x", width*(2*i-1)/6)
-            .attr("y", -height*1/10)
-            .attr("font-size", "20px")
+            .attr("y", -height/10)
+            .attr("font-size", "30px")
+            .attr("font-family", "HelveticaNeue")
             .text("Round " + i)
-            .style("fill", "greycolor")
+            .style("fill", "white");
     }
 }
 
@@ -139,7 +142,7 @@ g.append("svg:image")
     .attr("width", 50)
     .attr("height", 50)
     .attr("y", 1/2*height - 50) //- height of image
-    .attr("x", -1/7*width)
+    .attr("x", -1/7*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
@@ -149,7 +152,7 @@ g.append("svg:image")
     .attr("width", 50)
     .attr("height", 50)
     .attr("y", 1/2*height)
-    .attr("x", -1/7*width)
+    .attr("x", -1/7*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
@@ -188,7 +191,7 @@ var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6Ij
 
 ///event id
 var eventID = "wsof_aug9testrun_20160809160898";
-var eventIS = "stage-api" //if it is on the prod, use "api-v4" instead
+var eventIS = "stage-api"; //if it is on the prod, use "api-v4" instead
 
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
 //if using prod, use this token instead.
