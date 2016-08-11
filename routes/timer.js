@@ -13,6 +13,7 @@ module.exports = function(io) {
     });
 
     router.post('/timerCmd/:cmd', function(req, res, next) {
+        //start, stop, reset
         console.log("timer command called via API");
         var cmd = req.params.cmd;
         io.emit('timerCmd', {

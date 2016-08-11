@@ -54,25 +54,6 @@ module.exports = function(io, Vote) {
     });
 
 
-    socket.on('addPowerBalance', function(data) {
-      io.emit('addPowerBalance', data);
-
-      if (parseInt(data.amount) > 0) {
-        tomUp += parseInt(data.amount);
-      }
-      else {
-        devinUp -= parseInt(data.amount);
-      }
-
-      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
-        if (err) {
-          console.log("DB ERROR");
-          return next(err);
-        }
-        console.log("db store successful")
-      });
-    });
-
     /**
      * Listens to 'giveVoteStatus' message that receives the vote
      * status from the users using vote.html toggle overlay.
@@ -115,5 +96,27 @@ module.exports = function(io, Vote) {
         console.log("db store successful - result : tomUp: " + tomUp, " devinUp: " + devinUp);
       });
     });
+
+
+    /* NOT USED */
+    socket.on('addPowerBalance', function(data) {
+      io.emit('addPowerBalance', data);
+
+      if (parseInt(data.amount) > 0) {
+        tomUp += parseInt(data.amount);
+      }
+      else {
+        devinUp -= parseInt(data.amount);
+      }
+
+      Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
+        if (err) {
+          console.log("DB ERROR");
+          return next(err);
+        }
+        console.log("db store successful")
+      });
+    });
+
   });
 };
