@@ -2,8 +2,8 @@ var n = 900;                         // count
 var d3random = d3.randomNormal(0,1); // initialization
 var data = d3.range(0).map(d3random);
 
-var fighterA = "../../assets/images/vote1.png";
-var fighterB = "../../assets/images/vote2.png";
+var fighterA = "../../assets/images/fighterA.png";
+var fighterB = "../../assets/images/figtherB.png";
 var eMark = "../../assets/images/emark.svg";
 
 var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
@@ -365,19 +365,21 @@ function put_roundTxt(roundNum) {
 g.append("svg:image")
     .attr("class", "fighter a")
     .attr("xlink:href", fighterA)
-    .attr("width", width/10)
-    .attr("height", width/10)
-    .attr("y", 1/2*height - width/10*2) //- height of image
-    .attr("x", 1/100*width);
+    .attr("width", width/4)
+    .attr("height", width/4)
+    .style("opacity", 0.5)
+    .attr("y", 1/2*height - width/8*2) //- height of image
+    .attr("x", 17/24*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
 g.append("svg:image")
     .attr("class", "fighter b")
     .attr("xlink:href", fighterB)
-    .attr("width", width/10)
-    .attr("height", width/10)
-    .attr("y", 1/2*height + width/10)
-    .attr("x", 1/100*width);
+    .attr("width", width/4)
+    .attr("height", width/4)
+    .style("opacity", 0.5)
+    .attr("y", 1/2*height + width/16)
+    .attr("x", 17/24*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
