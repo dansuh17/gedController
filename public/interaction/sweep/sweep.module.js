@@ -20,6 +20,10 @@
               templateUrl : "sweep2.html",
               controller : "sweep2Ctrl"
             })
+            .when('/sweep_heart', {
+              templateUrl : "sweep3.html",
+              controller : "sweep3Ctrl"
+            })
             .otherwise({
               redirectTo : '/empty'
             });
