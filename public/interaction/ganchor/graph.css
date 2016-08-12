@@ -31,15 +31,38 @@ html {
   height: 70vh;
 }
 
+
+
+#bettingToggleIcon {
+  width: 15vh;
+  height: 15vh;
+  position: absolute;
+  bottom: 60vh;
+  left: 10vh;
+}
+
 #graphToggleIcon {
   width: 15vh;
   height: 15vh;
   position: absolute;
-  bottom: 10vh;
-  left: 20px;
+  bottom: 40vh;
+  left: 10vh;
+}
+
+#kisweToggleIcon {
+  width: 15vh;
+  height: 15vh;
+  position: absolute;
+  bottom: 20vh;
+  left: 10vh;
 }
 
 #myGraph {
+  width: 70vw;
+  height: 70vh;
+}
+
+#myBetting {
   width: 70vw;
   height: 70vh;
 }

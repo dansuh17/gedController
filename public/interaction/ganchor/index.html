@@ -13,6 +13,7 @@
 
   <!-- Graph D3 -->
   <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 
   <!-- Modules -->
   <script src="ganchor.module.js"></script>
@@ -25,19 +26,36 @@
 
 </head>
 <body ng-app="ganchor">
-<div id="Maincontainer" ng-controller="ganchorCtrl">
+<div id="Maincontainer" ng-controller="ganchorCtrl" >
 
-  <div id="graphContainer" ng-show="graphOn">
+  <div id="graphContainer" ng-show="kisweOn">
     <!-- graph part that brings up d3.js source -->
-    <div class="graph">
-      <svg width="70vw" height="70vh" id="myGraph"></svg>
+    <div class="graph" ng-show="graphOn">
+      <svg ng-show="graphOn" id="myGraph"></svg>
       <script src="../../assets/javascripts/graph.js"></script>
     </div>
+
+    <!-- betting part that brings up betting source -->
+    <div class="betting" ng-show="bettingOn">
+      <img ng-show="bettingOn" id="myBetting" src="../../assets/images/betting_image.png">
+    </div>
+
   </div>
 
+
+
   <!-- graph on/off toggle button image -->
-  <img id="graphToggleIcon" ng-click="graphOn = !graphOn"
-       src="../../assets/images/graph_icon.png"/>
+  <img id="graphToggleIcon" ng-click="kisweOn=true; graphOn=true; bettingOn=false"
+       src="../../assets/images/graph_button.png"/>
+
+  <!-- live betting on/off toggle button image -->
+  <img id="bettingToggleIcon" ng-click="kisweOn=true; bettingOn=true; graphOn=false"
+        src="../../assets/images/betting_button.png">
+
+  <!-- kiswe on/off toggle button image, remove all other functions going on -->
+  <img id="kisweToggleIcon" ng-click="kisweOn=false"
+       src="../../assets/images/kiswe_button.png">
+
 
 </div>
 </body>

@@ -13,30 +13,17 @@ var jsTime = 0;
 
 var currentTick = 0;
 var svg = d3.select("svg")
-             // .classed("svg-container", true)
-            // .classed("svg-container", true)
-            // responsive SVG needs these 2 attributes and no width and height attr
-            //  .attr("preserveAspectRatio", "xMinYMin meet")
-            // .attr("viewBox", "0 0 600 400")
+
             margin = {top: 0, right: 0, bottom: 0, left: 0};
 // var width = +svg.attr("vw") - margin.left - margin.right;
 // var height = +svg.attr("height") - margin.top - margin.bottom;
 
-var sR = 1;
-    // parseInt(d3.select("#myGraph").style("width"))/657
 var width = parseInt(d3.select("#myGraph").style("width"))
-    //- margin.left*sR  - margin.right*sR;
 var height = parseInt(d3.select("#myGraph").style("height"))
-    //- margin.top*sR - margin.bottom*sR;
 
 
 var g = svg.append("g")
-    // .attr("preserveAspectRatio", "xMinYMin meet")
-    // .attr("viewBox", "0 0 600 400")
-    // .classed("svg-content-responsive", true)
-    // class to make it responsive
-    // .classed("svg-content-responsive", true);
-    .attr("transform", "translate(" + margin.left*sR + "," + margin.top*sR + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var div = g.append("div")
     .attr("class", "tooltip")
@@ -241,6 +228,7 @@ function tick() {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
+                // .attr("interpolate", "basis")
                 .style("fill", "none")
                 .style("stroke-width", height/70+"px")
                 .style("stroke", "e91a67");
@@ -249,6 +237,7 @@ function tick() {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
+                // .attr("interpolate", "basis")
                 .style("fill", "none")
                 .style("stroke-width", "6")
                 .style("stroke", "32bdf0");
@@ -256,11 +245,6 @@ function tick() {
     }
 
 }
-
-
-
-
-
 
 // graph
 var x = d3.scaleLinear()
@@ -272,8 +256,12 @@ var y = d3.scaleLinear()
     .range([height, 0]);
 
 var d3line = d3.line()
+    // .interpolate("basis")
     .x(function(d, i) { return x(i); })
-    .y(function(d, i) { return y(d); });
+    .y(function(d, i) { return y(d); })
+    ;
+
+
 
 g.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -285,7 +273,9 @@ g.append("g")
     .attr("clip-path", "url(#clip)")
     .append("path")
     .datum(data)
+
     .attr("class", "d3line")
+
     .transition()
     .duration(1000)
     .ease(d3.easeLinear)
