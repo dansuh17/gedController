@@ -37,26 +37,23 @@
 
     <!-- betting part that brings up betting source -->
     <div class="betting" ng-show="bettingOn">
-      <img ng-show="bettingOn" id="myBetting" src="../../assets/images/betting_image.png">
+      <h1 id="bettingText">LIVE BETTING</h1>
+      <img id="myBetting" src="../../assets/images/betting_image.png">
     </div>
-
   </div>
 
-
-
+  <!-- TOGGLE BUTTONS -->
   <!-- graph on/off toggle button image -->
-  <img id="graphToggleIcon" ng-click="kisweOn=true; graphOn=true; bettingOn=false"
+  <img id="graphToggleIcon" ng-click="graphTurnOn()"
        src="../../assets/images/graph_button.png"/>
 
   <!-- live betting on/off toggle button image -->
-  <img id="bettingToggleIcon" ng-click="kisweOn=true; bettingOn=true; graphOn=false"
+  <img id="bettingToggleIcon" ng-click="bettingTurnOn()"
         src="../../assets/images/betting_button.png">
 
   <!-- kiswe on/off toggle button image, remove all other functions going on -->
-  <img id="kisweToggleIcon" ng-click="kisweOn=false"
+  <img id="kisweToggleIcon" ng-click="returnHome()"
        src="../../assets/images/kiswe_button.png">
-
-
 </div>
 </body>
 </html>
