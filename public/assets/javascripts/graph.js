@@ -13,22 +13,16 @@ var jsTime = 0;
 
 var currentTick = 0;
 var svg = d3.select("svg")
-            // .classed("svg-container", true)
-            // responsive SVG needs these 2 attributes and no width and height attr
-            // .attr("preserveAspectRatio", "xMinYMin meet")
-            // .attr("viewBox", "0 0 600 400")
-            margin = {top: 100, right: 100, bottom: 100, left: 100};
+
+            margin = {top: 0, right: 0, bottom: 0, left: 0};
 // var width = +svg.attr("vw") - margin.left - margin.right;
 // var height = +svg.attr("height") - margin.top - margin.bottom;
 
-var width = parseInt(d3.select("#myGraph").style("width")) - margin.left - margin.right;
-var height = parseInt(d3.select("#myGraph").style("height")) - margin.top - margin.bottom;
+var width = parseInt(d3.select("#myGraph").style("width"))
+var height = parseInt(d3.select("#myGraph").style("height"))
 
 
 var g = svg.append("g")
-
-    // class to make it responsive
-    // .classed("svg-content-responsive", true);
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var div = g.append("div")
@@ -234,24 +228,23 @@ function tick() {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
+                // .attr("interpolate", "basis")
                 .style("fill", "none")
+                .style("stroke-width", height/70+"px")
                 .style("stroke", "e91a67");
         }
         else if (currentWinning < 0) {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
+                // .attr("interpolate", "basis")
                 .style("fill", "none")
+                .style("stroke-width", "6")
                 .style("stroke", "32bdf0");
         }
     }
 
 }
-
-
-
-
-
 
 // graph
 var x = d3.scaleLinear()
@@ -263,8 +256,12 @@ var y = d3.scaleLinear()
     .range([height, 0]);
 
 var d3line = d3.line()
+    // .interpolate("basis")
     .x(function(d, i) { return x(i); })
-    .y(function(d, i) { return y(d); });
+    .y(function(d, i) { return y(d); })
+    ;
+
+
 
 g.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -276,7 +273,9 @@ g.append("g")
     .attr("clip-path", "url(#clip)")
     .append("path")
     .datum(data)
+
     .attr("class", "d3line")
+
     .transition()
     .duration(1000)
     .ease(d3.easeLinear)
@@ -307,13 +306,14 @@ g.append("text")
 */
 
 //x
-make_roundBorder(3);
-function make_roundBorder(roundNum){
+make_roundBorder(1, 5);
+make_roundBorder(3, 2);
+function make_roundBorder(roundNum, strokeWidth){
     for(var i=0; i<=roundNum; i++){
         g.append("rect")
             .attr("x", width/roundNum*i)
             .attr("y", 0)
-            .attr("width", 1)
+            .attr("width", strokeWidth)
             .attr("height", height)
             .attr("fill","lightgrey");
     }
@@ -324,13 +324,13 @@ g.append("rect")
     .attr("x", 0)
     .attr("y", height/2)
     .attr("width", width)
-    .attr("height", 1)
+    .attr("height", 4)
     .attr("fill","darkgrey");
 
 //graph grid
 
-// make_x_grid(27);
-// make_y_grid(8);
+ make_x_grid(27);
+ make_y_grid(16);
 
 // function for the x grid lines
 function make_x_grid(gridNum) {
@@ -365,8 +365,8 @@ function put_roundTxt(roundNum) {
             .attr("class", "text")
             .attr("text-anchor", "middle")
             .attr("x", width*(2*i-1)/6)
-            .attr("y", -height/10)
-            .attr("font-size", "30px")
+            .attr("y", +height*9.5/10 )
+            .attr("font-size", width/25+"px")
             .attr("font-family", "HelveticaNeue")
             .text("Round " + i)
             .style("fill", "white");
@@ -378,20 +378,20 @@ function put_roundTxt(roundNum) {
 g.append("svg:image")
     .attr("class", "fighter a")
     .attr("xlink:href", fighterA)
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("y", 1/2*height - 50) //- height of image
-    .attr("x", -1/7*width);
+    .attr("width", width/10)
+    .attr("height", width/10)
+    .attr("y", 1/2*height - width/10*2) //- height of image
+    .attr("x", 1/100*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
 
 g.append("svg:image")
     .attr("class", "fighter b")
     .attr("xlink:href", fighterB)
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("y", 1/2*height)
-    .attr("x", -1/7*width);
+    .attr("width", width/10)
+    .attr("height", width/10)
+    .attr("y", 1/2*height + width/10)
+    .attr("x", 1/100*width);
 
 //.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
 
