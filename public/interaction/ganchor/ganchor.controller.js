@@ -9,6 +9,24 @@
       .controller('ganchorCtrl', ['$scope', function($scope) {
           $scope.graphOn = false;
           $scope.bettingOn = false;
-          $scope.kisweOn = true;
+          $scope.kisweOn = false;
+
+          $scope.graphTurnOn = function() {
+            $scope.kisweOn=true;
+            $scope.graphOn=true;
+            $scope.bettingOn=false;
+          };
+
+          $scope.bettingTurnOn = function() {
+            $scope.kisweOn=true;
+            $scope.graphOn=false;
+            $scope.bettingOn=true;
+          };
+
+          $scope.returnHome = function() {
+            $scope.kisweOn=false;
+            $scope.graphOn=false;
+            $scope.bettingOn=false;
+          };
       }]);
 })();

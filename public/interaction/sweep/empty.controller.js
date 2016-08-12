@@ -18,6 +18,8 @@
               sPath = '/sweep_icon';
             } else if (pageNum == 2) {
               sPath = '/sweep_gloves';
+            } else if (pageNum == 3) {
+              sPath = '/sweep_heart';
             }
             $location.path(sPath);
           };
