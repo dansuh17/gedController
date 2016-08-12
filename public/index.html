@@ -24,6 +24,7 @@
         <!-- Graph D3 -->
         <script src="https://d3js.org/d3.v4.js"></script>
 
+
         <!-- Timer -->
         <script src="assets/lib/bower_components/moment/min/moment.min.js"></script>
         <script src="assets/lib/bower_components/moment/min/locales.min.js"></script>
@@ -72,9 +73,9 @@
 
                 <!-- particle clusters -->
                 <div id="ballmove"></div>
-                <div class="content" ng-controller="twitCtrl">
+                <div class="content" ng-controller="twitCtrl" ng-hide="feedList.length==0">
                     <!-- Twitter feed -->
-                    <div id="twitterfeed" ng-hide="feedList.length==0">
+                    <div id="twitterfeed">
                         <img ng-src="{{tweet.icon}}" alt>
                         <div class="name">{{tweet.name}} (@{{tweet.username}})</div>
                         <div class="message">{{tweet.text}}</div>

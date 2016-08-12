@@ -238,19 +238,21 @@ body {
 /*
  * Twitter Component
  */
-.content{
+.content {
 	position: absolute;
-	width: 90%;
-	height: 130px;
+	width: 75%;
   bottom: 0;
+  height: 140px;
 	text-align: center;
+  background-color: white;
+  border-radius: 20px;
 	margin: 5% 5% 5% 9%;
 }
 
 .content#twitterfeed{
 	position: absolute;
 	width: 700px;
-	height: 250px;
+	height: 200px;
 	background: #61bcf6;
 	display: inline-block;
 	margin: 0 2% 2% 0;
@@ -271,16 +273,16 @@ body {
 	top: 25px;
 	height: 40px;
 	/* font-weight: bold; */
-  color: #ffffff;
+  color: #61bcf6;
 }
 
 .content .message{
-  font-size:32px;
+  font-size:30px;
 	top: 60px;
-	width: 700px;
-	height: 70px;
+	width: 80%;
+	height: 50px;
 	text-align: left;
-  color: #ffffff;
+  color: black;
 }
 
 .content .name, .content .message{
@@ -311,4 +313,17 @@ body {
 
 .text {
   stroke: darkgrey;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }

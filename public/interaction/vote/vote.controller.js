@@ -2,6 +2,7 @@
  * Controller for voting page that will be overlayed onto the main broadcast stream
  * in which the user may tap onto the screen (except for the PiP area) to toggle
  * a vote to switch between different champions.
+ *
  * The user's voting status will be aggregated into a separate 'rest page' that shows
  * graphically the ratio and amount of votes casted on each fighter.
  * by Daniel Suh 8/2/2016
@@ -10,9 +11,8 @@
   angular
       .module('vote')
       .controller('voteCtrl', ['$scope', '$timeout', 'socketFactory', function ($scope, $timeout, socketFactory) {
-        // cute kiswe logo
-        $scope.currentVotePic = '../../assets/images/vote0.png';
         // status of the vote - 0 : default (no vote yet cast) 1 > voted for according player
+        $scope.currentVotePic = '../../assets/images/vote0.png'; // default image
         $scope.status = 0;
 
         /**
@@ -35,11 +35,15 @@
             default:
               break;
           }
+
           $scope.changePictureUrl($scope.status);
           socketFactory.emit('giveVoteStatus', {status: $scope.status, prevStatus: currentStatus});
         };
 
-        // change the picture Url for the current supporting champion
+        /**
+         * Changes the picture url according to current status.
+         * @param status current vote status
+         */
         $scope.changePictureUrl = function(status) {
           switch(status) {
             case 0:

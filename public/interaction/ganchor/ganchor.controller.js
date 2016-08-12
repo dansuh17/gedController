@@ -8,5 +8,7 @@
       .module('ganchor')
       .controller('ganchorCtrl', ['$scope', function($scope) {
           $scope.graphOn = false;
+          $scope.bettingOn = false;
+          $scope.kisweOn = true;
       }]);
 })();
