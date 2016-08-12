@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(io) {
+module.exports = function(io, Vote) {
 
     router.post('/setRoundNo/:roundNo', function(req, res, next) {
         console.log("API CALL : POST /timer/setRoundNo/:" + req.params.roundNo);
@@ -14,26 +14,54 @@ module.exports = function(io) {
         res.json({"sent": "done"});
     });
 
-    //TODO : better to be separated.
-    router.post('/timerCmd/:cmd', function(req, res, next) {
-        //start, stop, reset
-        console.log("timer command called via API");
-        var cmd = req.params.cmd;
-        io.emit('timerCmd', {
-            timerCmd: cmd
-        });
-        res.json({"sent": "done"});
-    });
 
-    router.post('/timerCmd/setCountdown/:countdown', function(req, res, next) {
-        var newCountdown = req.params.countdown;
-        console.log("countdown set to " + newCountdown);
+    router.post('/setCount/:cd', function(req, res, next) {
+        var newCountdown = req.params.cd;
+        console.log("API CALL : POST /timer/setCount/:" + req.params.cd);
         io.emit('timerCmd', {
             timerCmd: 'setCountdown',
             countdown: newCountdown
         });
         res.json({"sent": "done"});
     });
+
+
+    router.post('/start', function(req, res, next) {
+        console.log("API CALL : POST /timer/start : socket emit called. ");
+        io.emit('timerCmd', {
+            timerCmd: "start"
+        });
+
+        Vote.findOneAndUpdate({}, {gameGoingOn:true},
+            function (err, vote) {
+                if (err) {return next(err);}
+                res.json(vote);
+            });
+    });
+
+
+    router.post('/stop', function(req, res, next) {
+        console.log("API CALL : POST /timer/stop : socket emit called. ");
+        io.emit('timerCmd', {
+            timerCmd: "stop"
+        });
+
+        Vote.findOneAndUpdate({}, {gameGoingOn:false},
+            function (err, vote) {
+                if (err) {return next(err);}
+                res.json(vote);
+            });
+    });
+
+
+    router.post('/reset', function(req, res, next) {
+        console.log("API CALL : POST /timer/reset : socket emit called. ");
+        io.emit('timerCmd', {
+            timerCmd: "reset"
+        });
+        res.json({"sent": "done"});
+    });
+
 
     return router;
 };

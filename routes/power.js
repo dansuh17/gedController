@@ -3,10 +3,6 @@ var router = express.Router();
 
 module.exports = function(io) {
 
-    router.get('/', function (req, res, next) {
-        res.json({text:'power api modularised!'});
-    });
-
     router.post('/setPowerBalance/:balance', function(req, res, next) {
         console.log("power balance changed via API.");
         var balance = req.params.balance;

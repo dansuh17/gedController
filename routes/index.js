@@ -18,7 +18,7 @@ module.exports = function(io, Vote) {
 
     /* for handling power bar */
     var timerRoute = require('./timer');
-    router.use('/timer', timerRoute(io));
+    router.use('/timer', timerRoute(io, Vote));
 
     /* for sweep interaction page */
     var sweepRoute = require('./sweep');
