@@ -16,7 +16,7 @@ module.exports = function(io, Vote) {
 
     router.post('/set/:devinUp/:tomUp', function(req, res, next) {
         console.log("API CALL : POST votes/set/" + req.params.devinUp + "/" + req.params.tomUp);
-        Vote.findOneAndUpdate({}, { $set: {devinUp:req.params.devinUp, tomUp:req.params.tomUp, gameGoingOn:req.params.gameGoingOn}},
+        Vote.findOneAndUpdate({}, { $set: {devinUp:req.params.devinUp, tomUp:req.params.tomUp }},
             function(err, vote) {
                 if (err) {return next(err);}
                 res.json(vote);
