@@ -62,11 +62,22 @@ html {
 }
 
 #myGraph {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
   width: 70vw;
   height: 70vh;
+  position: relative;
 }
 
 #myBetting {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
   width: 60vw;
   height: 50vh;
   position: relative;
@@ -74,6 +85,11 @@ html {
 }
 
 #bettingText {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
   font-family: "Helvetica Neue";
   width: 70vw;
   text-align: center;

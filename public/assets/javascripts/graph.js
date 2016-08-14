@@ -17,7 +17,7 @@ var height = parseInt(d3.select("#graphContainer").style("height"));
 //var relWidth = "70vw";
 //var relHeight = "70vh";
 
-//width = window.innerWidth ;
+//width = window.innerWidth / 2 ;
 //height = window.innerHeight / 2;
 
 var g = svg.append("g")
