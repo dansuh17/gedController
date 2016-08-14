@@ -11,14 +11,14 @@ var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
 var currentTick = 0;
 var svg = d3.select("svg");
 
-var margin = {top: 10, right: 0, bottom: 0, left: 10};
-var width = parseInt(d3.select("#myGraph").style("width"));
-var height = parseInt(d3.select("#myGraph").style("height"));
+var margin = {top: 10, right: 0, bottom: 0, left: 0};
+var width = parseInt(d3.select("#graphContainer").style("width"));
+var height = parseInt(d3.select("#graphContainer").style("height"));
 //var relWidth = "70vw";
 //var relHeight = "70vh";
 
-width = window.innerWidth / 2;
-height = window.innerHeight / 2;
+//width = window.innerWidth ;
+//height = window.innerHeight / 2;
 
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -314,6 +314,31 @@ g.append("rect")
     .attr("height", 4)
     .attr("fill","darkgrey");
 
+//add image of fighters
+g.append("svg:image")
+    .attr("class", "fighter a")
+    .attr("xlink:href", fighterA)
+    .attr("width", width/4)
+    .attr("height", width/4)
+    .style("opacity", 0.5)
+    .attr("y", 1/2*height - width/8*2) //- height of image
+    .attr("x", 17/24*width);
+
+//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
+
+g.append("svg:image")
+    .attr("class", "fighter b")
+    .attr("xlink:href", fighterB)
+    .attr("width", width/4)
+    .attr("height", width/4)
+    .style("opacity", 0.5)
+    .attr("y", height - width/8*2)
+    .attr("x", 17/24*width);
+
+//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
+
+
+
 //graph grid
 
  make_x_grid(27);
@@ -361,25 +386,3 @@ function put_roundTxt(roundNum) {
 }
 
 
-//add image of fighters
-g.append("svg:image")
-    .attr("class", "fighter a")
-    .attr("xlink:href", fighterA)
-    .attr("width", width/4)
-    .attr("height", width/4)
-    .style("opacity", 0.5)
-    .attr("y", 1/2*height - width/8*2) //- height of image
-    .attr("x", 17/24*width);
-
-//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
-
-g.append("svg:image")
-    .attr("class", "fighter b")
-    .attr("xlink:href", fighterB)
-    .attr("width", width/4)
-    .attr("height", width/4)
-    .style("opacity", 0.5)
-    .attr("y", 1/2*height + width/16)
-    .attr("x", 17/24*width);
-
-//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
