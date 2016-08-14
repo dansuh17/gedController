@@ -142,6 +142,7 @@ function tick() {
     // Redraw the line.
     if (currentTick <= n) {
 
+        //get vote data
         $.ajax({
             url: "http://ged.uwcj.kr:3000/votes/get",
             dataType: "jsonp",
@@ -159,6 +160,7 @@ function tick() {
             }
         });
 
+        //get clip data
         if(reqHighlight.response.length > 10) {
             if (flag) {
                 if (flag2 < 1) {
@@ -206,6 +208,7 @@ function tick() {
             isStart = true;
             data.push(currentWinning);
             currentTick++;
+            //for test
             if (Math.random() > 0.8) {
                 addMark();
 
@@ -216,12 +219,11 @@ function tick() {
 
         d3.active(this)
             .transition()
-            .on("start", tick);
+            .on("start", tick); //recursive
         if (currentWinning >= 0) {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
-                // .attr("interpolate", "basis")
                 .style("fill", "none")
                 .style("stroke-width", height/70+"px")
                 .style("stroke", "e91a67");
@@ -230,7 +232,6 @@ function tick() {
             d3.select(this)
                 .attr("d", d3line)
                 .attr("transform", null)
-                // .attr("interpolate", "basis")
                 .style("fill", "none")
                 .style("stroke-width", "6")
                 .style("stroke", "32bdf0");
@@ -248,7 +249,7 @@ var y = d3.scaleLinear()
     .range([height, 0]);
 
 var d3line = d3.line()
-    // .interpolate("basis")
+    .curve(d3.curveBasis)
     .x(function(d, i) { return x(i); })
     .y(function(d, i) { return y(d); });
 
