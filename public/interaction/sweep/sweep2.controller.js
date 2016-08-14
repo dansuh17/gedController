@@ -22,17 +22,21 @@
           var sketch = function(pFive) {
             var boids = [];
             var gloveImage;
+            var punchSound;
             var pressed = false;
             var centerVector;
             var canvas;
+            var punchCount;
             const imageHalfWidth = 100;
             const imageHalfHeight = 100;
 
             /**
-             * Preloads images before drawing canvas.
+             * Preloads images and audios before drawing canvas.
              */
             pFive.preload = function() {
               gloveImage = pFive.loadImage("../../assets/images/gloves.png");
+              pFive.soundFormats("wav");
+              punchSound = pFive.loadSound("../../assets/audio/punch.wav");
             };
 
             /**
@@ -43,6 +47,7 @@
               setupCanvas();
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
+              punchCount = 0;
 
               // create boids given random initial positions outside the canvas boundaries
               // so that boids would close in from outside
@@ -81,14 +86,31 @@
               if (pressed) {
                 pressed = false;
               }
+
+              // display current punch count
+              pFive.stroke(0);
+              pFive.strokeWeight(1);
+              pFive.textSize(40);
+              pFive.fill(255, 255, 255, 100);
+              pFive.text(punchCount.toString(), 20, 50);
             };
 
             /**
              * If mouse pressed, set PRESSED to true so that according
              * effect can take place.
+             * Also, plays the audio file when clicked within one of the boids.
              */
             pFive.mousePressed = function () {
               pressed = true;
+
+              // plays the PUNCH sound
+              for (var i=0; i <boids.length; i++) {
+                if (boids[i].contains(pFive.mouseX, pFive.mouseY)) {
+                  punchCount++;
+                  punchSound.play();
+                  break;
+                }
+              }
             };
 
             /**
@@ -107,6 +129,18 @@
               this.maxspeed = 4;    // Maximum speed
               this.inScreen = true;
             }
+
+            /**
+             * Given the mouse position, return whether the mouse position is within the boid.
+             *
+             * @param mouseX x coordinate of mouse
+             * @param mouseY y coordinate of mouse
+             * @returns {boolean} true if mouse position is within the boid image
+             */
+            Boid.prototype.contains = function(mouseX, mouseY) {
+              return (mouseX <= (this.position.x + 2*imageHalfWidth) && (mouseX >= this.position.x)
+              && (mouseY <= this.position.y + 2*imageHalfHeight) && (mouseY >= this.position.y));
+            };
 
             /**
              * Runs the physical system of boids.
