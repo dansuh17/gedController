@@ -38,27 +38,27 @@ html {
 
 /* Icons on dock */
 #bettingToggleIcon {
-  width: 15vh;
-  height: 15vh;
+  width: 7vw;
+  height: 7vw;
   position: absolute;
   bottom: 60vh;
-  left: 5vh;
+  left: 5vw;
 }
 
 #graphToggleIcon {
-  width: 15vh;
-  height: 15vh;
+  width: 7vw;
+  height: 7vw;
   position: absolute;
   bottom: 40vh;
-  left: 5vh;
+  left: 5vw;
 }
 
 #kisweToggleIcon {
-  width: 15vh;
-  height: 15vh;
+  width: 7vw;
+  height: 7vw;
   position: absolute;
   bottom: 20vh;
-  left: 5vh;
+  left: 5vw;
 }
 
 #myGraph {
@@ -79,7 +79,7 @@ html {
   align-items: center;
 
   width: 60vw;
-  height: 50vh;
+  height: 40vh;
   position: relative;
   left: 5vw;
 }
@@ -94,6 +94,9 @@ html {
   width: 70vw;
   text-align: center;
   color: white;
+
+  position: relative;
+  left: 10vw;
 }
 
 

@@ -14,8 +14,8 @@ var svg = d3.select("svg");
 var margin = {top: 10, right: 0, bottom: 0, left: 0};
 var width = parseInt(d3.select("#graphContainer").style("width"));
 var height = parseInt(d3.select("#graphContainer").style("height"));
-//var relWidth = "70vw";
-//var relHeight = "70vh";
+width = 480;
+height = 250;
 
 //width = window.innerWidth / 2 ;
 //height = window.innerHeight / 2;
