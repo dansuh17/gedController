@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>GED Control Panel</title>
@@ -27,6 +27,9 @@
     <button class="btn btn-danger" ng-click="set_round(1)">1</button>
     <button class="btn btn-danger" ng-click="set_round(2)">2</button>
     <button class="btn btn-danger" ng-click="set_round(3)">3</button>
+
+    <input type="text" id="countdownInput" ng-model="countdownInput" style="height:30px">
+    <button class="btn btn-default" ng-click="set_countdown(countdownInput)">set</button>
 
 </div>
 

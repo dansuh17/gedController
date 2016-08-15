@@ -19,7 +19,12 @@
                 },
 
                 set_round: function(roundNo) {
-                    return $http.post('/timer/setRoundNo/' + roundNo.toString()).success(function(data) {
+                    return $http.post('/timer/setRoundNo/' + roundNo.toString(), {}).success(function(data) {
+                    });
+                },
+
+                set_countdown: function(countdownInput) {
+                    return $http.post('/timer/setCount/' + countdownInput.toString(), {}).success(function(data) {
                     });
                 }
             };

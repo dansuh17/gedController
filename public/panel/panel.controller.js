@@ -19,5 +19,11 @@
             console.log("set round number to " + roundNo);
             panelFactory.set_round(roundNo);
         }
+
+        $scope.countdownInput = 0;
+        $scope.set_countdown= function (countdownInput) {
+            console.log("set countdown to " + countdownInput + "(s).");
+            panelFactory.set_countdown(countdownInput);
+        }
     }]);
 })();
