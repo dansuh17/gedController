@@ -23,6 +23,7 @@
             var boids = [];
             var gloveImage;
             var punchSound;
+            var specialSound;
             var pressed = false;
             var centerVector;
             var canvas;
@@ -37,6 +38,7 @@
               gloveImage = pFive.loadImage("../../assets/images/gloves.png");
               pFive.soundFormats("wav");
               punchSound = pFive.loadSound("../../assets/audio/punch.wav");
+              specialSound = pFive.loadSound("../../assets/audio/YesOhMyGod.wav");
             };
 
             /**
@@ -110,6 +112,10 @@
                   punchSound.play();
                   break;
                 }
+              }
+
+              if (punchCount % 10 == 0) {
+                specialSound.play();
               }
             };
 
