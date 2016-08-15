@@ -1,7 +1,11 @@
 html {
-  width: 1280px;
-  height: 720px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+}
+
+@font-face {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #maincontainer {
@@ -13,6 +17,7 @@ html {
   align-items: center;
 }
 
+/* gray box container */
 #graphContainer {
   display: -webkit-flex;
   display: flex;
@@ -25,16 +30,52 @@ html {
   background-color: rgba(40, 40, 40, 0.8);
 
   position: relative;
-  left: 15%;
-  width: 65%;
-  height: 50%;
+  left: 15vw;
+  top : 10vh;
+  width: 70vw;
+  height: 70vh;
+}
+
+/* Icons on dock */
+#bettingToggleIcon {
+  width: 15vh;
+  height: 15vh;
+  position: absolute;
+  bottom: 60vh;
+  left: 5vh;
 }
 
 #graphToggleIcon {
-  width: 80px;
-  height: 80px;
+  width: 15vh;
+  height: 15vh;
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 40vh;
+  left: 5vh;
 }
 
+#kisweToggleIcon {
+  width: 15vh;
+  height: 15vh;
+  position: absolute;
+  bottom: 20vh;
+  left: 5vh;
+}
+
+#myGraph {
+  width: 70vw;
+  height: 70vh;
+}
+
+#myBetting {
+  width: 60vw;
+  height: 50vh;
+  position: relative;
+  left: 5vw;
+}
+
+#bettingText {
+  font-family: "Helvetica Neue";
+  width: 70vw;
+  text-align: center;
+  color: white;
+}

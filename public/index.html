@@ -60,7 +60,7 @@
                             <span id="round"> ROUND </span>
                             <span id="number"> {{ roundNo }} </span>
                         </div>
-                        <timer class="timer" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                        <timer class="timer" finish-callback="finish_callback()" auto-start="false" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
                     </div>
                 </div>
 
@@ -72,9 +72,9 @@
 
                 <!-- particle clusters -->
                 <div id="ballmove"></div>
-                <div class="content" ng-controller="twitCtrl">
+                <div class="content" ng-controller="twitCtrl" ng-hide="feedList.length==0">
                     <!-- Twitter feed -->
-                    <div id="twitterfeed" ng-hide="feedList.length==0">
+                    <div id="twitterfeed">
                         <img ng-src="{{tweet.icon}}" alt>
                         <div class="name">{{tweet.name}} (@{{tweet.username}})</div>
                         <div class="message">{{tweet.text}}</div>

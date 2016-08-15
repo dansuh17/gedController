@@ -1,7 +1,13 @@
+/**
+ * A controller for twitter feed which shows a twitter having a certain tag (defined in socket.js)
+ * for a certain time over the rest page.
+ */
 ;(function() {
     angular
         .module('gedApp')
-        .controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket', function ($scope, $timeout, $interval, socket) {
+        .controller('twitCtrl', ['$scope', '$timeout', '$interval', 'socket',
+          function ($scope, $timeout, $interval, socket) {
+            // each feed is stored here
             $scope.feedList = [];
             $scope.tweet = $scope.feedList[0];
             var intervalCall;
@@ -20,6 +26,7 @@
                 }
             };
 
+            // upon receiving a twitter feed, then show the feed for 5 secs
             socket.on("stream", function (tweet) {
                 console.log("twitter feed received.");
                 $scope.$apply(function () {

@@ -22,7 +22,10 @@ contains:
 
 ### Sweep interactive overlay page
 A video overlay that the user can tap on and have gamelike experience.
-[http://ged.uwcj.kr:3000/interaction/sweep](http://ged.uwcj.kr:3000/interaction/sweep) redirects to empty page.
+
+[http://ged.uwcj.kr:3000/interaction/sweep](http://ged.uwcj.kr:3000/interaction/sweep) 
+
+redirects to empty page.
 
 The interactive page is : [http://ged.uwcj.kr:3000/interaction/sweep/#/sweep_icon](http://ged.uwcj.kr:3000/interaction/sweep/#/sweep_icon)
 
