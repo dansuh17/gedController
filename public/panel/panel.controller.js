@@ -9,5 +9,10 @@
             console.log("timer stop");
             panelFactory.timer_stop();
         }
+
+        $scope.timer_reset= function () {
+            console.log("timer reset");
+            panelFactory.timer_reset();
+        }
     }]);
 })();

@@ -11,6 +11,11 @@
                 timer_stop: function() {
                     return $http.post('/timer/stop').success(function(data) {
                     });
+                },
+
+                timer_reset: function() {
+                    return $http.post('/timer/reset').success(function(data) {
+                    });
                 }
             };
         }]);
