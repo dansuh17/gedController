@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
-    <script src="controlPanel/panelApp.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+    <script src="panel.module.js"></script>
+    <script src="panel.controller.js"></script>
+    <script src="panel.factory.js"></script>
 
 
 </head>
-<body ng-app="panelApp" ng-controller="MainCtrl">
+<body ng-app="panelApp" ng-controller="panelController">
 <div id="bodyContainer">
-    <span> {{ vari }} </span>
+    <h1> KISWE PRODUCTION CONTROL PANEL</h1>
+
+    <h2>TIMER</h2>
+    <button class="btn btn-primary" ng-click="timer_start()">START</button>
 
 </div>
 
