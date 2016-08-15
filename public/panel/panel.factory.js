@@ -31,6 +31,17 @@
                 votes_set: function(devinUp, tomUp) {
                     return $http.post('/votes/set/' + devinUp.toString() + '/' + tomUp.toString(), {}).success(function(data) {
                     });
+                },
+
+                sweep_set_empty: function() {
+                    return $http.post('/sweep/setEmpty/', {}).success(function(data) {
+                    });
+                },
+
+                sweep_set_page: function(pageNum) {
+                    return $http.post('/sweep/setSweep/' + pageNum.toString(), {}).success(function(data) {
+                    });
+
                 }
             };
         }]);

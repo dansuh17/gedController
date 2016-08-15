@@ -33,5 +33,16 @@
             console.log("set votes to " + devinUp.toString() + ", " + tomUp.toString());
             panelFactory.votes_set(devinUp, tomUp);
         }
+
+
+        $scope.sweep_set_empty= function () {
+            console.log("sweep set empty");
+            panelFactory.sweep_set_empty();
+        }
+
+        $scope.sweep_set_page= function (pageNum) {
+            console.log("sweep set page : " + pageNum.toString());
+            panelFactory.sweep_set_page(pageNum);
+        }
     }]);
 })();
