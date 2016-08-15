@@ -14,5 +14,10 @@
             console.log("timer reset");
             panelFactory.timer_reset();
         }
+
+        $scope.set_round= function (roundNo) {
+            console.log("set round number to " + roundNo);
+            panelFactory.set_round(roundNo);
+        }
     }]);
 })();

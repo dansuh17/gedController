@@ -16,6 +16,11 @@
                 timer_reset: function() {
                     return $http.post('/timer/reset').success(function(data) {
                     });
+                },
+
+                set_round: function(roundNo) {
+                    return $http.post('/timer/setRoundNo/' + roundNo.toString()).success(function(data) {
+                    });
                 }
             };
         }]);
