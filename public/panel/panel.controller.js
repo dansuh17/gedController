@@ -4,5 +4,10 @@
             console.log("timer start");
             panelFactory.timer_start();
         }
+
+        $scope.timer_stop= function () {
+            console.log("timer stop");
+            panelFactory.timer_stop();
+        }
     }]);
 })();
