@@ -26,6 +26,11 @@
                 set_countdown: function(countdownInput) {
                     return $http.post('/timer/setCount/' + countdownInput.toString(), {}).success(function(data) {
                     });
+                },
+
+                votes_set: function(devinUp, tomUp) {
+                    return $http.post('/votes/set/' + devinUp.toString() + '/' + tomUp.toString(), {}).success(function(data) {
+                    });
                 }
             };
         }]);

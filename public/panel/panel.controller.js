@@ -25,5 +25,13 @@
             console.log("set countdown to " + countdownInput + "(s).");
             panelFactory.set_countdown(countdownInput);
         }
+
+
+        $scope.devinUp= 0;
+        $scope.tomUp= 0;
+        $scope.votes_set= function (devinUp, tomUp) {
+            console.log("set votes to " + devinUp.toString() + ", " + tomUp.toString());
+            panelFactory.votes_set(devinUp, tomUp);
+        }
     }]);
 })();
