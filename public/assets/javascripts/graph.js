@@ -1,23 +1,28 @@
-var n = 900;                         // count
+var n = 900; // count
+var y_range = 100;
+var timeInterval = 100;
 var d3random = d3.randomNormal(0,1); // initialization
-var data = d3.range(0).map(d3random);
+var dataA = d3.range(0).map(d3random);
+var dataB = d3.range(0).map(d3random);
 
-var fighterA = "../../assets/images/fighterA.png";
-var fighterB = "../../assets/images/figtherB.png";
+
+var fighterA = "../../assets/images/vote1.png";
+var fighterB = "../../assets/images/vote2.png";
 var eMark = "../../assets/images/emark.svg";
-
-var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
+//
+// var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
+//
 
 var currentTick = 0;
 var svg = d3.select("svg");
 
-var margin = {top: 10, right: 0, bottom: 0, left: 0};
+var margin = {top: 10, right: 0, bottom: 0, left: 25};
 var width = parseInt(d3.select("#graphContainer").style("width"));
 var height = parseInt(d3.select("#graphContainer").style("height"));
 width = 480;
 height = 250;
 
-//width = window.innerWidth / 2 ;
+//width = window.innerWidth / 2 ;`
 //height = window.innerHeight / 2;
 
 var g = svg.append("g")
@@ -27,217 +32,10 @@ var div = g.append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-function addMark() {
-    ////////////////////////////////toooltip!
-    // console.log("working")
-    //if(reqHighlight.response.length > 10) {
-         // tempHL = JSO    N.parse(reqHighlight.response).comments;
-     var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[0];
-     // console.log(tempHL);
-    //}
-    done++;
-    g.append("svg:image:title")
-        .attr("class", "eMark")
-        .attr("xlink:href", eMark)
-        .attr("width", 30)
-        .attr("height", 30)
-        .attr("x", width / n * (currentTick - 1) - 15)
-        .attr("y", data[currentTick - 1] * (-1) * (height / 2) + (height / 2) - 15)
-        .on("mouseover", function () {
-            div.transition()
-                .duration(200)
-                .style("opacity", .9);
-            div.html(tempHL) // done is variable for the order of highlights
-                .attr("width", 30)
-                .attr("height", 30)
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-        })
-        .on("mouseout", function () {
-            this.transition()
-                .duration(500)
-                .style("opacity", 0);
-        });
-}
 
-function addMarkAt(time_) {
-    var tick = (new Date(time_).getTime() - eventStartTime) / 1000 + (currentRound - 1) * 300;
-    console.log("tick : "+tick);
-
-    // if (tick < currentTick && tick > 0)
-    if(true){
-        tick = Math.floor(tick);
-        if(reqHighlight.response.length > 10) {
-            var tempHL = clipInfo.vsrc + clipInfo.evid + "/highlights/" + clipData[done].files[1];
-            console.log(tempHL);
-        }
-        done++;
-        g.append("svg:image")
-            .attr("class", "eMark")
-            .attr("xlink:href", eMark)
-            .attr("width", 30)
-            .attr("height", 30)
-            .attr("x", width / n * (tick - 1) - 15)
-            .attr("y", data[tick - 1] * (-1) * (height / 2) + (height / 2) - 15)
-            ///tooltip
-            .on("mouseover", function () {
-                div.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                div.html(tempHLV) // done is variable for the order of highlights
-                    .attr("width", 30)
-                    .attr("height", 30)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function () {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
-    }
-}
-
-///event id
-var eventID = "wsof_wsof32_20160727140717";
-var eventIS = "api-v4";
-    //for prod use
-    //"api-v4";
-    //for stage use
-    //"stage-api";
-
-var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
-    //for prod, use this token
-    //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJraXN3ZSIsInN1YiI6IjU3M2UxMzM4YTYzZjU5OWEwY2M4NjY1YyIsImV4cCI6IjIxMTUtMTEtMTZUMjA6MDg6MjkuNDg0WiJ9.L-JdjzIZ0Y6LHhtvygVyl-_DJUvJ7PWjbapNfp_Ea1s"
-    //for stage, use this token
-    //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLaXN3ZSIsInN1YiI6IjU3M2UxMzU5NmU0ZjEzNjEwYWY5YjY4ZCIsImV4cCI6IjIwMTYtMTEtMTlUMTk6Mjk6NDYuMzE3WiJ9.AxazxY2ToE4e8qEOZEobI7jKbRf_P1xezJbps_8KrPI";
-
-var gameStartTime;
-var timeZone = -1000*60*60*4 + 1000*60*20; // for eastern time -4;
-var eventStartTime = new Date().getTime() + timeZone;
-var timediff = 0;
-
-var reqEvent = new XMLHttpRequest();
-
-reqEvent.open('GET', 'https://' + eventIS + '.kiswe.com:443/api/events/id/' + eventID, true);
-reqEvent.setRequestHeader("Authorization", token);
-reqEvent.send(null);
-
-var isStart = false;
-var currentRound = 0;
-
-var currentWinning = 0;
-var gameGoingOn = false; ////////////
-
-var reqHighlight = new XMLHttpRequest();
-
-var clipInfo = new Object();
-var clipData = new Object();
-var done = 0;
-
-var flag = false;
-var flag2 = 0;
-
-function tick() {
-    // Redraw the line.
-    if (currentTick <= n) {
-
-        //get vote data
-        $.ajax({
-            url: "http://ged.uwcj.kr:3000/votes/get",
-            dataType: "jsonp",
-            success: function (data) {
-                currentWinning = ((data.devinUp / (data.tomUp + data.devinUp)) - 0.5) / 0.5;
-
-                if (currentWinning > 0) {
-                    tomWinning = true;
-                    devinWinning = false;
-                } else if (currentWinning < 0) {
-                    tomWinning = false;
-                    devinWinning = true;
-                }
-                gameGoingOn = data.gameGoingOn;
-            }
-        });
-
-        //get clip data
-        if(reqHighlight.response.length > 10) {
-            if (flag) {
-                if (flag2 < 1) {
-                    timediff += eventStartTime - ((new Date(JSON.parse(reqEvent.response).event.start_time).getTime()));
-                    // flag2++;
-                    // console.log(flag2);
-                    console.log("real event start in db : " + JSON.parse(reqEvent.response).event.start_time);
-                    console.log("real event start in date format : " + new Date(JSON.parse(reqEvent.response).event.start_time));
-                    console.log("current event play : " + new Date(eventStartTime));
-                    console.log("time diff in : " + timediff / 1000 / 60 / 60 / 24 + " day + " + (timediff / 1000 / 60 / 60) % 24 + " hours");
-                }
-                clipInfo = JSON.parse(reqHighlight.response).comments;
-                clipData = clipInfo.el;
-                if (flag2 < 1) {
-                    console.log("first clip time in db : " + clipData[0].start_time);
-                    console.log("first clip time in date format : " + new Date(clipData[0].start_time));
-                    console.log("first clip in min : " + ((new Date(clipData[0].start_time).getTime()) + timediff - eventStartTime) / 1000 / 60);
-                }
-                flag2++;
-                // timediff = (new Date().getTime()) - (new Date(clipData[0].start_time).getTime());
-                for (var i = done; i < clipData.length; i++) {
-                    var startIn = (new Date(clipData[i].start_time).getTime()) + timediff - (new Date().getTime() + timezone);
-                    // console.log(startIn);
-                    if (startIn < 0) {
-                        // addMarkAt();
-                        // done++;
-                    } else {
-                        break;
-                    }
-                }
-            }
-        }
-        // console.log(clipData);
-
-        flag = true;
-        reqHighlight.open('GET', 'https://' + eventIS + '.kiswe.com:443/api/comments/' + eventID, true);
-        reqHighlight.setRequestHeader("Authorization", token);
-        reqHighlight.send(null);
-
-        if (gameGoingOn) {
-            if (!isStart) {
-                currentRound++;
-                gameStartTime = new Date().getTime();
-            }
-            isStart = true;
-            data.push(currentWinning);
-            currentTick++;
-            //for test
-            if (Math.random() > 0.8) {
-                addMark();
-
-            }
-        } else {
-            isStart = false;
-        }
-
-        d3.active(this)
-            .transition()
-            .on("start", tick); //recursive
-        if (currentWinning >= 0) {
-            d3.select(this)
-                .attr("d", d3line)
-                .attr("transform", null)
-                .style("fill", "none")
-                .style("stroke-width", height/70+"px")
-                .style("stroke", "e91a67");
-        }
-        else if (currentWinning < 0) {
-            d3.select(this)
-                .attr("d", d3line)
-                .attr("transform", null)
-                .style("fill", "none")
-                .style("stroke-width", "6")
-                .style("stroke", "32bdf0");
-        }
-    }
-}
+var punchCountA = 0;
+var punchCountB = 0;
+var gameGoingOn = false;
 
 // graph
 var x = d3.scaleLinear()
@@ -245,13 +43,138 @@ var x = d3.scaleLinear()
     .range([0, width]);
 
 var y = d3.scaleLinear()
-    .domain([-1, 1])
+    .domain([0, y_range])
     .range([height, 0]);
 
-var d3line = d3.line()
-    .curve(d3.curveBasis)
-    .x(function(d, i) { return x(i); })
-    .y(function(d, i) { return y(d); });
+var d3lineA = d3.line()
+        .curve(d3.curveBasis)
+        .x(function(d, i) { return x(i); })
+        .y(function(d, i) { return y(d); })
+    ;
+
+var d3lineB = d3.line()
+        .curve(d3.curveBasis)
+        .x(function(d, i) { return x(i); })
+        .y(function(d, i) { return y(d); })
+    ;
+
+
+//main function
+function tick1() {
+    // Redraw the line.
+    if (currentTick <= n) {
+        currentTick++;
+        //get vote data
+        $.ajax({
+            url: "http://ged.uwcj.kr:3000/votes/get", ///perhaps change
+            dataType: "jsonp",
+            success: function (data) {
+
+                punchCountA = data.devinUp; //punchCountA = data.punchCountA;
+                // punchCountB = data.tomUp; //punchCountB = data.punchCountB;
+                gameGoingOn = data.gameGoingOn;
+            }
+        });
+
+        if (gameGoingOn) {
+
+            dataA.push(punchCountA);
+            // dataB.push(punchCountB);
+        }
+
+        d3.active(this)
+            .transition()
+            .on("start", tick1) //recursive
+        // if (currentWinning >= 0) {
+            d3.select(this)
+                .attr("d", d3lineA)
+                .attr("transform", null)
+                .style("fill", "none")
+                .style("stroke-width", height/70+"px")
+                .style("stroke", "e91a67");
+
+        g.selectAll(".fighterA").remove();
+
+        g.append("svg:image")
+            .attr("class", "fighterA")
+            .attr("xlink:href", fighterA)
+            .attr("width", width/10)
+            .attr("height", width/10)
+            .style("opacity", 1)
+            .attr("x", width*dataA.length/n)
+            .attr("y", height - height*punchCountA/y_range - width/16); //- height of image
+
+        g.append("text")
+            .attr("class", "fighterA")
+            .text(punchCountA)
+            .attr("font-size", width/30+"px")
+            .attr("font-family", "HelveticaNeue")
+            .style("opacity", 1)
+            .attr("x", width*dataA.length/n - width/16)
+            .style("stroke", "e91a67")
+            .style("fill", "e91a67")
+            .attr("y", height - height*punchCountA/y_range - width/32); //- height of image
+
+    }
+}
+
+function tick2() {
+    // Redraw the line.
+    if (currentTick <= n) {
+
+        //get vote data
+        $.ajax({
+            url: "http://ged.uwcj.kr:3000/votes/get", ///perhaps change
+            dataType: "jsonp",
+            success: function (data) {
+
+                // punchCountA = data.devinUp; //punchCountA = data.punchCountA;
+                punchCountB = data.tomUp; //punchCountB = data.punchCountB;
+                gameGoingOn = data.gameGoingOn;
+            }
+        });
+
+        if (gameGoingOn) {
+
+            // dataA.push(punchCountA);
+            dataB.push(punchCountB);
+        }
+
+        d3.active(this)
+            .transition()
+            .on("start", tick2); //recursive
+        // if (currentWinning >= 0) {
+
+        d3.select(this)
+            .attr("d", d3lineB)
+            .attr("transform", null)
+            .style("fill", "none")
+            .style("stroke-width", height/70+"px")
+            .style("stroke", "32bdf0");
+
+        g.selectAll(".fighterB").remove();
+
+        g.append("svg:image")
+            .attr("class", "fighterB")
+            .attr("xlink:href", fighterB)
+            .attr("width", width/10)
+            .attr("height", width/10)
+            .style("opacity", 1)
+            .attr("x", width*dataB.length/n)
+            .attr("y", height - height*punchCountB/y_range - width/16); //- height of image
+
+        g.append("text")
+            .attr("class", "fighterB")
+            .text(punchCountB)
+            .attr("font-size", width/30+"px")
+            .attr("font-family", "HelveticaNeue")
+            .style("opacity", 1)
+            .attr("x", width*dataB.length/n - width/16)
+            .style("stroke", "32bdf0")
+            .style("fill", "32bdf0")
+            .attr("y", height - height*punchCountB/y_range - width/32); //- height of image
+    }
+}
 
 g.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -262,12 +185,22 @@ g.append("defs").append("clipPath")
 g.append("g")
     .attr("clip-path", "url(#clip)")
     .append("path")
-    .datum(data)
-    .attr("class", "d3line")
+    .datum(dataA)
+    // .attr("class", "d3lineA")
     .transition()
-    .duration(1000)
-    .ease(d3.easeLinear)
-    .on("start", tick);  /// tick is the main function that draws the line
+    .duration(timeInterval)
+    // .ease(d3.easeLinear)
+    .on("start", tick1);  /// tick is the main function that draws the line
+
+g.append("g")
+    .attr("clip-path", "url(#clip)")
+    .append("path")
+    .datum(dataB)
+    // .attr("class", "d3lineB")
+    .transition()
+    .duration(timeInterval)
+    // .ease(d3.easeLinear)
+    .on("start", tick2);
 
 //axis
 g.append("g")
@@ -279,8 +212,16 @@ g.append("g")
 g.append("g")
     .attr("class", "axis axis--y")
     .attr("display", "none")
-    .attr("stroke", "darkgrey")
-    .call(d3.axisLeft(y));
+    // .attr("stroke", "lightgrey")
+    .call(d3.axisLeft(y))
+   // .append("text")
+   //  .attr("transform", "rotate(-90)")
+   //  // .attr("x", 0 )
+   //  .attr("y", width/20)
+   //  .attr("font-size", width/40+"px")
+   //  .attr("font-family", "HelveticaNeue")
+   //  .style("fill", "white")
+   //  .text("Punch Count");
 
 //axis text
 /*
@@ -293,8 +234,8 @@ g.append("text")
     .text("who's winning");
 */
 
-//x
-make_roundBorder(1, 5);
+// x
+make_roundBorder(0, 5);
 make_roundBorder(3, 2);
 function make_roundBorder(roundNum, strokeWidth){
     for(var i=0; i<=roundNum; i++){
@@ -302,42 +243,18 @@ function make_roundBorder(roundNum, strokeWidth){
             .attr("x", width/roundNum*i)
             .attr("y", 0)
             .attr("width", strokeWidth)
-            .attr("height", "70vh")
+            .attr("height", height)
             .attr("fill","lightgrey");
     }
 }
 
-//y
+// y
 g.append("rect")
     .attr("x", 0)
-    .attr("y", height/2)
+    .attr("y", height)
     .attr("width", width)
-    .attr("height", 4)
+    .attr("height", 5)
     .attr("fill","darkgrey");
-
-//add image of fighters
-g.append("svg:image")
-    .attr("class", "fighter a")
-    .attr("xlink:href", fighterA)
-    .attr("width", width/4)
-    .attr("height", width/4)
-    .style("opacity", 0.5)
-    .attr("y", 1/2*height - width/8*2) //- height of image
-    .attr("x", 17/24*width);
-
-//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ (height/1.15) +")");
-
-g.append("svg:image")
-    .attr("class", "fighter b")
-    .attr("xlink:href", fighterB)
-    .attr("width", width/4)
-    .attr("height", width/4)
-    .style("opacity", 0.5)
-    .attr("y", height - width/8*2)
-    .attr("x", 17/24*width);
-
-//.attr("transform", "translate("+ (-margin.left/1.2) +", "+ 0 +")");
-
 
 
 //graph grid
@@ -378,7 +295,8 @@ function put_roundTxt(roundNum) {
             .attr("class", "text")
             .attr("text-anchor", "middle")
             .attr("x", width*(2*i-1)/6)
-            .attr("y", +height*9.5/10 )
+            // .attr("y", +height*9.5/10 )
+            .attr("y", height*1/10)
             .attr("font-size", width/25+"px")
             .attr("font-family", "HelveticaNeue")
             .text("Round " + i)

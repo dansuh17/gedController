@@ -12,21 +12,37 @@
           $scope.kisweOn = false;
 
           $scope.graphTurnOn = function() {
-            $scope.kisweOn=true;
-            $scope.graphOn=true;
-            $scope.bettingOn=false;
+              if($scope.graphOn == true){
+                  $scope.kisweOn=false;
+                  $scope.graphOn=false;
+                  $scope.bettingOn=false;}
+              else {
+                  $scope.kisweOn=true;
+                  $scope.graphOn=true;
+                  $scope.bettingOn=false;
+              };
           };
 
           $scope.bettingTurnOn = function() {
-            $scope.kisweOn=true;
-            $scope.graphOn=false;
-            $scope.bettingOn=true;
+
+              if($scope.bettingOn == true){
+                  $scope.kisweOn=false;
+                  $scope.graphOn=false;
+                  $scope.bettingOn=false;}
+              else {
+                  $scope.kisweOn=true;
+                  $scope.graphOn=false;
+                  $scope.bettingOn=true;
+              };
           };
 
           $scope.returnHome = function() {
-            $scope.kisweOn=false;
-            $scope.graphOn=false;
-            $scope.bettingOn=false;
+              if($scope.kisweOn == true){
+                  $scope.kisweOn=false;
+                  $scope.graphOn=false;
+                  $scope.bettingOn=false;}
+
+
           };
       }]);
 })();
