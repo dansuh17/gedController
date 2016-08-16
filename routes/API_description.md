@@ -38,5 +38,18 @@ DEPRECATED
 | set the sweep page to empty      | Post   | /sweep/setEmpty                     |         |
 | open up the sweep page by PAGENUM| Post   | /sweep/setSweep/:pageNum            |         |
 
+
+
+
+
+## punch 
+
+| Description                      | Verb   | URI             |
+|----------------------------------|--------|-----------------|
+| Change the punch counts          | Post   | /punch          |
+| Get the punch counts             | Get    | /punch          |
+
+
+
 # Socket Interface
 
