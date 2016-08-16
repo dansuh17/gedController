@@ -46,26 +46,9 @@
             socketFactory.emit('addPowerBalance', {amount: amount});
           };
 
-          /**
-           * Stores the current punch count to the server.
-           * @param count1 left punch count
-           * @param count2 right punch count
-           */
           $scope.storePunchCount = function(count1, count2) {
-            var prev1;
-            var prev2;
-
-            $http.get('http://ged.uwcj.kr/punch/').then(function(response) {
-              prev1 = response.data.fighter1;
-              prev2 = response.data.fighter2;
-
-              var data = JSON.stringify({fighter1: count1 + prev1, fighter2: count2 + prev2});
-              console.log('storePunchCount emit : ', + count1 + ', ' + count2);
-
-              $http.post('http://ged.uwcj.kr/punch/', data).then(function(response) {
-                console.log("punch count successfully stored");
-              });
-            });
+              console.log("storePunchCount called on controller");
+            socketFactory.storePunchCount(count1, count2);
           };
 
           /**
