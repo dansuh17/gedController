@@ -32,8 +32,8 @@
 
 
 </head>
-<body ng-app="ganchor">
-<div id="Maincontainer" ng-controller="ganchorCtrl" >
+<body>
+<div id="Maincontainer" ng-controller="ganchorCtrl" ng-app="ganchor">
 
   <div id="graphContainer" ng-show="kisweOn">
     <!-- graph part that brings up d3.js source -->
@@ -71,7 +71,7 @@
   <script src="vote.factory.js"></script>
   <script src="vote.controller.js"></script>
 
-  <div id="main" ng-controller="voteCtrl">
+  <div id="main" ng-controller="voteCtrl" ng-app="vote">
     <!-- click on the image and you vote for the other guy -->
     <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
   </div>
