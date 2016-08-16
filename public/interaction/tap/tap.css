@@ -21,21 +21,17 @@ body {
 }
 
 #tapA {
-  background-color: black;
+  background-color: transparent;
   position: absolute;
-  bottom: 15vh;
-  left: 12vw;
-  width: 30%;
-  height: 50%;
+  bottom: 10vw;
+  left: 10vw;
 }
 
 #tapB {
-  background-color: black;
+  background-color: transparent;
   position: absolute;
-  bottom: 15vh;
-  right: 30vh;
-  width: 30%;
-  height: 50%;
+  bottom: 10vw;
+  right: 30vw;
 }
 
 #logo {
@@ -43,6 +39,19 @@ body {
   width: 48px;
   height: 48px;
   bottom: 10vh;
-  left: 5vw;
+  left: 10vw;
   z-index: 1000;
+}
+
+.count {
+  margin: 0;
+  color: darkgray;
+  font-size: 30px;
+  text-align: center;
+  text-shadow: 0 0 3px red;
+}
+
+.punchImage {
+  width: 7vw;
+  height: 7vw;
 }

@@ -28,15 +28,24 @@
 </head>
 <body ng-app="tap">
 <div id="main" ng-controller="tapCtrl">
-  <!-- invisible tapping area where tapping will let you modify the power balance bar in index.html -->
-  <div id="tapA" ng-click="moveBalanceBar(2)"></div>
-  <div id="tapB" ng-click="moveBalanceBar(-2)"></div>
 
-  <!-- little cute kiswe logo at the bottom left -->
+  <!-- punch images to tap on and increase punch counts for each players -->
+  <div id="tapA">
+    <img class="punchImage" ng-click="increaseFighterPunchCount(1)" ng-src="{{punchImage1}}" />
+    <p class="count">{{fighterCount1}}</p>
+  </div>
+
+  <div id="tapB">
+    <img class="punchImage" ng-click="increaseFighterPunchCount(2)" ng-src="{{punchImage2}}" />
+    <p class="count">{{fighterCount2}}</p>
+  </div>
+
+  <!-- little cute kiswe logo at the bottom left
   <div id="logo">
     <a href="http://kiswe.com/" target="_blank">
       <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
   </div>
+  -->
 </div>
 </body>
 </html>
