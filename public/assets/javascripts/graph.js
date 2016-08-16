@@ -1,6 +1,6 @@
 var n = 900; // count
 var y_range = 100;
-var timeInterval = 100;
+var timeInterval = 1000;
 var d3random = d3.randomNormal(0,1); // initialization
 var dataA = d3.range(0).map(d3random);
 var dataB = d3.range(0).map(d3random);
