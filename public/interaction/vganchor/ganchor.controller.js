@@ -4,29 +4,45 @@
  * Created by Minki Chung / Daniel Suh on 8/9/16.
  */
 ;(function() {
-  angular
-      .module('ganchor')
-      .controller('ganchorCtrl', ['$scope', function($scope) {
-          $scope.graphOn = false;
-          $scope.bettingOn = false;
-          $scope.kisweOn = false;
+    angular
+        .module('ganchor')
+        .controller('ganchorCtrl', ['$scope', function($scope) {
+            $scope.graphOn = false;
+            $scope.bettingOn = false;
+            $scope.kisweOn = false;
 
-          $scope.graphTurnOn = function() {
-            $scope.kisweOn=true;
-            $scope.graphOn=true;
-            $scope.bettingOn=false;
-          };
+            $scope.graphTurnOn = function() {
+                if($scope.graphOn == true){
+                    $scope.kisweOn=false;
+                    $scope.graphOn=false;
+                    $scope.bettingOn=false;}
+                else {
+                    $scope.kisweOn=true;
+                    $scope.graphOn=true;
+                    $scope.bettingOn=false;
+                };
+            };
 
-          $scope.bettingTurnOn = function() {
-            $scope.kisweOn=true;
-            $scope.graphOn=false;
-            $scope.bettingOn=true;
-          };
+            $scope.bettingTurnOn = function() {
 
-          $scope.returnHome = function() {
-            $scope.kisweOn=false;
-            $scope.graphOn=false;
-            $scope.bettingOn=false;
-          };
-      }]);
+                if($scope.bettingOn == true){
+                    $scope.kisweOn=false;
+                    $scope.graphOn=false;
+                    $scope.bettingOn=false;}
+                else {
+                    $scope.kisweOn=true;
+                    $scope.graphOn=false;
+                    $scope.bettingOn=true;
+                };
+            };
+
+            $scope.returnHome = function() {
+                if($scope.kisweOn == true){
+                    $scope.kisweOn=false;
+                    $scope.graphOn=false;
+                    $scope.bettingOn=false;}
+
+
+            };
+        }]);
 })();
