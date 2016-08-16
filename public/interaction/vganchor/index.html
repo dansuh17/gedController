@@ -30,11 +30,14 @@
   <link rel="stylesheet" href="vote.css">
   <link rel="stylesheet" href="graph.css">
 
+  <!-- Sockets -->
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+
   <!-- custom JS files -->
   <script src="vote.module.js"></script>
   <script src="vote.factory.js"></script>
   <script src="vote.controller.js"></script>
-  
+
 </head>
 <body>
 <div id="Maincontainer" ng-controller="ganchorCtrl" ng-app="ganchor">
@@ -66,14 +69,6 @@
   <!-- kiswe on/off toggle button image, remove all other functions going on -->
   <img id="kisweToggleIcon" ng-click="returnHome()"
        src="../../assets/images/kiswe_button.png">
-
-  <!-- Sockets -->
-  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
-
-  <!-- custom JS files -->
-  <script src="vote.module.js"></script>
-  <script src="vote.factory.js"></script>
-  <script src="vote.controller.js"></script>
 
   <div id="main" ng-controller="voteCtrl" ng-app="vote">
     <!-- click on the image and you vote for the other guy -->
