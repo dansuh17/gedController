@@ -6,7 +6,8 @@
 ;(function() {
     angular
         .module('ganchor')
-        .controller('ganchorCtrl', ['$scope', function($scope) {
+        .controller('ganchorCtrl', ['$scope', '$http', 'socketFactory', '$location',
+          function($scope, $http, socketFactory, $location) {
             $scope.graphOn = false;
             $scope.bettingOn = false;
             $scope.kisweOn = false;
@@ -20,11 +21,10 @@
                     $scope.kisweOn=true;
                     $scope.graphOn=true;
                     $scope.bettingOn=false;
-                };
+                }
             };
 
             $scope.bettingTurnOn = function() {
-
                 if($scope.bettingOn == true){
                     $scope.kisweOn=false;
                     $scope.graphOn=false;
@@ -33,7 +33,7 @@
                     $scope.kisweOn=true;
                     $scope.graphOn=false;
                     $scope.bettingOn=true;
-                };
+                }
             };
 
             $scope.returnHome = function() {
@@ -41,8 +41,24 @@
                     $scope.kisweOn=false;
                     $scope.graphOn=false;
                     $scope.bettingOn=false;}
-
-
             };
+
+            /**
+             * Moves to the empty page.
+             */
+            $scope.goToEmptyPage = function() {
+              $location.path('/empty');
+            };
+
+            /**
+             * Socket function that wraps the goToEmptyPage function,
+             * run on receiving 'goToEmptyPage' message.
+             */
+            socketFactory.on('goToGanchorEmpty', function() {
+              console.log("goToGanchorEmpty call received - vganchor");
+              $scope.$apply(function() {
+                $scope.goToEmptyPage();
+              })
+            });
         }]);
 })();

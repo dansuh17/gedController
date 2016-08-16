@@ -13,11 +13,9 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-aria.min.js"></script>
   
-
   <!-- Graph D3 -->
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-
 
   <!-- Modules -->
   <script src="ganchor.module.js"></script>
@@ -34,47 +32,14 @@
   <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 
   <!-- custom JS files -->
-  <script src="vote.module.js"></script>
+  <script src="ganchor.module.js"></script>
   <script src="vote.factory.js"></script>
   <script src="vote.controller.js"></script>
+  <script src="empty.controller.js"></script>
+  <script src="ganchor.controller.js"></script>
 
 </head>
 <body ng-app="ganchor">
-<div id="Maincontainer" ng-controller="ganchorCtrl">
-
-  <div id="graphContainer" ng-show="kisweOn">
-    <!-- graph part that brings up d3.js source -->
-    <div class="graph" ng-show="graphOn">
-
-      <svg ng-show="graphOn" id="myGraph"></svg>
-      <script src="../../assets/javascripts/graph.js"></script>
-    </div>
-
-    <!-- betting part that brings up betting source -->
-    <div class="betting" ng-show="bettingOn">
-      <h1 id="bettingText">LIVE BETTING</h1>
-      <img id="myBetting" src="../../assets/images/betting_image.png">
-    </div>
-  </div>
-
-  <!-- TOGGLE BUTTONS -->
-  <!-- graph on/off toggle button image -->
-  <img id="graphToggleIcon" ng-click="graphTurnOn()"
-       src="../../assets/images/graph_button.png"/>
-
-  <!-- live betting on/off toggle button image -->
-  <img id="bettingToggleIcon" ng-click="bettingTurnOn()"
-        src="../../assets/images/betting_button.png">
-
-  <!-- kiswe on/off toggle button image, remove all other functions going on -->
-  <img id="kisweToggleIcon" ng-click="returnHome()"
-       src="../../assets/images/kiswe_button.png">
-
-  <div id="main" ng-controller="voteCtrl">
-    <!-- click on the image and you vote for the other guy -->
-    <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
-  </div>
-</div>
-
+  <div ng-view></div>
 </body>
 </html>

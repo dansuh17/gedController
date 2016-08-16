@@ -1,0 +1,35 @@
+<div id="Maincontainer">
+
+  <div id="graphContainer" ng-show="kisweOn">
+    <!-- graph part that brings up d3.js source -->
+    <div class="graph" ng-show="graphOn">
+
+      <svg ng-show="graphOn" id="myGraph"></svg>
+      <script src="../../assets/javascripts/graph.js"></script>
+    </div>
+
+    <!-- betting part that brings up betting source -->
+    <div class="betting" ng-show="bettingOn">
+      <h1 id="bettingText">LIVE BETTING</h1>
+      <img id="myBetting" src="../../assets/images/betting_image.png">
+    </div>
+  </div>
+
+  <!-- TOGGLE BUTTONS -->
+  <!-- graph on/off toggle button image -->
+  <img id="graphToggleIcon" ng-click="graphTurnOn()"
+       src="../../assets/images/graph_button.png"/>
+
+  <!-- live betting on/off toggle button image -->
+  <img id="bettingToggleIcon" ng-click="bettingTurnOn()"
+       src="../../assets/images/betting_button.png">
+
+  <!-- kiswe on/off toggle button image, remove all other functions going on -->
+  <img id="kisweToggleIcon" ng-click="returnHome()"
+       src="../../assets/images/kiswe_button.png">
+
+  <div id="main" ng-controller="voteCtrl">
+    <!-- click on the image and you vote for the other guy -->
+    <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
+  </div>
+</div>
