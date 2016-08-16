@@ -39,7 +39,7 @@
   <script src="vote.controller.js"></script>
 
 </head>
-<body>
+<body ng-app="vote">
 <div id="Maincontainer" ng-controller="ganchorCtrl" ng-app="ganchor">
 
   <div id="graphContainer" ng-show="kisweOn">
@@ -70,7 +70,7 @@
   <img id="kisweToggleIcon" ng-click="returnHome()"
        src="../../assets/images/kiswe_button.png">
 
-  <div id="main" ng-controller="voteCtrl" ng-app="vote">
+  <div id="main" ng-controller="voteCtrl">
     <!-- click on the image and you vote for the other guy -->
     <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
   </div>
