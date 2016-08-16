@@ -1,0 +1,102 @@
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#maincontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+/* gray box container */
+#graphContainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background-color: rgba(40, 40, 40, 0.8);
+
+  position: relative;
+  left: 15vw;
+  top : 10vh;
+  width: 70vw;
+  height: 70vh;
+}
+
+/* Icons on dock */
+#bettingToggleIcon {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: 60vh;
+  left: 5vw;
+}
+
+#graphToggleIcon {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: 40vh;
+  left: 5vw;
+}
+
+#kisweToggleIcon {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: 20vh;
+  left: 5vw;
+}
+
+#myGraph {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
+  width: 70vw;
+  height: 70vh;
+  position: relative;
+}
+
+#myBetting {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
+  width: 60vw;
+  height: 40vh;
+  position: relative;
+  left: 5vw;
+}
+
+#bettingText {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
+  font-family: "Helvetica Neue";
+  width: 70vw;
+  text-align: center;
+  color: white;
+
+  position: relative;
+  left: 10vw;
+}
+
+
