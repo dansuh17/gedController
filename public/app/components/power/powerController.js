@@ -16,7 +16,8 @@
           $interval(function() {
             $http.get("http://ged.uwcj.kr/votes/get").then(function (response) {
               console.log(response.data.tomUp);
-              $scope.powerBalance = 100 * response.data.tomUp / (response.data.tomUp + response.data.devinUp);
+              var balance = 100 * response.data.tomUp / (response.data.tomUp + response.data.devinUp);
+              $scope.powerBalance = Math.round(balance);
             });
           }, 2000);
 
