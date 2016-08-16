@@ -47,5 +47,25 @@
             console.log("set punch counts to " + punch1.toString(), punch2.toString());
             panelFactory.punch_set(punch1, punch2);
         };
+
+        $scope.punch_set_empty = function() {
+            console.log("set punch count empty");
+            panelFactory.punch_set_empty();
+        };
+
+        $scope.punch_set_tap = function() {
+            console.log("set punch tap");
+            panelFactory.punch_set_tap();
+        };
+
+        $scope.ganchor_set_empty = function() {
+            console.log("set ganchor empty");
+            panelFactory.ganchor_set_empty();
+        };
+
+        $scope.ganchor_set_tap = function() {
+            console.log("set ganchor tap");
+            panelFactory.ganchor_set_tap();
+        };
     }]);
 })();

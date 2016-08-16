@@ -45,6 +45,22 @@
 
                 punch_set: function(punch1, punch2) {
                     return $http.post('/punch/' + punch1.toString() + '/' + punch2.toString(), {});
+                },
+
+                punch_set_empty: function() {
+                    return $http.post('/punch/setPunchEmpty/');
+                },
+
+                punch_set_tap: function() {
+                    return $http.post('/punch/setTap/');
+                },
+
+                ganchor_set_empty: function() {
+                    return $http.post('/votes/setGanchorEmpty/');
+                },
+
+                ganchor_set_tap: function() {
+                    return $http.post('/votes/setGanchor/');
                 }
             };
         }]);
