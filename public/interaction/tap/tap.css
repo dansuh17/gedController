@@ -55,3 +55,31 @@ body {
   width: 7vw;
   height: 7vw;
 }
+
+.graphToggle {
+  width: 7vw;
+  height: 7vw;
+
+  position: absolute;
+  top: 5vw;
+  left: 5vw;
+}
+
+/* gray box container */
+#graphContainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background-color: rgba(40, 40, 40, 0.8);
+
+  position: relative;
+  left: 15vw;
+  top : 10vh;
+  width: 70vw;
+  height: 70vh;
+}

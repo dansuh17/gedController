@@ -10,8 +10,16 @@
         $scope.logoUrl = '../../assets/images/kisweLogo.png';
         $scope.punchImage1 = '../../assets/images/punch_grey.png'; // left
         $scope.punchImage2 = '../../assets/images/punch_red.png'; // right
+        $scope.toggleImage = '../../assets/images/graph_button.png'; // toggle button
+
         $scope.fighterCount1 = 0;
         $scope.fighterCount2 = 0;
+
+        $scope.graphOn = false;
+
+        $scope.showGraph = function() {
+          $scope.graphOn = !$scope.graphOn;
+        };
 
         /**
          * Increment per tap the punch count for each fighter.
