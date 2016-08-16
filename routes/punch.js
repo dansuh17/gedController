@@ -34,9 +34,9 @@ module.exports = function(Punch, io) {
     /**
      * Set the tapping page to empty page.
      */
-    router.post('/setEmpty', function(req, res, next) {
+    router.post('/setPunchEmpty', function(req, res, next) {
         console.log("stop punch interaction and show empty page");
-        io.emit("goToEmptyPage", {});
+        io.emit("goToPunchEmpty", {});
         res.json({"sent": "done"});
     });
 

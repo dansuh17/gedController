@@ -37,5 +37,24 @@ module.exports = function(io, Vote) {
             }
         });
     });
+
+    /**
+     * Set the ganchor page to empty page.
+     */
+    router.post('/setGanchorEmpty', function(req, res, next) {
+        console.log("stop graph toggle page and show empty page");
+        io.emit("goToGanchorEmpty", {});
+        res.json({"sent": "done"});
+    });
+
+    /**
+     * Requests the empty page to open up a page indicated
+     * by PAGENUM.
+     */
+    router.post('/setGanchor', function(req, res, next) {
+        console.log("turning on the ganchor page");
+        io.emit("goToGanchorPage", {});
+        res.json({"sent": "done"});
+    });
     return router;
 };
