@@ -5,7 +5,7 @@
  */
 ;(function() {
   angular
-      .module('ganchor')
+      .module('vote')
       .controller('ganchorCtrl', ['$scope', function($scope) {
           $scope.graphOn = false;
           $scope.bettingOn = false;
