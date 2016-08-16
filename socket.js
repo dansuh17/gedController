@@ -16,6 +16,7 @@ var T = new Twit({
   access_token_secret:  keys.access_token_secret
 });
 
+// listens to this hastag!
 var index = {
   hash: "#WSOF32"
 };
@@ -52,7 +53,6 @@ module.exports = function(io, Vote) {
       tomUp = vote.tomUp;
       devinUp = vote.devinUp;
     });
-
 
     socket.on('timerCmd', function(data) {
       if (data.timerCmd == "finished") {
@@ -130,6 +130,5 @@ module.exports = function(io, Vote) {
         console.log("db store successful")
       });
     });
-
   });
 };
