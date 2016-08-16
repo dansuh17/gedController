@@ -7,11 +7,15 @@
   <!-- jQuery dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-  <!-- tap.js -->
+  <!-- angular dependency -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
+  <!-- Graph D3 -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css"/>
@@ -28,15 +32,34 @@
 </head>
 <body ng-app="tap">
 <div id="main" ng-controller="tapCtrl">
-  <!-- invisible tapping area where tapping will let you modify the power balance bar in index.html -->
-  <div id="tapA" ng-click="moveBalanceBar(2)"></div>
-  <div id="tapB" ng-click="moveBalanceBar(-2)"></div>
+  <!-- graph toggle button that shows the graph section when clicked -->
+  <img class="graphToggle" ng-src="{{toggleImage}}" ng-click="showGraph()" />
 
-  <!-- little cute kiswe logo at the bottom left -->
+  <!-- punch images to tap on and increase punch counts for each players -->
+  <div id="tapA">
+    <img class="punchImage" ng-click="increaseFighterPunchCount(1)" ng-src="{{punchImage1}}" />
+    <p class="count">{{fighterCount1}}</p>
+  </div>
+
+  <div id="tapB">
+    <img class="punchImage" ng-click="increaseFighterPunchCount(2)" ng-src="{{punchImage2}}" />
+    <p class="count">{{fighterCount2}}</p>
+  </div>
+
+  <!-- actual graph section -->
+  <div id="graphContainer" ng-show="graphOn">
+    <!-- graph part that brings up d3.js source -->
+    <div class="graph" ng-show="graphOn">
+      <svg ng-show="graphOn" id="myGraph"></svg>
+      <script src="../../assets/javascripts/graph.js"></script>
+    </div>
+  </div>
+  <!-- little cute kiswe logo at the bottom left
   <div id="logo">
     <a href="http://kiswe.com/" target="_blank">
       <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
   </div>
+  -->
 </div>
 </body>
 </html>

@@ -110,7 +110,7 @@ body {
 
 /* Power Balance Bar */
 .progress {
-  background-color: #777777;
+  background-color: #555555;
   box-sizing: border-box;
   height: 100px;
   margin: 10px 0;
@@ -124,6 +124,12 @@ body {
   -webkit-border-bottom-right-radius: 20px;
   -moz-border-radius-bottomright: 20px;
   border-bottom-right-radius: 20px;
+
+  color: white;
+  font-size: 45px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
 }
 
 .progress-small {
@@ -297,6 +303,7 @@ body {
 #ballmove {
   left: 0;
   overflow: hidden;
+  height: 200px;
 }
 
 /*
