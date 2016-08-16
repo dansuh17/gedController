@@ -4,5 +4,5 @@
  */
 ;(function() {
   angular
-      .module('vote', [])
+      .module('ganchor', [])
 })();
