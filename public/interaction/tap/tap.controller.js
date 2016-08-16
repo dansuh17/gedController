@@ -5,8 +5,8 @@
 ;(function() {
   angular
       .module('tap')
-      .controller('tapCtrl', ['$scope', '$http', 'socketFactory',
-        function ($scope, $http, socketFactory) {
+      .controller('tapCtrl', ['$scope', '$http', 'socketFactory', '$location',
+        function ($scope, $http, socketFactory, $location) {
           // cute kiswe logo
           $scope.logoUrl = '../../assets/images/kisweLogo.png';
           $scope.punchImage1 = '../../assets/images/punch_grey.png'; // left
@@ -51,5 +51,22 @@
             socketFactory.storePunchCount(count1, count2);
           };
 
+          /**
+           * Moves to the empty page.
+           */
+          $scope.goToEmptyPage = function() {
+            $location.path('/empty');
+          };
+
+          /**
+           * Socket function that wraps the goToEmptyPage function,
+           * run on receiving 'goToEmptyPage' message.
+           */
+          socketFactory.on('goToEmptyPage', function() {
+            console.log("goToEmptyPage call received - sweep");
+            $scope.$apply(function() {
+              $scope.goToEmptyPage();
+            })
+          });
       }]);
 })();

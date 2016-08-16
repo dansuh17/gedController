@@ -16,11 +16,11 @@ var eMark = "../../assets/images/emark.svg";
 var currentTick = 0;
 var svg = d3.select("svg");
 
-var margin = {top: 10, right: 0, bottom: 0, left: 25};
+var margin = {top: 10, right: 15, bottom: 10, left: 15};
 var width = parseInt(d3.select("#graphContainer").style("width"));
 var height = parseInt(d3.select("#graphContainer").style("height"));
-width = 480;
-height = 250;
+width = 450;
+height = 240;
 
 //width = window.innerWidth / 2 ;`
 //height = window.innerHeight / 2;
