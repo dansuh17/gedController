@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tapping interactive overlay</title>
+
+  <!-- jQuery dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <!-- angular dependency -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
+  <!-- Graph D3 -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css"/>
+  <link rel="stylesheet" href="tap.css">
+
+  <!-- socket.io -->
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+
+  <!-- custom JS files -->
+  <script src="tap.module.js"></script>
+  <script src="tap.factory.js"></script>
+  <script src="empty.controller.js"></script>
+  <script src="tap.controller.js"></script>
+
+</head>
+<body ng-app="tap">
+  <!-- view window where angular controller will draw the screen -->
+  <div ng-view></div>
+</body>
+</html>
