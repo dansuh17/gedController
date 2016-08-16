@@ -6,8 +6,8 @@ var dataA = d3.range(0).map(d3random);
 var dataB = d3.range(0).map(d3random);
 
 
-var fighterA = "../../assets/images/vote1.png";
-var fighterB = "../../assets/images/vote2.png";
+var fighterA = "../../assets/images/fA.png";
+var fighterB = "../../assets/images/fB.png";
 var eMark = "../../assets/images/emark.svg";
 //
 // var timezone = -(1000*60*60*4) + (1000*60*20.7); // -jsTime
@@ -16,10 +16,10 @@ var eMark = "../../assets/images/emark.svg";
 var currentTick = 0;
 var svg = d3.select("svg");
 
-var margin = {top: 10, right: 15, bottom: 10, left: 15};
+var margin = {top: 10, right: 10, bottom: 10, left: 10};
 var width = parseInt(d3.select("#graphContainer").style("width"));
 var height = parseInt(d3.select("#graphContainer").style("height"));
-width = 450;
+width = 420;
 height = 240;
 
 //width = window.innerWidth / 2 ;`
@@ -66,15 +66,27 @@ function tick1() {
         currentTick++;
         //get vote data
         $.ajax({
-            url: "http://ged.uwcj.kr:3000/votes/get", ///perhaps change
+            url: "http://ged.uwcj.kr/punch", ///perhaps change
             dataType: "jsonp",
             success: function (data) {
 
-                punchCountA = data.devinUp; //punchCountA = data.punchCountA;
+                punchCountA = data.fighter1; //punchCountA = data.punchCountA;
                 // punchCountB = data.tomUp; //punchCountB = data.punchCountB;
                 gameGoingOn = data.gameGoingOn;
             }
         });
+
+        $.ajax({
+            url: "http://ged.uwcj.kr/votes/get", ///perhaps change
+            dataType: "jsonp",
+            success: function (data) {
+
+                // punchCountA = data.devinUp; //punchCountA = data.punchCountA;
+                // punchCountB = data.fighter2; //punchCountB = data.punchCountB;
+                gameGoingOn = data.gameGoingOn;
+            }
+        });
+
 
         if (gameGoingOn) {
 
@@ -110,7 +122,7 @@ function tick1() {
             .attr("font-size", width/30+"px")
             .attr("font-family", "HelveticaNeue")
             .style("opacity", 1)
-            .attr("x", width*dataA.length/n - width/16)
+            .attr("x", width*dataA.length/n + width/10)
             .style("stroke", "e91a67")
             .style("fill", "e91a67")
             .attr("y", height - height*punchCountA/y_range - width/32); //- height of image
@@ -124,13 +136,13 @@ function tick2() {
 
         //get vote data
         $.ajax({
-            url: "http://ged.uwcj.kr:3000/votes/get", ///perhaps change
+            url: "http://ged.uwcj.kr/punch", ///perhaps change
             dataType: "jsonp",
             success: function (data) {
 
-                // punchCountA = data.devinUp; //punchCountA = data.punchCountA;
-                punchCountB = data.tomUp; //punchCountB = data.punchCountB;
-                gameGoingOn = data.gameGoingOn;
+                // punchCountA = data.fighter1; //punchCountA = data.punchCountA;
+                punchCountB = data.fighter2; //punchCountB = data.punchCountB;
+                // gameGoingOn = data.gameGoingOn;
             }
         });
 
@@ -169,7 +181,7 @@ function tick2() {
             .attr("font-size", width/30+"px")
             .attr("font-family", "HelveticaNeue")
             .style("opacity", 1)
-            .attr("x", width*dataB.length/n - width/16)
+            .attr("x", width*dataB.length/n + width/10)
             .style("stroke", "32bdf0")
             .style("fill", "32bdf0")
             .attr("y", height - height*punchCountB/y_range - width/32); //- height of image
@@ -252,7 +264,7 @@ function make_roundBorder(roundNum, strokeWidth){
 g.append("rect")
     .attr("x", 0)
     .attr("y", height)
-    .attr("width", width)
+    .attr("width", width+2)
     .attr("height", 5)
     .attr("fill","darkgrey");
 
