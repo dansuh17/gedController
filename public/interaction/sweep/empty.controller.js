@@ -2,14 +2,14 @@
  * Controller for empty page. Listens to a socket message indicating which sweep page to go.
  * by Daniel Suh 8/11/2016
  */
-;(function() {
+((function () {
   angular
       .module('sweep')
       .controller('sweepEmptyCtrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
-        function ($scope, $location, $anchorScroll, socketFactory) {
+        function angularModule($scope, $location, $anchorScroll, socketFactory) {
+
           /**
            * Moves to the sweep page.
-           *
            * @param pageNum the number of sweep page.
            */
           $scope.goToSweepPage = function(pageNum) {
@@ -35,4 +35,4 @@
             })
           });
         }]);
-})();
+})());

@@ -2,19 +2,19 @@
  * Binds the socket and exposes socket.on and socket.emit functions.
  * by daniel suh 8/8/2016
  */
-;(function() {
+((function sweepSocketFactory() {
   angular
       .module('sweep')
-      .factory('socketFactory', [function() {
-        var socket = io.connect();
+      .factory('socketFactory', [function sweepFactoryCallback() {
+        const socket = io.connect();
 
         return {
-          on: function(eventname, callback) {
+          on: function socketOnCallback(eventname, callback) {
             socket.on(eventname, callback);
           },
-          emit: function(eventname, data) {
+          emit: function socketEmitCallback(eventname, data) {
             socket.emit(eventname, data);
-          }
+          },
         };
       }]);
-})();
+})());
