@@ -4,7 +4,7 @@
  */
 ;(function() {
   angular
-      .module('vote')
+      .module('ganchor')
       .factory('socketFactory', [function() {
         var socket = io.connect();
 
