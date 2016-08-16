@@ -30,4 +30,4 @@ Punch.find({}, function(err, results) {
     }
 });
 
-module.exports.Punch = Punch;
+module.exports = Punch;

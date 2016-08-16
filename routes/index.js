@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(io, Vote) {
+module.exports = function(io, Vote, Punch) {
 
     /* GET home page. */
     router.get('/', function(req, res, next) {
@@ -25,7 +25,11 @@ module.exports = function(io, Vote) {
     router.use('/sweep', sweepRoute(io));
 
     var panelRoute = require('./panel');
-    router.use('/panel', panelRoute(io, Vote));
+    router.use('/panel', panelRoute);
+
+
+    var punchRoute = require('./punch');
+    router.use('/punch', punchRoute(Punch));
 
     return router;
 };

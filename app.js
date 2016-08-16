@@ -18,7 +18,7 @@ var Vote = require('./models/votes');
 var Punch = require('./models/punch');
 
 // routes
-var routes = require('./routes/index')(io, Vote);
+var routes = require('./routes/index')(io, Vote, Punch);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public'));
