@@ -44,10 +44,10 @@ DEPRECATED
 
 ## punch 
 
-| Description                      | Verb   | URI             |
-|----------------------------------|--------|-----------------|
-| Change the punch counts          | Post   | /punch          |
-| Get the punch counts             | Get    | /punch          |
+| Description                      | Verb   | URI                            |
+|----------------------------------|--------|--------------------------------|
+| Change the punch counts          | Post   | /punch/:fighter1/:fighter2     |
+| Get the punch counts             | Get    | /punch                         |
 
 
 
