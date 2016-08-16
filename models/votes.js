@@ -11,7 +11,6 @@ var VoteSchema = new mongoose.Schema({
 );
 
 const Vote = mongoose.model('Vote', VoteSchema);
-mongoose.connect('mongodb://localhost:27017/ged');
 
 // test if the desired document already exists and if it doesn't,
 // save a dummy data for warming up the fresh db
@@ -40,4 +39,4 @@ Vote.find({}, function(err, results) {
   }
 });
 
-module.exports.Vote = Vote;
+module.exports = Vote;

@@ -12,7 +12,10 @@ var io = socketio();
 app.io = io;
 
 // mongoose
-var Vote = require('./models/votes').Vote;
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/ged');
+var Vote = require('./models/votes');
+var Punch = require('./models/punch');
 
 // routes
 var routes = require('./routes/index')(io, Vote);
