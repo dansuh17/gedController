@@ -9,7 +9,7 @@
  */
 ;(function() {
   angular
-      .module('vote')
+      .module('ganchor')
       .controller('voteCtrl', ['$scope', '$timeout', 'socketFactory', function ($scope, $timeout, socketFactory) {
         // status of the vote - 0 : default (no vote yet cast) 1 > voted for according player
         $scope.currentVotePic = '../../assets/images/vote0.png'; // default image
