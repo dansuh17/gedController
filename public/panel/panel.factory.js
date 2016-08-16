@@ -42,6 +42,10 @@
                     return $http.post('/sweep/setSweep/' + pageNum.toString(), {}).success(function(data) {
                     });
 
+                },
+
+                punch_set: function(punch1, punch2) {
+                    return $http.post('/punch/' + punch1.toString() + '/' + punch2.toString(), {});
                 }
             };
         }]);

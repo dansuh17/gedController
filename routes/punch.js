@@ -9,6 +9,7 @@ module.exports = function(Punch) {
                 fighter2: req.params.fighter2},
             function (err, punch) {
                 if (err) {return next(err);}
+                console.log("successfully updated punch.");
                 res.json(punch);
             });
     });

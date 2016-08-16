@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 var PunchSchema = new mongoose.Schema({
-        fighterA: Number,
-        fighterB: Number
+        fighter1: Number,
+        fighter2: Number
     },
     {
         timestamps: true
@@ -19,8 +19,8 @@ Punch.find({}, function(err, results) {
         console.log("Punch mongo DB to be initiated.");
 
         var newPunch = new Punch({
-            fighterA: 0,
-            fighterB: 0
+            fighter1: 0,
+            fighter2: 0
         });
         newPunch.save(function (err) {
             if (err) {

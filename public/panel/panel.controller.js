@@ -44,5 +44,14 @@
             console.log("sweep set page : " + pageNum.toString());
             panelFactory.sweep_set_page(pageNum);
         }
+
+
+
+
+        $scope.punch_set = function(punch1, punch2) {
+            console.log("set punch counts to " + punch1.toString(), punch2.toString());
+            panelFactory.punch_set(punch1, punch2);
+        }
+
     }]);
 })();
