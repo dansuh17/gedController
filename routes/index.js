@@ -27,7 +27,6 @@ module.exports = function(io, Vote, Punch) {
     var panelRoute = require('./panel');
     router.use('/panel', panelRoute);
 
-
     var punchRoute = require('./punch');
     router.use('/punch', punchRoute(Punch));
 

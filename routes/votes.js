@@ -3,8 +3,6 @@ var router = express.Router();
 
 module.exports = function(io, Vote) {
 
-
-
     router.post('/gameGoingOn/:bool', function(req, res, next) {
         console.log("API CALL : POST gameGoingOn/" + req.params.bool);
         Vote.findOneAndUpdate({}, {gameGoingOn:req.params.bool},
@@ -39,7 +37,5 @@ module.exports = function(io, Vote) {
             }
         });
     });
-
-
     return router;
 };

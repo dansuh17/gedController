@@ -14,7 +14,6 @@ module.exports = function(io, Vote) {
         res.json({"sent": "done"});
     });
 
-
     router.post('/setCount/:cd', function(req, res, next) {
         var newCountdown = req.params.cd;
         console.log("API CALL : POST /timer/setCount/:" + req.params.cd);
@@ -24,7 +23,6 @@ module.exports = function(io, Vote) {
         });
         res.json({"sent": "done"});
     });
-
 
     router.post('/start', function(req, res, next) {
         console.log("API CALL : POST /timer/start : socket emit called. ");
@@ -39,7 +37,6 @@ module.exports = function(io, Vote) {
             });
     });
 
-
     router.post('/stop', function(req, res, next) {
         console.log("API CALL : POST /timer/stop : socket emit called. ");
         io.emit('timerCmd', {
@@ -53,7 +50,6 @@ module.exports = function(io, Vote) {
             });
     });
 
-
     router.post('/reset', function(req, res, next) {
         console.log("API CALL : POST /timer/reset : socket emit called. ");
         io.emit('timerCmd', {
@@ -61,7 +57,6 @@ module.exports = function(io, Vote) {
         });
         res.json({"sent": "done"});
     });
-
 
     return router;
 };

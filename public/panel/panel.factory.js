@@ -41,7 +41,6 @@
                 sweep_set_page: function(pageNum) {
                     return $http.post('/sweep/setSweep/' + pageNum.toString(), {}).success(function(data) {
                     });
-
                 },
 
                 punch_set: function(punch1, punch2) {
