@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(Punch) {
+module.exports = function(Punch, io) {
     router.post('/:fighter1/:fighter2', function(req, res, next) {
         console.log("API CALL : POST to punch" + req.params.fighter1 + "/" + req.params.fighter2);
         Punch.findOneAndUpdate({}, { fighter1:req.params.fighter1,
@@ -30,5 +30,28 @@ module.exports = function(Punch) {
 
         });
     });
+
+    /**
+     * Set the tapping page to empty page.
+     */
+    router.post('/setEmpty', function(req, res, next) {
+        console.log("stop punch interaction and show empty page");
+        io.emit("goToEmptyPage", {});
+        res.json({"sent": "done"});
+    });
+
+    /**
+     * Requests the empty page to open up a page indicated
+     * by PAGENUM.
+     */
+    router.post('/setTap', function(req, res, next) {
+        var pageNum = req.params.pageNum;
+        console.log("turning on the tap page num : " + req.params.pageNum);
+        io.emit("goToTapPage", {
+            pageNum: pageNum
+        });
+        res.json({"sent": "done"});
+    });
+
     return router;
 };

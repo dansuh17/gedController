@@ -125,7 +125,7 @@ module.exports = function(io, Vote) {
       Vote.findOneAndUpdate({}, {tomUp:tomUp, devinUp:devinUp}, function(err, vote) {
         if (err) {
           console.log("DB ERROR");
-          return next(err);
+         return next(err);
         }
         console.log("db store successful")
       });
