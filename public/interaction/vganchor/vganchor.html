@@ -1,11 +1,12 @@
 <div id="Maincontainer">
 
   <div id="graphContainer" ng-show="kisweOn">
+
     <!-- graph part that brings up d3.js source -->
     <div class="graph" ng-show="graphOn">
 
       <svg ng-show="graphOn" id="myGraph"></svg>
-      <script src="../../assets/javascripts/graph.js"></script>
+      <script src="graph.js"></script>
     </div>
 
     <!-- betting part that brings up betting source -->
@@ -29,6 +30,7 @@
        src="../../assets/images/kiswe_button.png">
 
   <div id="main" ng-controller="vganchorVoteCtrl">
+
     <!-- click on the image and you vote for the other guy -->
     <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
   </div>
