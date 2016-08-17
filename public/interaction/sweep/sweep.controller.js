@@ -10,27 +10,30 @@
  *  templateUrl : /sweep_icon
  *  by Daniel Suh 8/1/2016
  */
-;(function() {
+/* global p5:true */
+((function SweepController() {
   angular
       .module('sweep')
-      .controller('sweepCtrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
-        function ($scope, $location, $anchorScroll, socketFactory) {
+      .controller('SweepController', ['$scope', '$location', '$log', 'socketFactory',
+        function SweepControllerCallback($scope, $location, $log, socketFactory) {
+          var vm = this; // defines the controller scope
 
           /* P5 instance mode part */
-          ///////////////////// P5 codes START ////////////////////
-          var sketch = function(pFive) {
+          // P5 Codes START
+          var sketch = function sketchPfive(pFive) {
             var boids = [];
             var images = [];
             var pressed = false;
             var centerVector;
             var canvas;
-            const imageHalfWidth = 100;
-            const imageHalfHeight = 100;
+            var imageHalfWidth = 100;
+            var imageHalfHeight = 100;
+            var i;
 
             /**
              * Preloads images before drawing canvas.
              */
-            pFive.preload = function () {
+            pFive.preload = function p5preload() {
               images[0] = pFive.loadImage('../../assets/images/alien_blue.png');
               images[1] = pFive.loadImage('../../assets/images/alien_red.png');
               images[2] = pFive.loadImage('../../assets/images/alien_yellow.png');
@@ -41,15 +44,15 @@
              * Setup the canvas.
              * Initialize the canvas and also initialize the boids' starting points.
              */
-            pFive.setup = function () {
+            pFive.setup = function p5setup() {
               setupCanvas();
               // center position = center of gravity
               centerVector = pFive.createVector(pFive.width/2, pFive.height/2);
 
               // create boids given random initial positions outside the canvas boundaries
               // so that boids would close in from outside
-              for (var i = 0; i < 15; i++) {
-                if (i % 2 == 0) {
+              for (i = 0; i < 15; i++) {
+                if (i % 2 === 0) {
                   boids[i] = new Boid(
                       pFive.random(pFive.width + 10, pFive.width + 50),
                       pFive.random(-20, pFive.height + 20),
@@ -69,13 +72,13 @@
             /**
              * The draw loop.
              */
-            pFive.draw = function () {
+            pFive.draw = function p5draw() {
               pFive.clear(); // clear the canvas every frame
               determineLoopContinue();
               pFive.background(255, 255, 255, 0);
 
               // Run all the boids
-              for (var i = 0; i < boids.length; i++) {
+              for (i = 0; i < boids.length; i++) {
                 boids[i].run(boids);
               }
 
@@ -89,7 +92,7 @@
              * If mouse pressed, set PRESSED to true so that according
              * effect can take place.
              */
-            pFive.mousePressed = function () {
+            pFive.mousePressed = function p5mousePressed() {
               pressed = true;
             };
 
@@ -116,7 +119,7 @@
              * Takes into account the effect of gravity and
              * the effect of mouse press.
              */
-            Boid.prototype.run = function () {
+            Boid.prototype.run = function boidRun() {
               this.gravity();
               this.update();
               this.render();
@@ -125,7 +128,7 @@
             /**
              * Simulates the gravitational force (which is actually a spring-mass system).
              */
-            Boid.prototype.gravity = function () {
+            Boid.prototype.gravity = function boidGravity() {
               // calculate the distance from the center to this boid
               var direction = p5.Vector.sub(centerVector, this.position).normalize();
               var distance = p5.Vector.dist(centerVector, this.position);
@@ -138,7 +141,9 @@
              * Updates the acceleration, velocity, and position of each boids
              * according to previous values.
              */
-            Boid.prototype.update = function() {
+            Boid.prototype.update = function boidStatusUpdate() {
+              var mouseVector;
+
               // randomize acceleration to simulate drunken walker
               this.acceleration.add(pFive.random(-0.01, 0.01), pFive.random(-0.01, 0.01));
 
@@ -149,7 +154,7 @@
               // if the mouse is pressed, the nearby boids move in the opposite
               // direction from the selected location so that it clears out the space.
               if (pressed) {
-                var mouseVector = pFive.createVector(pFive.mouseX, pFive.mouseY);
+                mouseVector = pFive.createVector(pFive.mouseX, pFive.mouseY);
                 this.repel(mouseVector);
               }
 
@@ -176,7 +181,7 @@
              *
              * @param force the force taken place on the boid
              */
-            Boid.prototype.applyForce = function(force) {
+            Boid.prototype.applyForce = function (force) {
               this.acceleration.add(force);
             };
 
@@ -189,7 +194,7 @@
              *
              * @param mouseVector the point of mouse click
              */
-            Boid.prototype.repel = function(mouseVector) {
+            Boid.prototype.repel = function (mouseVector) {
               var imageCenterVector = pFive.createVector(
                   this.position.x + imageHalfWidth,
                   this.position.y + imageHalfHeight
@@ -230,12 +235,12 @@
           /* instantiate p5 canvas */
           var myp5 = new p5(sketch);
 
-          ///////////////////// P5 codes END ////////////////////
+          // P5 Codes END
 
           /**
            * Moves to the empty page.
            */
-          $scope.goToEmptyPage = function() {
+          vm.goToEmptyPage = function() {
             $location.path('/empty');
           };
 
@@ -243,11 +248,11 @@
            * Socket function that wraps the goToEmptyPage function,
            * run on receiving 'goToEmptyPage' message.
            */
-          socketFactory.on('goToEmptyPage', function() {
-            console.log('goToEmptyPage call received - sweep');
-            $scope.$apply(function() {
-              $scope.goToEmptyPage();
-            })
+          socketFactory.on('goToEmptyPage', function goToEmptyCallback() {
+            $log('goToEmptyPage call received - sweep');
+            $scope.$apply(function goToEmptyApply() {
+              vm.goToEmptyPage();
+            });
           });
         }]);
-})();
+})());
