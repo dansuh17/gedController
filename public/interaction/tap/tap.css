@@ -48,7 +48,7 @@ body {
   color: darkgray;
   font-size: 30px;
   text-align: center;
-  text-shadow: 0 0 3px red;
+  text-shadow: 0 0 2px black;
 }
 
 .punchImage {

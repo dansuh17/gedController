@@ -2,37 +2,38 @@
  * Controller for tapping events.
  * by Daniel Suh 7/28/2016
  */
-;(function() {
+((function TapController() {
   angular
       .module('tap')
-      .controller('tapCtrl', ['$scope', '$http', 'socketFactory', '$location',
-        function ($scope, $http, socketFactory, $location) {
-          // cute kiswe logo
-          $scope.logoUrl = '../../assets/images/kisweLogo.png';
-          $scope.punchImage1 = '../../assets/images/punch_grey.png'; // left
-          $scope.punchImage2 = '../../assets/images/punch_red.png'; // right
-          $scope.toggleImage = '../../assets/images/graph_button.png'; // toggle button
+      .controller('TapController', ['$scope', 'socketFactory', '$location', '$log',
+        function TapControllerCallback($scope, socketFactory, $location, $log) {
+          var vm = this;
+          vm.logoUrl = '../../assets/images/kisweLogo.png'; // cute Kiswe logo - not used
+          vm.punchImage1 = '../../assets/images/punch_grey.png'; // left
+          vm.punchImage2 = '../../assets/images/punch_red.png'; // right
+          vm.toggleImage = '../../assets/images/graph_button.png'; // toggle button
+          vm.fighterCount1 = 0; // left punch count
+          vm.fighterCount2 = 0; // right punch count
+          vm.graphOn = false;
 
-          $scope.fighterCount1 = 0;
-          $scope.fighterCount2 = 0;
-
-          $scope.graphOn = false;
-
-          $scope.showGraph = function() {
-            $scope.graphOn = !$scope.graphOn;
+          /**
+           * Toggles the graph button.
+           */
+          vm.showGraph = function showGraph() {
+            vm.graphOn = !vm.graphOn;
           };
 
           /**
            * Increment per tap the punch count for each fighter.
            * @param num the fighter number.
            */
-          $scope.increaseFighterPunchCount = function(num) {
-            if (num == 1) {
-              $scope.fighterCount1++;
-            } else if (num == 2) {
-              $scope.fighterCount2++;
+          vm.increaseFighterPunchCount = function increaseFighterPunchCount(num) {
+            if (num === 1) {
+              vm.fighterCount1++;
+            } else if (num === 2) {
+              vm.fighterCount2++;
             }
-            $scope.storePunchCount($scope.fighterCount1, $scope.fighterCount2);
+            vm.storePunchCount(vm.fighterCount1, vm.fighterCount2);
           };
 
           /**
@@ -41,20 +42,25 @@
            * in power bar controller of the resting page through socket.
            * @param amount the amount to change the balance bar
            */
-          $scope.moveBalanceBar = function(amount) {
-            console.log('moveBalanceBar emit : ' + amount);
-            socketFactory.emit('addPowerBalance', {amount: amount});
+          vm.moveBalanceBar = function moveBalanceBar(amount) {
+            $log('moveBalanceBar emit : ' + amount);
+            socketFactory.emit('addPowerBalance', { amount: amount });
           };
 
-          $scope.storePunchCount = function(count1, count2) {
-              console.log("storePunchCount called on controller");
+          /**
+           * Adds the current user's punch count to the database.
+           * @param count1 left punch count
+           * @param count2 right punch count
+           */
+          vm.storePunchCount = function storePunchCount(count1, count2) {
+            $log('storePunchCount called on controller');
             socketFactory.storePunchCount(count1, count2);
           };
 
           /**
            * Moves to the empty page.
            */
-          $scope.goToEmptyPage = function() {
+          vm.goToEmptyPage = function goToEmptyPage() {
             $location.path('/empty');
           };
 
@@ -62,11 +68,11 @@
            * Socket function that wraps the goToEmptyPage function,
            * run on receiving 'goToEmptyPage' message.
            */
-          socketFactory.on('tap_set_empty', function() {
-            console.log("goToPunchEmpty call received - sweep");
-            $scope.$apply(function() {
-              $scope.goToEmptyPage();
-            })
+          socketFactory.on('tap_set_empty', function goToEmptyOn() {
+            $log.log('goToPunchEmpty call received - sweep');
+            $scope.$apply(function goToEmptyApply() {
+              vm.goToEmptyPage();
+            });
           });
-      }]);
-})();
+        }]);
+})());

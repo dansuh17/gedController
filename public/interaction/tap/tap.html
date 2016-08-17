@@ -1,33 +1,25 @@
-<!--<script src="../../assets/javascripts/graph.js"></script>-->
-<div id="main" ng-controller="tapCtrl">
+<!--script src="../vganchor/graph.js"></script-->
+<div id="main">
   <!-- graph toggle button that shows the graph section when clicked -->
-  <!--
-  <img class="graphToggle" ng-src="{{toggleImage}}" ng-click="showGraph()" />
-  -->
+  <img class="graphToggle" ng-src="{{vm.toggleImage}}" ng-click="vm.showGraph()" />
 
   <!-- punch images to tap on and increase punch counts for each players -->
   <div id="tapA">
-    <img class="punchImage" ng-click="increaseFighterPunchCount(1)" ng-src="{{punchImage1}}" />
-    <p class="count">{{fighterCount1}}</p>
+    <img class="punchImage" ng-click="vm.increaseFighterPunchCount(1)" ng-src="{{vm.punchImage1}}" />
+    <p class="count">{{vm.fighterCount1}}</p>
   </div>
 
   <div id="tapB">
-    <img class="punchImage" ng-click="increaseFighterPunchCount(2)" ng-src="{{punchImage2}}" />
-    <p class="count">{{fighterCount2}}</p>
+    <img class="punchImage" ng-click="vm.increaseFighterPunchCount(2)" ng-src="{{vm.punchImage2}}" />
+    <p class="count">{{vm.fighterCount2}}</p>
   </div>
 
   <!-- actual graph section -->
-  <div id="graphContainer" ng-show="graphOn">
+  <div id="graphContainer" ng-show="vm.graphOn">
     <!-- graph part that brings up d3.js source -->
-    <div class="graph" ng-show="graphOn">
-      <svg ng-show="graphOn" id="myGraph"></svg>
+    <div class="graph" ng-show="vm.graphOn">
+      <svg ng-show="vm.graphOn" id="myGraph"></svg>
     </div>
   </div>
-  <!-- little cute kiswe logo at the bottom left
-  <div id="logo">
-    <a href="http://kiswe.com/" target="_blank">
-      <img ng-src="{{ logoUrl }}" width="48" height="48"/></a>
-  </div>
-  -->
 </div>
 
