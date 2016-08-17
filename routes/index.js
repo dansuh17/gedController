@@ -13,7 +13,7 @@ module.exports = function (io, Vote, Punch) {
   });
 
   /* GET overlay pages */
-  var overlayRoute = require('./overlay');
+  var overlayRoute = require('./overlay')(io);
   router.use('/overlay', overlayRoute);
 
   /* for handling power bar */

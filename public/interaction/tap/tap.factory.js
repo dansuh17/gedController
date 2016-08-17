@@ -32,7 +32,7 @@
               var data = JSON.stringify({fighter1: count1 + prev1, fighter2: count2 + prev2});
               console.log('storePunchCount emit : ', + count1 + ', ' + count2);
 
-              $http.post('/punch/' + count1 + '/' + count2, {}).then(function(response) {
+              $http.post('/punch/', { fighter1: count1, fighter2: count2 }).then(function(response) {
                 console.log("punch count successfully stored");
               });
             });
