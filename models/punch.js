@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 var PunchSchema = new mongoose.Schema({
         fighter1: Number,

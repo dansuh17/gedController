@@ -3,7 +3,8 @@ module.exports = {
     "env": {
         "browser": 1
     },
-    "plugins": [
-        "angular"
-    ]
+    "rules": {
+        "angular/di": [2, "array"],
+        "wrap-iife": [2, "inside"]
+    }
 };

@@ -1,11 +1,11 @@
 /**
  * Controller for the power balance bar.
  */
-;(function() {
+(function () {
   angular
       .module('gedApp')
-      .controller('powerCtrl', ['$scope', 'socket', '$http', '$interval',
-        function($scope, socket, $http, $interval) {
+      .controller('powerController', ['$scope', 'socket', '$http', '$interval', '$log',
+        function ($scope, socket, $http, $interval, $log) {
           $scope.powerBalance = 50;
           $scope.leftColor = 'grad-normal';
           $scope.rightColor = 'grad-normal';
@@ -15,7 +15,6 @@
            */
           $interval(function() {
             $http.get("http://ged.uwcj.kr/votes/get").then(function (response) {
-              console.log(response.data.tomUp);
               var balance = 100 * response.data.tomUp / (response.data.tomUp + response.data.devinUp);
               $scope.powerBalance = Math.round(balance);
             });
