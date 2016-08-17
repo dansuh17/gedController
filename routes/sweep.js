@@ -5,26 +5,25 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(io) {
-
+module.exports = function (io) {
   // set the sweep page to empty page
-  router.post('/setEmpty', function(req, res, next) {
-    console.log("stop sweep interaction and show empty page");
-    io.emit("goToEmptyPage", {});
-    res.json({"sent": "done"});
+  router.post('/setEmpty', function (req, res) {
+    console.log('stop sweep interaction and show empty page');
+    io.emit('goToEmptyPage', {});
+    res.json({ sent: 'done' });
   });
 
   /**
    * Requests the empty page to open up a sweep page indicated
    * by PAGENUM.
    */
-  router.post('/setSweep/:pageNum', function(req, res, next) {
+  router.post('/setSweep/:pageNum', function (req, res) {
     var pageNum = req.params.pageNum;
-    console.log("turning on the sweep page num : " + req.params.pageNum);
-    io.emit("goToSweepPage", {
+    console.log('turning on the sweep page num : ' + req.params.pageNum);
+    io.emit('goToSweepPage', {
       pageNum: pageNum
     });
-    res.json({"sent": "done"});
+    res.json({ sent: 'done' });
   });
 
   return router;
