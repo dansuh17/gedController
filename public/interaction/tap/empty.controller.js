@@ -22,7 +22,7 @@
            * Socket function that wraps the goToTapPage function,
            * run on receiving 'goToTapPage' message.
            */
-          socketFactory.on('goToTapPage', function() {
+          socketFactory.on('tap_set', function() {
             console.log("goToTapPage call received from /empty");
             $scope.$apply(function() {
               $scope.goToTapPage();

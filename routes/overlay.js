@@ -38,7 +38,7 @@ module.exports = function (io) {
   router.post('/sweep/', function (req, res) {
     var page = req.body.page;
     console.log('turning on the sweep page num : ' + req.body.page);
-    if (req.body.page === "empty") {
+    if (req.body.page === 'empty') {
       io.emit('sweep_set_empty', {});
     } else {
       io.emit('sweep_set', {
@@ -55,9 +55,13 @@ module.exports = function (io) {
    */
   router.post('/tap', function (req, res) {
     var page = req.body.page;
-    io.emit('tap_set', {
-      page: page
-    });
+    if (page === 'empty') {
+      io.emit('tap_set_empty', {});
+    } else {
+      io.emit('tap_set', {
+        page: page
+      });
+    }
     res.json({ sent: 'done' });
   });
 
