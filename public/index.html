@@ -50,28 +50,28 @@
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
     </head>
-    <body ng-app="gedApp" ng-controller="MainController">
+    <body ng-app="gedApp" ng-controller="MainController as vm">
         <div id="bodyContainer">
             <!-- this will contain everything -->
             <div id="flexMainBody">
-                <div class="upperBar" ng-controller="TimeController">
+                <div class="upperBar" ng-controller="TimeController as vm">
                     <!-- container for round number + timer -->
                     <div class="gameInfo">
                         <div class="roundNumber">
                             <span id="round"> ROUND </span>
-                            <span id="number"> {{ roundNo }} </span>
+                            <span id="number"> {{ vm.roundNo }} </span>
                         </div>
-                        <timer class="timer" finish-callback="finish_callback()" auto-start="false" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
+                        <timer class="timer" finish-callback="vm.finish_callback()" auto-start="false" countdown="300" interval='1000'>{{minutes}} : {{seconds}}</timer>
                     </div>
                 </div>
 
-                <div ng-controller="powerController">
+                <div ng-controller="powerController as vm">
                   <power-balance></power-balance>
                 </div>
 
                 <!-- particle clusters -->
                 <div id="ballmove"></div>
-                <div class="content" ng-controller="TwitController" ng-hide="feedList.length==0">
+                <div class="content" ng-controller="TwitController as vm" ng-hide="vm.feedList.length==0">
                     <!-- Twitter feed -->
                     <div id="twitterfeed">
                         <img ng-src="{{tweet.icon}}" alt>
