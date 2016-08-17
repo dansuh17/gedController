@@ -91,49 +91,53 @@ For more information, refer to [Twit](https://github.com/ttezel/twit), which is 
 | Description                      | Verb   | URI                                 | Old URI|
 |----------------------------------|--------|-------------------------------------|--------|
 | get the rest page                | Get    | /                                   |        |
-| get the sweep overlay page       | Get    | /overlay/sweep/                     |        |
-| get the tap(punch) overlay page  | Get    | /overlay/tap/                       |        |
-| get the vganchor overlay page    | Get    | /overlay/vganchor/                  |        |
+
+
+### overlay 
+For turning the overlay on/off
+| Description                      | Verb   | URI                                 |         |
+|----------------------------------|--------|-------------------------------------|---------|
+| get the sweep overlay page       | Get    | /overlay/sweep/                     |         |
+| get the tap(punch) overlay page  | Get    | /overlay/tap/                       |         |
+| get the vganchor overlay page    | Get    | /overlay/vganchor/                  |         |
+| set the sweep page to empty      | Post   | /overlay/sweep/setEmpty             |         |
+| open up the sweep page by PAGENUM| Post   | /overlay/sweep/setSweep/            |         |
+| set the sweep page to empty      | Post   | /overlay/tap/setEmpty               |         |
+| open up the sweep page by PAGENUM| Post   | /overlay/tap/setSweep/              |         |
+| set the sweep page to empty      | Post   | /overlay/vganchor/setEmpty          |         |
+| open up the sweep page by PAGENUM| Post   | /overlay/vganchor/setSweep/         |         |
+
+
+### votes
+| Description                      | Verb   | URI                                 |         |
+|----------------------------------|--------|-------------------------------------|---------|
+| Change the number of votes       | Post   | /votes/                             |         |
+| vote status and game status      | Get    | /votes/                             |         |
+
+
+### punch 
+| Description                                   | Verb   | URI       |
+|-----------------------------------------------|--------|-----------|
+| Post punch counts for fighter1 and fighter 2  | Post   | /punch/   |
+| Get punch counts for fighter1 and fighter 2   | Get    | /punch/   |
+
+
+
+
+### timer
+| Description                      | Verb   | URI                                 |         |
+|----------------------------------|--------|-------------------------------------|---------|
+| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo          |         |
+| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd                 |         |
+| Change the game running status   | Post   | /timer/start                        |         |
+| Change the game running status   | Post   | /timer/stop                         |         |
+| Change the game running status   | Post   | /timer/reset                        |         |
+
+
 
 ### power
 
 DEPRECATED
-
-
-### votes
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the number of votes       | Post   | /votes/set/:devinUp/:tomUp          | |
-| vote status and game status      | Get    | /votes/get                          | |
-| to be deprecated                 | Post   | /votes/gameGoingOn/:bool            | |
-
-
-### timer
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo          |         |
-| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd                 | /timer/timerCmd/setCountdown/:countdown |
-| Change the game running status   | Post   | /timer/start                        | /votes/gameGoingOn/:bool            |
-| Change the game running status   | Post   | /timer/stop                         | /votes/gameGoingOn/:bool            |
-| Change the game running status   | Post   | /timer/reset                        | /votes/gameGoingOn/:bool            |
-
-### sweep
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| set the sweep page to empty      | Post   | /sweep/setEmpty                     |         |
-| open up the sweep page by PAGENUM| Post   | /sweep/setSweep/:pageNum            |         |
-
-
-### punch 
-
-| Description                      | Verb   | URI                            |
-|----------------------------------|--------|--------------------------------|
-| Change the punch counts          | Post   | /punch/:fighter1/:fighter2     |
-| Get the punch counts             | Get    | /punch                         |
-
 
 
 

@@ -31,7 +31,7 @@ module.exports = function(io, Vote) {
 
     Vote.findOneAndUpdate({}, { gameGoingOn: true },
         function (err, vote) {
-          if (err) { return next(err); }
+          if (err) { next(err); }
           res.json(vote);
         });
   });
@@ -44,7 +44,7 @@ module.exports = function(io, Vote) {
 
     Vote.findOneAndUpdate({}, { gameGoingOn: false },
         function (err, vote) {
-          if (err) { return next(err); }
+          if (err) { next(err); }
           res.json(vote);
         });
   });

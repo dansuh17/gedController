@@ -12,28 +12,27 @@ module.exports = function (io, Vote, Punch) {
     res.render('panel');
   });
 
-  /* GET overlay pages */
-  var overlayRoute = require('./overlay');
-  router.use('/overlay', overlayRoute);
+  /* for handling timer and round slates on rest page */
+  var timerRoute = require('./timer');
+  router.use('/timer', timerRoute(io, Vote));
 
-  /* for handling power bar */
-  var powerRoute = require('./power');
-  router.use('/power', powerRoute(io));
+
+  /* GET overlay pages */
+  var overlayRoute = require('./overlay')(io);
+  router.use('/overlay', overlayRoute);
 
   /* for managing votes */
   var votesRoute = require('./votes');
   router.use('/votes', votesRoute(io, Vote));
 
-  /* for handling power bar */
-  var timerRoute = require('./timer');
-  router.use('/timer', timerRoute(io, Vote));
-
-  /* for sweep interaction page */
-  var sweepRoute = require('./sweep');
-  router.use('/sweep', sweepRoute(io));
-
+  /* for managing the punch counts on tap page */
   var punchRoute = require('./punch');
   router.use('/punch', punchRoute(Punch, io));
+
+
+  /* DEPRECATED */
+  var powerRoute = require('./power');
+  router.use('/power', powerRoute(io));
 
   return router;
 };
