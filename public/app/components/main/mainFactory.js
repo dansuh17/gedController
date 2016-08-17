@@ -4,7 +4,7 @@
         var socket = io.connect();
 
         return {
-          on: function (eventName, callback){
+          on: function (eventName, callback) {
             socket.on(eventName, callback);
           },
           emit: function (eventName, data) {

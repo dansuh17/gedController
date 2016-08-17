@@ -5,12 +5,12 @@
 (function () {
   angular
       .module('gedApp')
-      .controller('TimeController', ['$scope', 'socket', function ($scope, socket) {
+      .controller('TimeController', ['$scope', 'socket', '$log', function ($scope, socket, $log) {
         var vm = this;
         vm.roundNo = 1;
 
         vm.finish_callback = function () {
-          console.log('timer finished. socket call for now.');
+          $log.log('timer finished. socket call for now.');
           socket.emit('timerCmd', {
             timerCmd: 'finished'
           });
@@ -21,7 +21,7 @@
         };
 
         socket.on('roundNo', function (data) {
-          console.log('roundNo received.' + data.roundNo);
+          $log.log('roundNo received.' + data.roundNo);
 
           $scope.$apply(function () {
             vm.setRoundNo(data.roundNo);
@@ -31,7 +31,7 @@
         vm.timerRunning = false;
 
         socket.on('timerCmd', function (data) {
-          console.log('timer command received. ' + data.timerCmd);
+          $log.log('timer command received. ' + data.timerCmd);
 
           if (data.timerCmd === 'stop') {
             $scope.$apply(function () {
