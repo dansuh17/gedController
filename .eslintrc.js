@@ -1,11 +1,3 @@
 module.exports = {
-  "extends": "airbnb",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
-  "globals": {
-    "angular": 1
-  }
+  "extends": "airbnb-base/legacy",
 };
