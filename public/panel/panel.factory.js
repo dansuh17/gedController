@@ -3,17 +3,17 @@
   angular.module('panelApp')
       .factory('panelFactory', ['$http', function($http) {
         return {
-          timer_start: function() {
+          timer_start: function () {
             return $http.post('/timer/start').success(function(data) {
             });
           },
 
-          timer_stop: function() {
+          timer_stop: function () {
             return $http.post('/timer/stop').success(function(data) {
             });
           },
 
-          timer_reset: function() {
+          timer_reset: function () {
             return $http.post('/timer/reset').success(function(data) {
             });
           },
@@ -39,31 +39,31 @@
 
           /* sweep page */
           sweep_set_empty: function () {
-            return $http.post('/overlay/setEmpty/', {});
+            return $http.post('/overlay/sweep/', { page: 'empty' });
           },
 
-          sweep_set_page: function (pageNum) {
-            return $http.post('/overlay/setSweep/', { pageNum: pageNum });
+          sweep_set: function (page) {
+            return $http.post('/overlay/sweep/', { page: page });
           },
 
 
           /* tap/punch page */
-          punch_set_empty: function () {
-            return $http.post('/overlay/setPunchEmpty/');
+          tap_set_empty: function () {
+            return $http.post('/overlay/tap/', { page: 'empty' });
           },
 
-          punch_set_tap: function () {
-            return $http.post('/overlay/setTap/');
+          tap_set: function () {
+            return $http.post('/overlay/tap/', { page: 'on' });
           },
 
 
           /* vganchor page */
-          ganchor_set_empty: function () {
-            return $http.post('/overlay/setGanchorEmpty/');
+          vganchor_set_empty: function () {
+            return $http.post('/overlay/vganchor/', { page: 'empty' });
           },
 
-          ganchor_set_tap: function () {
-            return $http.post('/overlay/setGanchor/');
+          vganchor_set: function () {
+            return $http.post('/overlay/vganchor/', { page: 'on' });
           }
         };
       }]);

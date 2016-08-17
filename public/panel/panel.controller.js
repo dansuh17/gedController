@@ -1,71 +1,74 @@
-;(function() {
-    angular.module('panelApp').controller('panelController', ['$scope', 'panelFactory', function($scope, panelFactory){
-        $scope.timer_start= function () {
-            console.log("timer start");
-            panelFactory.timer_start();
+(function () {
+  angular.module('panelApp').controller('PanelController',
+      ['$scope', '$log', 'panelFactory', function ($scope, $log, panelFactory) {
+        var vm = this;
+
+        vm.timer_start = function () {
+          $log.log('timer start');
+          panelFactory.timer_start();
         };
 
-        $scope.timer_stop= function () {
-            console.log("timer stop");
-            panelFactory.timer_stop();
+        vm.timer_stop = function () {
+          $log.log('timer stop');
+          panelFactory.timer_stop();
         };
 
-        $scope.timer_reset= function () {
-            console.log("timer reset");
-            panelFactory.timer_reset();
+        vm.timer_reset = function () {
+          $log.log('timer reset');
+          panelFactory.timer_reset();
         };
 
-        $scope.set_round= function (roundNo) {
-            console.log("set round number to " + roundNo);
-            panelFactory.set_round(roundNo);
+        vm.set_round = function (roundNo) {
+          $log.log('set round number to ' + roundNo);
+          panelFactory.set_round(roundNo);
         };
 
-        $scope.countdownInput = 0;
-        $scope.set_countdown= function (countdownInput) {
-            console.log("set countdown to " + countdownInput + "(s).");
-            panelFactory.set_countdown(countdownInput);
+        vm.countdownInput = 0;
+        vm.set_countdown = function (countdownInput) {
+          $log.log('set countdown to s' + countdownInput + '(s).');
+          panelFactory.set_countdown(countdownInput);
         };
 
-        $scope.devinUp= 0;
-        $scope.tomUp= 0;
-        $scope.votes_set= function (devinUp, tomUp) {
-            console.log("set votes to " + devinUp.toString() + ", " + tomUp.toString());
-            panelFactory.votes_set(devinUp, tomUp);
+        vm.fighter1 = 0;
+        vm.fighter2 = 0;
+        vm.votes_set = function (fighter1, fighter2) {
+          $log.log('set votes to : ' + fighter1 + ', ' + fighter2);
+          panelFactory.votes_set(fighter1, fighter2);
         };
 
-        $scope.sweep_set_empty= function () {
-            console.log("sweep set empty");
-            panelFactory.sweep_set_empty();
+        vm.punch_set = function (punch1, punch2) {
+          $log.log('set punch counts to ' + punch1.toString(), punch2.toString());
+          panelFactory.punch_set(punch1, punch2);
         };
 
-        $scope.sweep_set_page= function (pageNum) {
-            console.log("sweep set page : " + pageNum.toString());
-            panelFactory.sweep_set_page(pageNum);
+        vm.sweep_set_empty = function () {
+          $log.log('sweep set empty');
+          panelFactory.sweep_set_empty();
         };
 
-        $scope.punch_set = function(punch1, punch2) {
-            console.log("set punch counts to " + punch1.toString(), punch2.toString());
-            panelFactory.punch_set(punch1, punch2);
+        vm.sweep_set = function (page) {
+          $log.log('sweep set page : ' + page);
+          panelFactory.sweep_set(page);
         };
 
-        $scope.punch_set_empty = function() {
-            console.log("set punch count empty");
-            panelFactory.punch_set_empty();
+        vm.tap_set_empty = function () {
+          $log.log('set punch count empty');
+          panelFactory.tap_set_empty();
         };
 
-        $scope.punch_set_tap = function() {
-            console.log("set punch tap");
-            panelFactory.punch_set_tap();
+        vm.tap_set = function () {
+          $log.log('set punch tap');
+          panelFactory.tap_set();
         };
 
-        $scope.ganchor_set_empty = function() {
-            console.log("set ganchor empty");
-            panelFactory.ganchor_set_empty();
+        vm.vganchor_set_empty = function () {
+          $log.log('set ganchor empty');
+          panelFactory.vganchor_set_empty();
         };
 
-        $scope.ganchor_set_tap = function() {
-            console.log("set ganchor tap");
-            panelFactory.ganchor_set_tap();
+        vm.vganchor_set = function () {
+          $log.log('set ganchor tap');
+          panelFactory.vganchor_set();
         };
-    }]);
+      }]);
 })();

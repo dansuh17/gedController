@@ -13,13 +13,13 @@
            * Moves to the sweep page.
            * @param pageNum the number of sweep page.
            */
-          vm.goToSweepPage = function goToSweepPage(pageNum) {
+          vm.goToSweepPage = function goToSweepPage(page) {
             var sPath = '/empty';
-            if (pageNum === 1) {
+            if (page === 1) {
               sPath = '/sweep_icon';
-            } else if (pageNum === 2) {
+            } else if (page === 2) {
               sPath = '/sweep_gloves';
-            } else if (pageNum === 3) {
+            } else if (page === 3) {
               sPath = '/sweep_heart';
             }
             $location.path(sPath);
@@ -29,10 +29,10 @@
            * Socket function that wraps the goToSweepPage function,
            * run on receiving 'goToSweepPage' message.
            */
-          socketFactory.on('goToSweepPage', function goToSweepPageCallback(data) {
-            $log('goToSweepPage call received from /empty' + data.pageNum);
+          socketFactory.on('sweep_set', function goToSweepPageCallback(data) {
+            $log.log('goToSweepPage call received from /empty' + data.page);
             $scope.$apply(function goToSweepApplyCallback() {
-              vm.goToSweepPage(parseInt(data.pageNum, 10));
+              vm.goToSweepPage(parseInt(data.page, 10));
             });
           });
         }]);

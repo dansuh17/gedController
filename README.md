@@ -95,17 +95,18 @@ For more information, refer to [Twit](https://github.com/ttezel/twit), which is 
 
 ### overlay 
 For turning the overlay on/off
-| Description                      | Verb   | URI                                 |         |
+
+| Description                      | Verb   | URI                                 |  Data   |
 |----------------------------------|--------|-------------------------------------|---------|
 | get the sweep overlay page       | Get    | /overlay/sweep/                     |         |
 | get the tap(punch) overlay page  | Get    | /overlay/tap/                       |         |
-| get the vganchor overlay page    | Get    | /overlay/vganchor/                  |         |
-| set the sweep page to empty      | Post   | /overlay/sweep/setEmpty             |         |
-| open up the sweep page by PAGENUM| Post   | /overlay/sweep/setSweep/            |         |
-| set the sweep page to empty      | Post   | /overlay/tap/setEmpty               |         |
-| open up the sweep page by PAGENUM| Post   | /overlay/tap/setSweep/              |         |
-| set the sweep page to empty      | Post   | /overlay/vganchor/setEmpty          |         |
-| open up the sweep page by PAGENUM| Post   | /overlay/vganchor/setSweep/         |         |
+| get the vote/graph anchor page   | Get    | /overlay/vganchor/                  |         |
+| change the sweep page            | Post   | /overlay/sweep/                     | { page : [ 1, 2, 3, empty] } |
+| change the tap/punch page        | Post   | /overlay/tap/                       | { page : [ on, empty ] }     |
+| change the vote/graph anchor page| Post   | /overlay/vganchor/                  | { page : [ on, empty] }      |
+| TO BE DEPRECATED                 | Post   | /overlay/setPunchEmpty              |         |
+| TO BE DEPRECATED                 | Post   | /overlay/setGanchorEmpty            |         |
+| TO BE DEPRECATED                 | Post   | /overlay/setEmpty                   |         |
 
 
 ### votes
@@ -116,10 +117,10 @@ For turning the overlay on/off
 
 
 ### punch 
-| Description                                   | Verb   | URI       |
-|-----------------------------------------------|--------|-----------|
-| Post punch counts for fighter1 and fighter 2  | Post   | /punch/   |
-| Get punch counts for fighter1 and fighter 2   | Get    | /punch/   |
+| Description                        | Verb   | URI       |
+|------------------------------------|--------|-----------|
+| Post punch counts for fighter1, 2  | Post   | /punch/   |
+| Get punch counts for fighter1, 2   | Get    | /punch/   |
 
 
 
@@ -138,9 +139,6 @@ For turning the overlay on/off
 ### power
 
 DEPRECATED
-
-
-
 
 ## Implementation Details
 Twitter Feed on the rest page appears in the following logic :

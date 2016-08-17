@@ -62,7 +62,7 @@
            * Socket function that wraps the goToEmptyPage function,
            * run on receiving 'goToEmptyPage' message.
            */
-          socketFactory.on('goToPunchEmpty', function() {
+          socketFactory.on('tap_set_empty', function() {
             console.log("goToPunchEmpty call received - sweep");
             $scope.$apply(function() {
               $scope.goToEmptyPage();
