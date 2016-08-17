@@ -1,11 +1,11 @@
 /**
  * Controller for the power balance bar.
  */
-;(function() {
+(function () {
   angular
       .module('gedApp')
-      .controller('powerCtrl', ['$scope', 'socket', '$http', '$interval',
-        function($scope, socket, $http, $interval) {
+      .controller('powerController', ['$scope', 'socket', '$http', '$interval',
+        function ($scope, socket, $http, $interval) {
           $scope.powerBalance = 50;
           $scope.leftColor = 'grad-normal';
           $scope.rightColor = 'grad-normal';

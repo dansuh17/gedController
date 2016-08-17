@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 var VoteSchema = new mongoose.Schema({
     tomUp: Number, 

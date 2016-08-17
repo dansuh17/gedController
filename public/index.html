@@ -50,11 +50,11 @@
         <link rel="stylesheet" href="assets/stylesheets/style.css">
 
     </head>
-    <body ng-app="gedApp" ng-controller="MainCtrl">
+    <body ng-app="gedApp" ng-controller="MainController">
         <div id="bodyContainer">
             <!-- this will contain everything -->
             <div id="flexMainBody">
-                <div class="upperBar" ng-controller="timeCtrl">
+                <div class="upperBar" ng-controller="TimeController">
                     <!-- container for round number + timer -->
                     <div class="gameInfo">
                         <div class="roundNumber">
@@ -65,13 +65,13 @@
                     </div>
                 </div>
 
-                <div ng-controller="powerCtrl">
+                <div ng-controller="powerController">
                   <power-balance></power-balance>
                 </div>
 
                 <!-- particle clusters -->
                 <div id="ballmove"></div>
-                <div class="content" ng-controller="twitCtrl" ng-hide="feedList.length==0">
+                <div class="content" ng-controller="TwitController" ng-hide="feedList.length==0">
                     <!-- Twitter feed -->
                     <div id="twitterfeed">
                         <img ng-src="{{tweet.icon}}" alt>
