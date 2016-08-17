@@ -32,21 +32,45 @@ module.exports = function (io) {
 
 
   /**
-   * Set the tapping page to empty page.
+   * Requests the empty page to open up a sweep page indicated
+   * by PAGENUM.
    */
-  router.post('/setPunchEmpty', function (req, res) {
-    console.log('stop punch interaction and show empty page');
-    io.emit('goToPunchEmpty', {});
+  router.post('/sweep/', function (req, res) {
+    var page = req.body.page;
+    console.log('turning on the sweep page num : ' + req.body.page);
+    if (req.body.page === "empty") {
+      io.emit('sweep_set_empty', {});
+    } else {
+      io.emit('sweep_set', {
+        page: page
+      });
+    }
     res.json({ sent: 'done' });
   });
+
 
   /**
    * Requests the empty page to open up a page indicated
    * by PAGENUM.
    */
-  router.post('/setTap', function (req, res) {
-    console.log('turning on the tap page num : ' + req.body.pageNum);
-    io.emit('goToTapPage', {});
+  router.post('/tap', function (req, res) {
+    var page = req.body.page;
+    io.emit('tap_set', {
+      page: page
+    });
+    res.json({ sent: 'done' });
+  });
+
+
+  /**
+   * requests the empty page to open up a page indicated
+   * by pagenum.
+   */
+  router.post('/vganchor', function (req, res) {
+    var page = req.body.page;
+    io.emit('vganchor_set', {
+      page: page
+    });
     res.json({ sent: 'done' });
   });
 
@@ -62,12 +86,11 @@ module.exports = function (io) {
 
 
   /**
-   * requests the empty page to open up a page indicated
-   * by pagenum.
+   * Set the tapping page to empty page.
    */
-  router.post('/setGanchor', function (req, res) {
-    console.log('turning on the ganchor page');
-    io.emit('goToGanchorPage', {});
+  router.post('/setPunchEmpty', function (req, res) {
+    console.log('stop punch interaction and show empty page');
+    io.emit('goToPunchEmpty', {});
     res.json({ sent: 'done' });
   });
 
@@ -75,19 +98,6 @@ module.exports = function (io) {
   router.post('/setEmpty', function (req, res) {
     console.log('stop sweep interaction and show empty page');
     io.emit('goToEmptyPage', {});
-    res.json({ sent: 'done' });
-  });
-
-  /**
-   * Requests the empty page to open up a sweep page indicated
-   * by PAGENUM.
-   */
-  router.post('/setSweep/', function (req, res) {
-    var pageNum = req.body.pageNum;
-    console.log('turning on the sweep page num : ' + req.params.pageNum);
-    io.emit('goToSweepPage', {
-      pageNum: pageNum
-    });
     res.json({ sent: 'done' });
   });
 
