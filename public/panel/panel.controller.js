@@ -63,7 +63,7 @@
 
         vm.vganchor_set_empty = function () {
           $log.log('set ganchor empty');
-          panelFactory.ganchor_set_empty();
+          panelFactory.vganchor_set_empty();
         };
 
         vm.vganchor_set = function () {

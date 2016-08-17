@@ -72,9 +72,15 @@ module.exports = function (io) {
    */
   router.post('/vganchor', function (req, res) {
     var page = req.body.page;
-    io.emit('vganchor_set', {
-      page: page
-    });
+    if (page === 'empty') {
+      io.emit('vganchor_set_empty', {
+        page: page
+      });
+    } else {
+      io.emit('vganchor_set', {
+        page: page
+      });
+    }
     res.json({ sent: 'done' });
   });
 

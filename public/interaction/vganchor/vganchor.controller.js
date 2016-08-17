@@ -55,7 +55,7 @@
              * Socket function that wraps the goToEmptyPage function,
              * run on receiving 'goToEmptyPage' message.
              */
-            socketFactory.on('goToGanchorEmpty', function() {
+            socketFactory.on('vganchor_set_empty', function() {
               console.log('goToGanchorEmpty call received - vganchor');
               $scope.$apply(function() {
                 $scope.goToEmptyPage();
