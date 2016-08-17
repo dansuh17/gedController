@@ -30,11 +30,11 @@
             /**
              * Preloads images before drawing canvas.
              */
-            pFive.preload = function() {
-              images[0] = pFive.loadImage("../../assets/images/alien_blue.png");
-              images[1] = pFive.loadImage("../../assets/images/alien_red.png");
-              images[2] = pFive.loadImage("../../assets/images/alien_yellow.png");
-              images[3] = pFive.loadImage("../../assets/images/alien_green.png");
+            pFive.preload = function () {
+              images[0] = pFive.loadImage('../../assets/images/alien_blue.png');
+              images[1] = pFive.loadImage('../../assets/images/alien_red.png');
+              images[2] = pFive.loadImage('../../assets/images/alien_yellow.png');
+              images[3] = pFive.loadImage('../../assets/images/alien_green.png');
             };
 
             /**
@@ -190,8 +190,10 @@
              * @param mouseVector the point of mouse click
              */
             Boid.prototype.repel = function(mouseVector) {
-              var imageCenterVector =
-                  pFive.createVector(this.position.x + imageHalfWidth, this.position.y + imageHalfHeight);
+              var imageCenterVector = pFive.createVector(
+                  this.position.x + imageHalfWidth,
+                  this.position.y + imageHalfHeight
+              );
               var repelDirection = p5.Vector.sub(imageCenterVector, mouseVector).normalize();
               var dist = p5.Vector.dist(imageCenterVector, mouseVector);
 
@@ -210,9 +212,9 @@
               var url = window.location.href;
               // if the url contains "empty", stop the loop
               if(url.indexOf('sweep_icon') === -1) {
-                  pFive.noLoop();
-                  document.getElementById('sweepCanvas').remove();
-                  console.log("URL changed - turning off sweep canvas");
+                pFive.noLoop();
+                document.getElementById('sweepCanvas').remove();
+                console.log('URL changed - turning off sweep canvas');
               }
             }
 
@@ -221,7 +223,7 @@
              */
             function setupCanvas() {
               canvas = pFive.createCanvas(window.innerWidth, window.innerHeight);
-              canvas.id("sweepCanvas");
+              canvas.id('sweepCanvas');
             }
           };
 
@@ -242,7 +244,7 @@
            * run on receiving 'goToEmptyPage' message.
            */
           socketFactory.on('goToEmptyPage', function() {
-            console.log("goToEmptyPage call received - sweep");
+            console.log('goToEmptyPage call received - sweep');
             $scope.$apply(function() {
               $scope.goToEmptyPage();
             })

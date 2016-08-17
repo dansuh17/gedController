@@ -70,7 +70,7 @@ module.exports = function(io, Vote) {
     /**
      * Listens to 'giveVoteStatus' message that receives the vote
      * status from the users using vote.html toggle overlay.
-     * The socket message sender is defined in interaction/vote/vote.controller.js
+     * The socket message sender is defined in interaction/vote/vganchor.vote.controller.js
      */
     socket.on('giveVoteStatus', function(data) {
       // 1 : tom, 2 : devin
