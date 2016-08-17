@@ -11,7 +11,7 @@
  *  templateUrl : /sweep_gloves
  *  by Daniel Suh 8/1/2016
  */
-;(function() {
+((function() {
   angular
       .module('sweep')
       .controller('sweep2Ctrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
@@ -19,7 +19,7 @@
 
           /* P5 instance mode part */
           ///////////////////// P5 codes START ////////////////////
-          var sketch = function(pFive) {
+          const sketch = function(pFive) {
             var boids = [];
             var gloveImage;
             var punchSound;
@@ -279,10 +279,10 @@
            * run on receiving 'goToEmptyPage' message.
            */
           socketFactory.on('goToEmptyPage', function() {
-            console.log("goToEmptyPage call received - sweep");
+            console.log('goToEmptyPage call received - sweep');
             $scope.$apply(function() {
               $scope.goToEmptyPage();
             })
           });
         }]);
-})();
+})());
