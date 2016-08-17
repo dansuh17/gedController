@@ -5,7 +5,7 @@ module.exports = function (Punch) {
   router.post('/', function (req, res, next) {
     var fighter1 = req.body.fighter1;
     var fighter2 = req.body.fighter2;
-    console.log('API CALL : POST to punch' + fighter1 + '/' + fighter2);
+    console.log('API CALL : POST to punch : ' + fighter1 + '/' + fighter2);
     Punch.findOneAndUpdate({}, {
       fighter1: fighter1,
       fighter2: fighter2
