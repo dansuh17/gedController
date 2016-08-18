@@ -24,19 +24,10 @@
              * @param count2 right punch count
              */
             storePunchCount: function storePunchCount(count1, count2) {
-              var prev1;
-              var prev2;
-
-              $http.get('/punch/').then(function httpGetCallback(response) {
-                prev1 = response.data.fighter1 + count1;
-                prev2 = response.data.fighter2 + count2;
-
-                $http.post('/punch/' + prev1 + '/' + prev2, {}).then(
-                    function postCallback() {
-                      $log('punch count successfully stored : ' + count1 + ', ' + count2);
-                    }
-                );
-              });
+              $http.post('/punch/incr', { accum1: count1, accum2: count2 })
+                  .then(function () {
+                    $log.log('punch count successfully stored : ' + count1 + ', ' + count2);
+                  });
             }
           };
         }]);

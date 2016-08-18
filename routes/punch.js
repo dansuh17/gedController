@@ -16,6 +16,20 @@ module.exports = function (Punch) {
     });
   });
 
+
+  router.post('/incr/', function (req, res, next) {
+    console.log(req.body);
+    var accum1 = req.body.accum1;
+    var accum2 = req.body.accum2;
+    console.log('API CALL : POST to increase punch count : ' + accum1 + '/' + accum2);
+
+    Punch.findOneAndUpdate({},
+        { $inc: { fighter1: accum1, fighter2: accum2 } }, function (err, punch) {
+          if (err) { next(err); }
+          res.json(punch);
+        });
+  });
+
   router.get('/', function (req, res, next) {
     console.log('API CALL : GET to punch');
 
