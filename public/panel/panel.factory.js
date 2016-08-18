@@ -1,21 +1,18 @@
 
-(function() {
+(function () {
   angular.module('panelApp')
-      .factory('panelFactory', ['$http', function($http) {
+      .factory('panelFactory', ['$http', function ($http) {
         return {
           timer_start: function () {
-            return $http.post('/timer/start').success(function(data) {
-            });
+            return $http.post('/timer/start');
           },
 
           timer_stop: function () {
-            return $http.post('/timer/stop').success(function(data) {
-            });
+            return $http.post('/timer/stop');
           },
 
           timer_reset: function () {
-            return $http.post('/timer/reset').success(function(data) {
-            });
+            return $http.post('/timer/reset');
           },
 
           set_round: function (roundNo) {
@@ -25,7 +22,6 @@
           set_countdown: function (countdown) {
             return $http.post('/timer/countdown/', { countdown: countdown });
           },
-
 
           /* DB access */
           votes_set: function (fighter1, fighter2) {
