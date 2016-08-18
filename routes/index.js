@@ -30,9 +30,5 @@ module.exports = function (io, Vote, Punch) {
   router.use('/punch', punchRoute(Punch, io));
 
 
-  /* DEPRECATED */
-  var powerRoute = require('./power');
-  router.use('/power', powerRoute(io));
-
   return router;
 };
