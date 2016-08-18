@@ -88,32 +88,29 @@ For more information, refer to [Twit](https://github.com/ttezel/twit), which is 
 ## API
 
 ### index
-| Description                      | Verb   | URI                                 | Old URI|
-|----------------------------------|--------|-------------------------------------|--------|
-| get the rest page                | Get    | /                                   |        |
+| Description                      | Verb   | URI                                 |
+|----------------------------------|--------|-------------------------------------|
+| get the rest page                | Get    | /                                   |
 
 
 ### overlay 
 For turning the overlay on/off
 
-| Description                      | Verb   | URI                                 |  Data   |
-|----------------------------------|--------|-------------------------------------|---------|
-| get the sweep overlay page       | Get    | /overlay/sweep/                     |         |
-| get the tap(punch) overlay page  | Get    | /overlay/tap/                       |         |
-| get the vote/graph anchor page   | Get    | /overlay/vganchor/                  |         |
-| change the sweep page            | Post   | /overlay/sweep/                     | { page : [ 1, 2, 3, empty] } |
-| change the tap/punch page        | Post   | /overlay/tap/                       | { page : [ on, empty ] }     |
-| change the vote/graph anchor page| Post   | /overlay/vganchor/                  | { page : [ on, empty] }      |
-| TO BE DEPRECATED                 | Post   | /overlay/setPunchEmpty              |         |
-| TO BE DEPRECATED                 | Post   | /overlay/setGanchorEmpty            |         |
-| TO BE DEPRECATED                 | Post   | /overlay/setEmpty                   |         |
+| Description                      | Verb   | URI                 |  Data   |
+|----------------------------------|--------|---------------------|---------|
+| get the sweep overlay page       | Get    | /overlay/sweep/     |         |
+| get the tap(punch) overlay page  | Get    | /overlay/tap/       |         |
+| get the vote/graph anchor page   | Get    | /overlay/vganchor/  |         |
+| change the sweep page            | Post   | /overlay/sweep/     | { page : [ 1, 2, 3, empty] } |
+| change the tap/punch page        | Post   | /overlay/tap/       | { page : [ on, empty ] }     |
+| change the vote/graph anchor page| Post   | /overlay/vganchor/  | { page : [ on, empty] }      |
 
 
 ### votes
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the number of votes       | Post   | /votes/                             |         |
-| vote status and game status      | Get    | /votes/                             |         |
+| Description                      | Verb   | URI         |                                    |
+|----------------------------------|--------|-------------|------------------------------------|
+| Change the number of votes       | Post   | /votes/     | { fighter1 : int, fighter 2 : int} |
+| vote status and game status      | Get    | /votes/     |                                    |
 
 
 ### punch 
@@ -123,22 +120,15 @@ For turning the overlay on/off
 | Get punch counts for fighter1, 2   | Get    | /punch/   |
 
 
-
-
 ### timer
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo          |         |
-| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd                 |         |
-| Change the game running status   | Post   | /timer/start                        |         |
-| Change the game running status   | Post   | /timer/stop                         |         |
-| Change the game running status   | Post   | /timer/reset                        |         |
+| Description                      | Verb   | URI                         |
+|----------------------------------|--------|-----------------------------|
+| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo  |
+| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd         |
+| Change the game running status   | Post   | /timer/start                |
+| Change the game running status   | Post   | /timer/stop                 |
+| Change the game running status   | Post   | /timer/reset                |
 
-
-
-### power
-
-DEPRECATED
 
 ## Implementation Details
 Twitter Feed on the rest page appears in the following logic :
