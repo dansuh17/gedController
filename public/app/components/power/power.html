@@ -1,6 +1,6 @@
 <!-- power balance bar html directive -->
 <div class="progress progress-stacked">
-  <span style="width: {{powerBalance}}%" class="bg-left">{{powerBalance}}%</span>
+  <span style="width: {{vm.powerBalance}}%" class="bg-left">{{vm.powerBalance}}%</span>
   <span style="width: 1%" class="meter"></span>
-  <span style="width: {{99 - powerBalance}}%" class="bg-right">{{100 - powerBalance}}%</span>
+  <span style="width: {{99 - vm.powerBalance}}%" class="bg-right">{{100 - vm.powerBalance}}%</span>
 </div>

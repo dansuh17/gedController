@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var VoteSchema = new mongoose.Schema({
-    tomUp: Number, 
-    devinUp: Number,
+    fighter1: Number,
+    fighter2: Number,
     gameGoingOn: Boolean
 },
 {
@@ -23,8 +23,8 @@ Vote.find({}, function(err, results) {
 
     // dummy schema
     var firstVote = new Vote({
-      tomUp: 0,
-      devinUp: 0,
+      fighter1: 0,
+      fighter2: 0,
       gameGoingOn: false
     });
 

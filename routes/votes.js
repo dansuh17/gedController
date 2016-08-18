@@ -4,8 +4,10 @@ var router = express.Router();
 module.exports = function (io, Vote) {
 
   router.post('/', function (req, res, next) {
-    console.log('API CALL : POST votes/ : ' + req.body.devinUp + ', ' + req.body.tomUp);
-    Vote.findOneAndUpdate({}, { $set: { devinUp: req.params.devinUp, tomUp: req.params.tomUp } },
+    var fighter1 = req.body.fighter1;
+    var fighter2 = req.body.fighter2;
+    console.log('API CALL : POST votes/ : ' + req.body.fighter1 + ', ' + req.body.fighter2);
+    Vote.findOneAndUpdate({}, { $set: { fighter1: fighter1, fighter2: fighter2 } },
         function (err, vote) {
           if (err) { next(err); }
           res.json(vote);
