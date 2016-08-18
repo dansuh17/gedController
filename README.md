@@ -121,10 +121,11 @@ For turning the overlay on/off
 
 
 ### punch 
-| Description                        | Verb   | URI       |                                    |
-|------------------------------------|--------|-----------|------------------------------------|
-| Post punch counts for fighter1, 2  | Post   | /punch/   | { fighter1 : int, fighter 2 : int} |
-| Get punch counts for fighter1, 2   | Get    | /punch/   |
+| Description                        | Verb   | URI        |                                    |
+|------------------------------------|--------|------------|------------------------------------|
+| Post punch counts for fighter1, 2  | Post   | /punch/    | { fighter1 : int, fighter 2 : int} |
+| Increment punch counts             | Post   | /punch/incr| { fighter1 : int, fighter 2 : int} |
+| Get punch counts for fighter1, 2   | Get    | /punch/    |
 
 
 ### timer
