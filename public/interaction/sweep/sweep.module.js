@@ -14,17 +14,17 @@
               controllerAs: 'vm'
             })
             .when('/sweep_icon', {
-              templateUrl: 'sweep.html',
+              templateUrl: 'empty.html',
               controller: 'SweepController',
               controllerAs: 'vm'
             })
             .when('/sweep_gloves', {
-              templateUrl: 'sweep2.html',
+              templateUrl: 'empty.html',
               controller: 'Sweep2Controller',
               controllerAs: 'vm'
             })
             .when('/sweep_heart', {
-              templateUrl: 'sweep3.html',
+              templateUrl: 'empty.html',
               controller: 'sweep3Ctrl',
               controllerAs: 'vm'
             })
