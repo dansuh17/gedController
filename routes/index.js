@@ -3,10 +3,19 @@ var router = express.Router();
 
 module.exports = function(io, Vote, Punch) {
 
-    /* GET home page. */
+    /* GET the rest page. */
     router.get('/', function(req, res, next) {
         res.render('index');
     });
+
+    /* GET the panel page */
+    router.get('/panel', function(req, res, next) {
+        res.render('panel');
+    });
+
+    /* GET overlay pages */
+    var overlayRoute = require('./overlay');
+    router.use('/overlay', overlayRoute);
 
     /* for handling power bar */
     var powerRoute = require('./power');
@@ -24,11 +33,9 @@ module.exports = function(io, Vote, Punch) {
     var sweepRoute = require('./sweep');
     router.use('/sweep', sweepRoute(io));
 
-    var panelRoute = require('./panel');
-    router.use('/panel', panelRoute);
-
     var punchRoute = require('./punch');
     router.use('/punch', punchRoute(Punch, io));
+
 
     return router;
 };

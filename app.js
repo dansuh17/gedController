@@ -31,6 +31,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+      if (req.path.substr(-1) != '/' && req.path.length > 1) {
+        var query = req.url.slice(req.path.length);
+        res.redirect(301, req.path + '/' + query);
+      } else {
+        next();
+      }
+    }
+);
 
 app.use('/', routes);
 
