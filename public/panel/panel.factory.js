@@ -4,15 +4,15 @@
       .factory('panelFactory', ['$http', function ($http) {
         return {
           timer_start: function () {
-            return $http.post('/timer/start');
+            return $http.post('/timer/start/');
           },
 
           timer_stop: function () {
-            return $http.post('/timer/stop');
+            return $http.post('/timer/stop/');
           },
 
           timer_reset: function () {
-            return $http.post('/timer/reset');
+            return $http.post('/timer/reset/');
           },
 
           set_round: function (roundNo) {
