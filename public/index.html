@@ -52,7 +52,7 @@
           <div class="gameInfo">
             <div class="roundNumber">
               <span id="round"> ROUND </span>
-              <span id="number"> {{ vm.roundNo }} </span>
+              <span id="number"> {{vm.roundNo}} </span>
             </div>
             <timer class="timer" finish-callback="vm.finish_callback()" auto-start="false" countdown="300" interval='1000'>
               {{minutes}} : {{seconds}}
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div ng-controller="powerController as vm">
+        <div ng-controller="PowerController as vm">
           <power-balance></power-balance>
         </div>
 
@@ -69,9 +69,9 @@
         <div class="content" ng-controller="TwitController as vm" ng-hide="vm.feedList.length==0">
           <!-- Twitter feed -->
           <div id="twitterfeed">
-            <img ng-src="{{tweet.icon}}" alt>
-            <div class="name">{{tweet.name}} (@{{tweet.username}})</div>
-            <div class="message">{{tweet.text}}</div>
+            <img ng-src="{{vm.tweet.icon}}" alt>
+            <div class="name">{{vm.tweet.name}} (@{{vm.tweet.username}})</div>
+            <div class="message">{{vm.tweet.text}}</div>
           </div>
         </div>
       </div>

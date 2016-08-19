@@ -244,8 +244,8 @@
            * Socket function that wraps the goToEmptyPage function,
            * run on receiving 'goToEmptyPage' message.
            */
-          socketFactory.on('goToEmptyPage', function goEmptyPage() {
-            $log('goToEmptyPage call received - sweep');
+          socketFactory.on('sweep_set_empty', function goEmptyPage() {
+            $log.log('goToEmptyPage call received - sweep');
             $scope.$apply(function goEmptyPageApply() {
               vm.goToEmptyPage();
             })

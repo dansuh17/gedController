@@ -81,9 +81,6 @@ module.exports = function (io, Vote) {
 
       Vote.findOneAndUpdate({},
           { $inc: { fighter1: fighter1, fighter2: fighter2 } }, function (err) {
-            if (err) {
-              next(err);
-            }
           });
 
       console.log('db store successful');

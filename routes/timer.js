@@ -1,29 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(io, Vote) {
-  router.post('/setRoundNo/:roundNo', function (req, res) {
-    console.log('API CALL : POST /timer/setRoundNo/:' + req.params.roundNo);
+module.exports = function (io, Vote) {
+  router.post('/roundNo/', function (req, res) {
+    console.log('API CALL : POST /timer/roundNo/ :' + req.body.roundNo);
 
     // to the rest page.
     io.emit('roundNo', {
-      roundNo: req.params.roundNo
+      roundNo: req.body.roundNo
     });
 
     res.json({ sent: 'done' });
   });
 
-  router.post('/setCount/:cd', function (req, res) {
-    var newCountdown = req.params.cd;
-    console.log('API CALL : POST /timer/setCount/:' + req.params.cd);
+  router.post('/countdown/', function (req, res) {
+    var newCountdown = req.body.countdown;
+    console.log('API CALL : POST /timer/countdown/ :' + newCountdown);
     io.emit('timerCmd', {
       timerCmd: 'setCountdown',
       countdown: newCountdown
     });
-    res.json({ sent: 'done'});
+    res.json({ sent: 'done' });
   });
 
-  router.post('/start', function(req, res, next) {
+  router.post('/start', function (req, res, next) {
     console.log('API CALL : POST /timer/start : socket emit called. ');
     io.emit('timerCmd', {
       timerCmd: 'start'
@@ -54,7 +54,7 @@ module.exports = function(io, Vote) {
     io.emit('timerCmd', {
       timerCmd: 'reset'
     });
-    res.json({ sent: 'done'});
+    res.json({ sent: 'done' });
   });
 
   return router;

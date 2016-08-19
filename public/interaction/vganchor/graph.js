@@ -115,7 +115,6 @@ function tick1() {
         .style('fill', 'e91a67')
         .attr('y', height - ((height * punchCountA) / yRange) - (width / 32));
   }
-}
 
 // same as function tick1()
 function tick2() {
