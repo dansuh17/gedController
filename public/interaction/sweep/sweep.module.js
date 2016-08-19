@@ -25,7 +25,7 @@
             })
             .when('/sweep_heart', {
               templateUrl: 'empty.html',
-              controller: 'sweep3Ctrl',
+              controller: 'Sweep3Controller',
               controllerAs: 'vm'
             })
             .otherwise({
