@@ -30,6 +30,7 @@
           // upon receiving a twitter feed, then show the feed for 5 secs
           socket.on('stream', function (tweet) {
             $log.log('twitter feed received.');
+            $log.log(tweet);
             $scope.$apply(function () {
               if (vm.feedList.length < 5) {
                 vm.feedList.push(tweet);
