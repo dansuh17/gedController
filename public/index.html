@@ -52,7 +52,7 @@
           <div class="gameInfo">
             <div class="roundNumber">
               <span id="round"> ROUND </span>
-              <span id="number"> {{ vm.roundNo }} </span>
+              <span id="number"> {{vm.roundNo}} </span>
             </div>
             <timer class="timer" finish-callback="vm.finish_callback()" auto-start="false" countdown="300" interval='1000'>
               {{minutes}} : {{seconds}}
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div ng-controller="powerController as vm">
+        <div ng-controller="PowerController as vm">
           <power-balance></power-balance>
         </div>
 
