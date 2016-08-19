@@ -289,7 +289,7 @@
            * run on receiving 'goToEmptyPage' message.
            */
           socketFactory.on('sweep_set_empty', function goToEmpty() {
-            $log('goToEmptyPage call received - sweep');
+            $log.log('goToEmptyPage call received - sweep');
             $scope.$apply(function goToEmptyApply() {
               vm.goToEmptyPage();
             });
