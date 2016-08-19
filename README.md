@@ -129,13 +129,13 @@ For turning the overlay on/off
 
 
 ### timer
-| Description                      | Verb   | URI                         |
-|----------------------------------|--------|-----------------------------|
-| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo  |
-| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd         |
-| Change the game running status   | Post   | /timer/start                |
-| Change the game running status   | Post   | /timer/stop                 |
-| Change the game running status   | Post   | /timer/reset                |
+| Description                      | Verb   | URI                         |                         |
+|----------------------------------|--------|-----------------------------|-------------------------|
+| Change the Round Number          | Post   | /timer/roundNo/             | { roundNo : [1, 2, 3] } |
+| Change the CountdownNo in seconds| Post   | /timer/countdown/           | { countdown : int }     |
+| Change the game running status   | Post   | /timer/start                |                         |
+| Change the game running status   | Post   | /timer/stop                 |                         |
+| Change the game running status   | Post   | /timer/reset                |                         |
 
 
 ## Implementation Details
