@@ -2,7 +2,7 @@
  * Controller for empty page. Listens to a socket message indicating which vganchor page to go.
  * by Daniel Suh 8/16/2016
  */
-((function vganchorEmptyController() {
+(function vganchorEmptyController() {
   angular
       .module('vganchor')
       .controller('vganchorEmptyCtrl', ['$scope', '$location', '$anchorScroll', 'socketFactory',
@@ -21,9 +21,9 @@
            */
           socketFactory.on('goToGanchorPage', function () {
             console.log('goToGanchorPage call received from /empty');
-            $scope.$apply(function() {
+            $scope.$apply(function () {
               $scope.goToGanchorPage();
             });
           });
         }]);
-})());
+})();
