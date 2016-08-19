@@ -27,9 +27,9 @@
 
 </head>
 <body ng-app="vote">
-<div id="main" ng-controller="voteCtrl">
+<div id="main" ng-controller="VoteController as vm">
   <!-- click on the image and you vote for the other guy -->
-  <img id="votePic" ng-click="switchVote()" ng-src="{{currentVotePic}}" />
+  <img id="votePic" ng-click="vm.switchVote()" ng-src="{{vm.currentVotePic}}" />
 </div>
 </body>
 </html>

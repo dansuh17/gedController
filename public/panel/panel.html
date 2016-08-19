@@ -14,46 +14,51 @@
     <script src="panel.factory.js"></script>
 
 </head>
-<body ng-app="panelApp" ng-controller="panelController">
+<body ng-app="panelApp" ng-controller="PanelController as vm">
 <div id="bodyContainer">
     <h1> KISWE PRODUCTION CONTROL PANEL</h1>
 
-    <h2>TIMER</h2>
-    <button class="btn btn-primary" ng-click="timer_start()">START</button>
-    <button class="btn btn-primary" ng-click="timer_stop()">STOP</button>
-    <button class="btn btn-primary" ng-click="timer_reset()">RESET</button>
-    <button class="btn btn-danger" ng-click="set_round(1)">1</button>
-    <button class="btn btn-danger" ng-click="set_round(2)">2</button>
-    <button class="btn btn-danger" ng-click="set_round(3)">3</button>
+    <h2>REST PAGE</h2>
+
+    <h3>TIMER</h3>
+    <button class="btn btn-primary" ng-click="vm.timer_start()">START</button>
+    <button class="btn btn-primary" ng-click="vm.timer_stop()">STOP</button>
+    <button class="btn btn-primary" ng-click="vm.timer_reset()">RESET</button>
+    <button class="btn btn-danger" ng-click="vm.set_round(1)">1</button>
+    <button class="btn btn-danger" ng-click="vm.set_round(2)">2</button>
+    <button class="btn btn-danger" ng-click="vm.set_round(3)">3</button>
 
     <input type="text" id="countdownInput" ng-model="countdownInput" style="height:30px">
-    <button class="btn btn-default" ng-click="set_countdown(countdownInput)">set</button>
-
-
-    <h2>VOTES</h2>
-    <input type="text" id="devinUp" ng-model="devinUp" style="height:30px">
-    <input type="text" id="tomUp" ng-model="tomUp" style="height:30px">
-    <button class="btn btn-default" ng-click="votes_set(devinUp, tomUp)">set</button>
-
-    <button class="btn btn-danger" ng-click="ganchor_set_empty()">set empty</button>
-    <button class="btn btn-primary" ng-click="ganchor_set_tap()">set tap</button>
+    <button class="btn btn-default" ng-click="vm.set_countdown(countdownInput)">set</button>
 
 
 
-    <h2>SWEEP</h2>
-    <button class="btn btn-primary" ng-click="sweep_set_empty()">EMPTY</button>
-    <input type="text" id="sweepPage" ng-model="sweepPage" style="height:30px">
-    <button class="btn btn-default" ng-click="sweep_set_page(sweepPage)">SET PAGE</button>
+    <h2>OVERLAY</h2>
 
 
-    <h2>PUNCH</h2>
+    <h3>SWEEP</h3>
+    <input type="text" id="sweepPage" ng-model="sweepPage" style="height:30px" placeholder="1, 2 or 3">
+    <button class="btn btn-default" ng-click="vm.sweep_set(sweepPage)">SET PAGE</button>
+    <button class="btn btn-danger" ng-click="vm.sweep_set_empty()">EMPTY</button>
+
+
+    <h3>PUNCH/TAP</h3>
     <input type="text" id="punch1" ng-model="punch1" style="height:30px">
     <input type="text" id="punch2" ng-model="punch2" style="height:30px">
-    <button class="btn btn-default" ng-click="punch_set(punch1, punch2)">set</button>
-    <button class="btn btn-danger" ng-click="punch_set_empty()">set empty</button>
-    <button class="btn btn-primary" ng-click="punch_set_tap()">set tap</button>
+    <button class="btn btn-default" ng-click="vm.punch_set(punch1, punch2)">SET PUNCH</button>
+    <button class="btn btn-danger" ng-click="vm.tap_set_empty()">SET EMPTY</button>
+    <button class="btn btn-primary" ng-click="vm.tap_set()">SET ON</button>
+
+
+    <h3>VOTES/VGANCHOR</h3>
+    <input type="text" id="devinUp" ng-model="vm.fighter1" style="height:30px">
+    <input type="text" id="tomUp" ng-model="vm.fighter2" style="height:30px">
+    <button class="btn btn-default" ng-click="vm.votes_set(vm.fighter1, vm.fighter2)">SET VOTE</button>
+
+    <button class="btn btn-danger" ng-click="vm.vganchor_set_empty()">SET EMPTY</button>
+    <button class="btn btn-primary" ng-click="vm.vganchor_set()">SET ON</button>
+
 
 </div>
-
 </body>
 </html>

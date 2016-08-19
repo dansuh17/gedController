@@ -19,7 +19,7 @@
            * Socket function that wraps the goToGanchorPage function,
            * run on receiving 'goToGanchorPage' message.
            */
-          socketFactory.on('goToGanchorPage', function () {
+          socketFactory.on('vganchor_set', function () {
             console.log('goToGanchorPage call received from /empty');
             $scope.$apply(function () {
               $scope.goToGanchorPage();

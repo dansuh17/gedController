@@ -3,29 +3,33 @@
  * html overlay on video.
  * by Daniel Suh 8/2/2016
  */
-((function sweepModule() {
+((function SweepModule() {
   angular
       .module('sweep', ['ngRoute'])
-      .config(function($routeProvider) {
+      .config(['$routeProvider', function RouteProviderCallback($routeProvider) {
         $routeProvider
             .when('/empty', {
               templateUrl: 'empty.html',
-              controller: 'sweepEmptyCtrl',
+              controller: 'SweepEmptyController',
+              controllerAs: 'vm'
             })
             .when('/sweep_icon', {
-              templateUrl: 'sweep.html',
-              controller: 'sweepCtrl',
+              templateUrl: 'empty.html',
+              controller: 'SweepController',
+              controllerAs: 'vm'
             })
             .when('/sweep_gloves', {
-              templateUrl: 'sweep2.html',
-              controller: 'sweep2Ctrl',
+              templateUrl: 'empty.html',
+              controller: 'Sweep2Controller',
+              controllerAs: 'vm'
             })
             .when('/sweep_heart', {
-              templateUrl: 'sweep3.html',
+              templateUrl: 'empty.html',
               controller: 'sweep3Ctrl',
+              controllerAs: 'vm'
             })
             .otherwise({
-              redirectTo: '/empty',
+              redirectTo: '/empty'
             });
-      });
+      }]);
 })());

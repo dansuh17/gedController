@@ -14,7 +14,8 @@
             })
             .when('/vganchor', {
               templateUrl: 'vganchor.html',
-              controller: 'vganchorCtrl',
+              controller: 'VganchorController',
+              controllerAs: 'vm'
             })
             .otherwise({
               redirectTo: '/empty',

@@ -39,8 +39,11 @@ The punch overlay contains multi-purpose tapping area.
 
 Every tap increases the punch count that is shown in the graph overlay.
 
+The interactive page can be viewed [here](http://ged.uwcj.kr/overlay/tap/#/tap)
 
-#### [Vote and Graph toggle](http://ged.uwcj.kr/overlay/vganchor/)
+
+
+#### [Vote and Graph toggle ('overlay/vganchor/')](http://ged.uwcj.kr/overlay/vganchor/)
 
 This overlay is targeted for the last pip that will show the rest page via OBS.
 
@@ -49,6 +52,8 @@ We benchmarked the score/stats page shown in many PC games such as LoL and Count
 The Vote and Graph overlay contains buttons for graph, vote, and betting.
 
 The aggregate of the votes will be shown as power bar in the rest page.
+
+The interactive page can be viewed [here](http://ged.uwcj.kr/overlay/vganchor/#/vganchor)
 
 
 ## Installation
@@ -65,6 +70,8 @@ Also the application has Mongodb dependency, so make sure you have a mongod inst
 
 The mongod can run in background by the command 
 `mongod --fork --logpath [logpath]`
+
+By default, the server uses port number 3000.
 
 ### Twitter app
 Use [apps.twitter.com](https://apps.twitter.com) to register and retrieve the app keys.
@@ -88,54 +95,47 @@ For more information, refer to [Twit](https://github.com/ttezel/twit), which is 
 ## API
 
 ### index
-| Description                      | Verb   | URI                                 | Old URI|
-|----------------------------------|--------|-------------------------------------|--------|
-| get the rest page                | Get    | /                                   |        |
-| get the sweep overlay page       | Get    | /overlay/sweep/                     |        |
-| get the tap(punch) overlay page  | Get    | /overlay/tap/                       |        |
-| get the vganchor overlay page    | Get    | /overlay/vganchor/                  |        |
+| Description                      | Verb   | URI                                 |
+|----------------------------------|--------|-------------------------------------|
+| get the rest page                | Get    | /                                   |
 
-### power
 
-DEPRECATED
+### overlay 
+For turning the overlay on/off
+
+| Description                      | Verb   | URI                 |  Data   |
+|----------------------------------|--------|---------------------|---------|
+| get the sweep overlay page       | Get    | /overlay/sweep/     |         |
+| get the tap(punch) overlay page  | Get    | /overlay/tap/       |         |
+| get the vote/graph anchor page   | Get    | /overlay/vganchor/  |         |
+| change the sweep page            | Post   | /overlay/sweep/     | { page : [ 1, 2, 3, empty] } |
+| change the tap/punch page        | Post   | /overlay/tap/       | { page : [ on, empty ] }     |
+| change the vote/graph anchor page| Post   | /overlay/vganchor/  | { page : [ on, empty] }      |
 
 
 ### votes
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the number of votes       | Post   | /votes/set/:devinUp/:tomUp          | |
-| vote status and game status      | Get    | /votes/get                          | |
-| to be deprecated                 | Post   | /votes/gameGoingOn/:bool            | |
-
-
-### timer
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo          |         |
-| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd                 | /timer/timerCmd/setCountdown/:countdown |
-| Change the game running status   | Post   | /timer/start                        | /votes/gameGoingOn/:bool            |
-| Change the game running status   | Post   | /timer/stop                         | /votes/gameGoingOn/:bool            |
-| Change the game running status   | Post   | /timer/reset                        | /votes/gameGoingOn/:bool            |
-
-### sweep
-
-| Description                      | Verb   | URI                                 |         |
-|----------------------------------|--------|-------------------------------------|---------|
-| set the sweep page to empty      | Post   | /sweep/setEmpty                     |         |
-| open up the sweep page by PAGENUM| Post   | /sweep/setSweep/:pageNum            |         |
+| Description                      | Verb   | URI         |                                    |
+|----------------------------------|--------|-------------|------------------------------------|
+| Change the number of votes       | Post   | /votes/     | { fighter1 : int, fighter 2 : int} |
+| vote status and game status      | Get    | /votes/     |                                    |
 
 
 ### punch 
+| Description                        | Verb   | URI        |                                    |
+|------------------------------------|--------|------------|------------------------------------|
+| Post punch counts for fighter1, 2  | Post   | /punch/    | { fighter1 : int, fighter 2 : int} |
+| Increment punch counts             | Post   | /punch/incr| { fighter1 : int, fighter 2 : int} |
+| Get punch counts for fighter1, 2   | Get    | /punch/    |
 
-| Description                      | Verb   | URI                            |
-|----------------------------------|--------|--------------------------------|
-| Change the punch counts          | Post   | /punch/:fighter1/:fighter2     |
-| Get the punch counts             | Get    | /punch                         |
 
-
-
+### timer
+| Description                      | Verb   | URI                         |
+|----------------------------------|--------|-----------------------------|
+| Change the Round Number          | Post   | /timer/setRoundNo/:roundNo  |
+| Change the CountdownNo in seconds| Post   | /timer/setCount/:cd         |
+| Change the game running status   | Post   | /timer/start                |
+| Change the game running status   | Post   | /timer/stop                 |
+| Change the game running status   | Post   | /timer/reset                |
 
 
 ## Implementation Details

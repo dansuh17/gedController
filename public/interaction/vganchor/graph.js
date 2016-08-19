@@ -7,22 +7,21 @@
 /* global d3:true */
 /* global $:true */
 
-//  total running time for graphs(in minutes) is x_range * timeInterval /1000
-const xRange = 900;
-const yRange = 100;
-const timeInterval = 1000;
-const fighterA = '../../assets/images/fA.png';
-const fighterB = '../../assets/images/fB.png';
-
+// total running time for graphs(in minutes) is x_range * timeInterval /1000
+var xRange = 900;
+var yRange = 100;
+var timeInterval = 1000;
+var fighterA = '../../assets/images/fA.png';
+var fighterB = '../../assets/images/fB.png';
 
 // FIXME: Size should be responsive to any mobile devices
-const margin = { top: 10, right: 10, bottom: 10, left: 10 };
-// var width = parseInt(d3.select('#graphContainer').style('width'));
-// var height = parseInt(d3.select('#graphContainer').style('height'));
+var margin = { top: 10, right: 10, bottom: 10, left: 10 };
+// var width = parseInt(d3.select("#graphContainer").style("width"));
+// var height = parseInt(d3.select("#graphContainer").style("height"));
 
 // Works only for iPhone6
-const width = 420;
-const height = 240;
+var width = 420;
+var height = 240;
 
 // match data
 var punchCountA = 0;

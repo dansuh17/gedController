@@ -6,48 +6,49 @@
 ((function vganchorController() {
   angular
         .module('vganchor')
-        .controller('vganchorCtrl', ['$scope', '$http', 'socketFactory', '$location',
+        .controller('VganchorController', ['$scope', '$http', 'socketFactory', '$location',
           function ($scope, $http, socketFactory, $location) {
-            $scope.graphOn = false;
-            $scope.bettingOn = false;
-            $scope.kisweOn = false;
+            var vm = this;
+            vm.graphOn = false;
+            vm.bettingOn = false;
+            vm.kisweOn = false;
 
-            $scope.graphTurnOn = function () {
-              if ($scope.graphOn === true) {
-                $scope.kisweOn = false;
-                $scope.graphOn = false;
-                $scope.bettingOn = false;
+            vm.graphTurnOn = function () {
+              if (vm.graphOn === true) {
+                vm.kisweOn = false;
+                vm.graphOn = false;
+                vm.bettingOn = false;
               } else {
-                $scope.kisweOn = true;
-                $scope.graphOn = true;
-                $scope.bettingOn = false;
+                vm.kisweOn = true;
+                vm.graphOn = true;
+                vm.bettingOn = false;
               }
             };
 
-            $scope.bettingTurnOn = function () {
-              if ($scope.bettingOn === true) {
-                $scope.kisweOn = false;
-                $scope.graphOn = false;
-                $scope.bettingOn = false;
+            vm.bettingTurnOn = function () {
+              if (vm.bettingOn === true) {
+                vm.kisweOn = false;
+                vm.graphOn = false;
+                vm.bettingOn = false;
               } else {
-                $scope.kisweOn = true;
-                $scope.graphOn = false;
-                $scope.bettingOn = true;
+                vm.kisweOn = true;
+                vm.graphOn = false;
+                vm.bettingOn = true;
               }
             };
 
-            $scope.returnHome = function () {
-              if ($scope.kisweOn === true) {
-                $scope.kisweOn = false;
-                $scope.graphOn = false;
-                $scope.bettingOn = false;
+            vm.returnHome = function () {
+              if (vm.kisweOn === true) {
+                vm.kisweOn = false;
+                vm.graphOn = false;
+                vm.bettingOn = false;
               }
             };
 
             /**
              * Moves to the empty page.
              */
-            $scope.goToEmptyPage = function () {
+            vm.goToEmptyPage = function () {
               $location.path('/empty');
             };
 
@@ -55,11 +56,10 @@
              * Socket function that wraps the goToEmptyPage function,
              * run on receiving 'goToEmptyPage' message.
              */
-            socketFactory.on('goToGanchorEmpty', function () {
-              console.log('goToGanchorEmpty call received - vganchor');
+            socketFactory.on('vganchor_set_empty', function () {
               $scope.$apply(function () {
-                $scope.goToEmptyPage();
+                vm.goToEmptyPage();
               });
             });
-        }]);
+          }]);
 })());
