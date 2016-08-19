@@ -68,14 +68,14 @@ function tick1() {
 
 		//get punch count data
 		$.ajax({
-			url: "http://ged.uwcj.kr/punch",
+			url: "http://ged.uwcj.kr/punch/",
 			dataType: "jsonp",
 			success: function (data) { punchCountA = data.fighter1; }
 		});
 
         //check whether game is going on or not
 		$.ajax({
-			url: "http://ged.uwcj.kr/votes/get",
+			url: "http://ged.uwcj.kr/votes/",
 			dataType: "jsonp",
 			success: function (data) { gameGoingOn = data.gameGoingOn; }
 		});
